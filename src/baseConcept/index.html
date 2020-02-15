@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+        <script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
+        <script type='text/javascript' src='planetaryjs.min.js'></script>
+        <script type="text/javascript" src="planetaryjs-objects.js"></script>
+        <style>
+            body{
+                /* display: flex; */
+            }
+            canvas{
+                /* border: 2px solid red; */
+                /* margin: auto; */
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                /* height: 93vh; */
+                /* width: 45vw; */
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id='globe' width='500' height='500' onclick="getOffset(event)"></canvas>
+        <script type="text/javascript">
+            var planet = planetaryjs.planet();
+            // You can remove this statement if `world-110m.json`
+            // is in the same path as the HTML page:
+            planet.loadPlugin(planetaryjs.plugins.earth({
+            // topojson: { file: './world-110m.json' }
+            topojson: { file: 'https://raw.githubusercontent.com/BinaryMuse/planetary.js/v1.1.2/dist/world-110m.json' },
+            oceans:   { fill:   '#0D47A1' },
+            land:     { fill:   '#4CAF50' },
+            borders:  { stroke: '#1B5E20' }
+            }));
+            planet.loadPlugin(planetaryjs.plugins.pings());
+            planet.loadPlugin(planetaryjs.plugins.drag({
+                onDragStart: function() {
+                this.plugins.autorotate.pause();
+                },
+                onDragEnd: function() {
+                // this.plugins.autorotate.resume();
+                this.plugins.autorotate.pause();
+                }
+            }));
+            planet.loadPlugin(planetaryjs.plugins.objects());
+            planet.loadPlugin(autorotate(30));
+
+            // Make the planet fit well in its canvas
+            // planet.projection.scale(250).translate([250, 250]);
+            planet.projection.scale(250).translate([250, 250]);
+            var canvas = document.getElementById('globe');
+            planet.draw(canvas);
+
+            // planet.projection
+            // .scale(width / 2)
+            // .translate([width / 2, height / 2])
+            // .rotate([60, -10, 0]);
+
+
+            planet.plugins.objects.add(-1.3167103, 50.6927176, {
+                imagesrc:"./index.png",
+                imageheight: 20,
+                imagewidth: 30,
+                fade: true
+            },);
+
+
+            colors = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];
+            setInterval(function() {
+                var lat = Math.random() * 170 - 85;
+                var lng = Math.random() * 360 - 180;
+                var color = colors[Math.floor(Math.random() * colors.length)];
+                var angle = Math.random() * 10;
+                planet.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: angle });
+            }, 250);
+
+            // function something(event){
+            //     // var planet = planetaryjs.planet();
+            //     console.log("Clicked!");
+            //     console.log(event);
+            //     // console.log(planet.projection.invert([x,y]));
+            //     console.log(planet.projection.invert([event.clientX,event.clientY]));
+            //     var a=planet.projection.invert([event.clientX,event.clientY]);
+            //     var lat=a[1];
+            //     var lng=a[0];
+            //     var angle = Math.random() * 10;
+            //     planet.plugins.pings.add(lng, lat, { color: "red", ttl: 5000, angle: angle });
+            // }
+
+            // function relMouseCoords(event){
+            //     var totalOffsetX = 0;
+            //     var totalOffsetY = 0;
+            //     var canvasX = 0;
+            //     var canvasY = 0;
+            //     var currentElement = this;
+
+            //     do{
+            //         totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+            //         totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+            //     }
+            //     while(currentElement = currentElement.offsetParent)
+
+            //     canvasX = event.pageX - totalOffsetX;
+            //     canvasY = event.pageY - totalOffsetY;
+
+            //     var a=planet.projection.invert([canvasX, canvasY]);
+            //     var lat=a[1];
+            //     var lng=a[0];
+            //     var angle = Math.random() * 10;
+            //     console.log("Lng:"+lng);
+            //     console.log("Lat:"+lat);
+            //     planet.plugins.pings.add(lng, lat, { color: "red", ttl: 5000, angle: angle });
+
+            //     return {x:canvasX, y:canvasY}
+            // }    
+
+            function getOffset(evt) {
+            var el = evt.target,
+                x = 0,
+                y = 0;
+
+            while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+                x += el.offsetLeft - el.scrollLeft;
+                y += el.offsetTop - el.scrollTop;
+                el = el.offsetParent;
+            }
+
+            x = evt.clientX - x;
+            y = evt.clientY - y;
+
+            var a=planet.projection.invert([x, y]);
+            var lat=a[1];
+            var lng=a[0];
+            var angle = Math.random() * 10;
+            console.log("Lng:"+lng);
+            console.log("Lat:"+lat);
+            planet.plugins.pings.add(lng, lat, { color: "red", ttl: 5000, angle: angle });
+
+            // planet.plugins.autorotate = {
+            //     pause:  function() { paused = false;  },
+            //     resume: function() { paused = true; }
+            //     };
+            // planet.loadPlugin(autorotate(30));
+
+            return { x: x, y: y };
+            }
+
+            function autorotate(degPerSec) {
+            // Planetary.js plugins are functions that take a `planet` instance
+            // as an argument...
+            return function(planet) {
+                var lastTick = null;
+                var paused = false;
+                planet.plugins.autorotate = {
+                    pause:  function() { paused = false;  },//To make the planet even after clicking, change it to false, and keep other one false.
+                    resume: function() { paused = false; }
+                };
+                // ...and configure hooks into certain pieces of its lifecycle.
+                planet.onDraw(function() {
+                if (paused || !lastTick) {
+                    lastTick = new Date();
+                } else {
+                    var now = new Date();
+                    var delta = now - lastTick;
+                    // This plugin uses the built-in projection (provided by D3)
+                    // to rotate the globe each time we draw it.
+                    var rotation = planet.projection.rotate();
+                    rotation[0] += degPerSec * delta / 1000;
+                    if (rotation[0] >= 180) rotation[0] -= 360;
+                    planet.projection.rotate(rotation);
+                    lastTick = now;
+                }
+                });
+            };
+            };            
+
+            // planetaryjs.plugins.drag({
+            //     onDrag: function() {
+            //         console.log("The planet was dragged!", this, d3.event);
+            //     }
+            // });
+        </script>
+    </body>
+</html>
