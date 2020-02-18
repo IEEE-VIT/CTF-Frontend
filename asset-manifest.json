@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/ctfGlobe/static/css/main.d1b05096.chunk.css",
+    "main.js": "/ctfGlobe/static/js/main.ea8c9627.chunk.js",
+    "main.js.map": "/ctfGlobe/static/js/main.ea8c9627.chunk.js.map",
+    "runtime-main.js": "/ctfGlobe/static/js/runtime-main.8524fd60.js",
+    "runtime-main.js.map": "/ctfGlobe/static/js/runtime-main.8524fd60.js.map",
+    "static/js/2.e2c7e54c.chunk.js": "/ctfGlobe/static/js/2.e2c7e54c.chunk.js",
+    "static/js/2.e2c7e54c.chunk.js.map": "/ctfGlobe/static/js/2.e2c7e54c.chunk.js.map",
+    "index.html": "/ctfGlobe/index.html",
+    "precache-manifest.9257e06e8c63769c607be2d4d4f470a8.js": "/ctfGlobe/precache-manifest.9257e06e8c63769c607be2d4d4f470a8.js",
+    "service-worker.js": "/ctfGlobe/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/ctfGlobe/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.e2c7e54c.chunk.js.LICENSE": "/ctfGlobe/static/js/2.e2c7e54c.chunk.js.LICENSE",
+    "static/media/globe_dark.jpg": "/ctfGlobe/static/media/globe_dark.daae3eb2.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8524fd60.js",
+    "static/js/2.e2c7e54c.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.ea8c9627.chunk.js"
+  ]
+}
