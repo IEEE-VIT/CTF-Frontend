@@ -10,3 +10,15 @@ canvas{
     /* height: 93vh; */
     /* width: 45vw; */
   }
+
+.globe-cotainer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid red;
+  height: fit-content;
+  width: fit-content;
+}
