@@ -3,13 +3,16 @@ import Globe from './uiComponents/globe/globe.js';
 
 import './App.css';
 
+// importing screens
+import LoginSignUpScreen from './screens/LoginSignUpScreen';
+
 class App extends React.Component{
 
   render(){
     return(
       <div> 
-        <Globe />
-    </div>
+        <LoginSignUpScreen />
+      </div>
     );
   }
 }
