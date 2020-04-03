@@ -1,0 +1,21 @@
+.ctfLogo {
+    align-self: center;
+    margin: 20px;
+}
+
+.platBtn {
+    margin-top: 40px;
+    padding: 8px 40px;
+    border-radius: 8px;
+    align-self: center;  
+
+    color: black;
+    background-color: white;
+
+    transition-duration: 0.5s;
+}
+
+.platBtn:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    color: white;
+}
