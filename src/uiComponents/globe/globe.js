@@ -62,7 +62,8 @@ class Globe extends React.Component{
                 globeOptions={{
                     cloudsOpacity: 0.6,
                     enableClouds: false,
-                    texture: `https://raw.githubusercontent.com/chrisrzhou/react-globe/master/textures/globe_dark.jpg`,
+                    // texture: `https://raw.githubusercontent.com/chrisrzhou/react-globe/master/textures/globe_dark.jpg`,
+                    texture: `https://raw.githubusercontent.com/mayankshah1607/Cle-Air/master/earth-planet-night.jpg`,
                 }}
                 cameraOptions={{
                     enableZoom: true,
