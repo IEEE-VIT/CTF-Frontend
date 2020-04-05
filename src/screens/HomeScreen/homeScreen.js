@@ -3,6 +3,7 @@ import React from 'react';
 import Globe from '../../uiComponents/globe/globe';
 import './homeScreen.css';
 import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIcons.js';
+import LeaderBoard from '../LeaderBoard/leaderBoard.js';
 
 import ctfLogo from '../../assets/CTF.png';
 // const ctf =require('../../assets/CTF.png');
@@ -12,7 +13,8 @@ class HomeScreen extends React.Component {
 	constructor() {
 		super();
 		this.state={
-			'page': 'map'
+			// 'page': 'map'
+			'page': 'leaderboard'
 		};
 	}
 
@@ -33,6 +35,10 @@ class HomeScreen extends React.Component {
 					this.state.page==="map"
 					?
 					<Globe />
+					:
+					this.state.page==='leaderboard'
+					?
+					<LeaderBoard />
 					:
 					<div></div>
 				}
