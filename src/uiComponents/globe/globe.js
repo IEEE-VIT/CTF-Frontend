@@ -56,7 +56,7 @@ class Globe extends React.Component{
                 }}
                 lightOptions={{
                     pointLightColor: 'white',
-                    pointLightIntensity: 2,
+                    pointLightIntensity: 0,
                     pointLightPositionRadiusScales: [2, 1, -1],
                   }}
                 focus={this.state.focus}
@@ -78,10 +78,13 @@ class Globe extends React.Component{
                     enterEasingFunction: ['Bounce', 'InOut'],
                     exitAnimationDuration: 3000,
                     exitEasingFunction: ['Cubic', 'Out'],
-                    getTooltipContent: marker => `${marker.city} (Sales: ${marker.value}.0M)`,
+                    getTooltipContent: (marker)=>{
+                        console.log(marker.city);
+                        console.log(marker.value);
+                        return `${marker.city} (Sales: ${marker.value}.0M)`;
+                    },
                     radiusScaleRange: [0.01, 0.05],
                   }}
-                
                 />
             </div>
         );
