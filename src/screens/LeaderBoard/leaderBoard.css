@@ -9,14 +9,34 @@
     background-color: rgba(10, 10, 10, 0.8);
 
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
-.leaderboard-card-container {
-    height: fit-content;
+
+leaderboard-subcontainer {
+    align-self: center;
     width: 40vw;
-    /* margin-bottom: 100px; */
-    /* border: 2px solid red; */
+    max-height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaderboard-card-container {
+    align-self: center;
+    width: 40vw;
+    max-height: 60vh;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-3dlight-color: aqua;
+    scrollbar-color: #00629b;
+    scrollbar-track-color: transparent;
+    scrollbar-face-color: white;
+    scrollbar-width: 10px;
 }
 
 table{
@@ -25,7 +45,6 @@ table{
     /* border: 2px solid black; */
     text-align: center;
     border-collapse: separate;
-    font-family: 'Nova Square'
 }
 
 table th{
@@ -45,14 +64,4 @@ tr{
 
 .empty-td {
     width: 30%;
-}
-
-.divider-container {
-    display: flex;
-}
-
-.divider {
-    width: 100%;
-    /* height: 1px; */
-    border: 1px solid white;
 }

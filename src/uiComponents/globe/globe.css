@@ -15,9 +15,9 @@
 	height: 92vh;
 	width: 100vw;
   overflow: hidden;
-  /* border: 2px solid red; */
-  margin-top: 10vh;
-  z-index: -10;
+  top: 8vh;
+  position: absolute;
+  z-index: 0;
 }
 
 

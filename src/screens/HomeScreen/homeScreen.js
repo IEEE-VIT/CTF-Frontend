@@ -16,7 +16,7 @@ class HomeScreen extends React.Component {
 	constructor() {
 		super();
 		this.state={
-			// 'page': 'leaderboard',
+			'page': 'leaderboard',
 			// 'page': 'info',
 			// 'page': 'profile',
 			isOpen: false
