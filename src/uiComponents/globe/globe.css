@@ -12,11 +12,11 @@
   }*/
 
 .globe-container {
-	height: 90vh;
+	height: 92vh;
 	width: 100vw;
   overflow: hidden;
-  /* border: 2px solid red; */
-  margin-top: 10vh;
+  top: 8vh;
+  position: absolute;
   z-index: 0;
 }
 
