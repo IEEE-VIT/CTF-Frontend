@@ -1,0 +1,132 @@
+.profile-container {
+    height: 90vh;
+    /* width: 100vw; */
+    margin-top: 10vh;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    /* background-color: rgb(12, 11, 11); */
+    background-color: black;
+    font-family: 'Nova Square';
+}
+
+.profile-card-container {
+    height: fit-content;
+    width: 40vw;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.info__heading {
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.info__heading__details {
+    font-size: 24px;
+    margin-top: 33px;
+    margin-bottom: 27px;
+}
+
+.info__stats-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+    /* border: 2px solid yellow; */
+    height: 18vh;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.info__stats__box-container {
+    height: fit-content;
+    width: 24%;
+    border: 1px solid white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+}
+
+.info__stats__icon-container {
+    /* border: 2px soild red; */
+    width: 100%;
+    /* top: 0%; */
+    /* margin-top: -15px; */
+    /* padding-top: 0px; */
+    /* padding-left: 4px; */
+    display: flex;
+}
+
+.info__stats__icon {
+    /* position: absolute; */
+    top: 1px;
+    left: 1px;
+    height: 21px;
+    width: 21px;
+    align-self: flex-start;
+}
+
+.info__stats__number {
+    font-size: 36px;
+}
+
+.info__stats__text {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.info__details__name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* border: 1px solid orange; */
+    width: 100%;
+}
+
+.info__details__edit {
+    height: 18px;
+    width: 18px;
+}
+
+.info__details__container {
+    width: 36%;
+    height: fit-content;
+    /* border: 1px solid yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.info__details__heading {
+    font-size: 12px;
+}
+
+.info__details__text {
+    font-size: 18px;
+}
+
+.info__logout-btn {
+    margin: 30px 0px;
+    background-color: white;
+    color: black;
+    height: 42px;
+    width: 120px;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    font-weight: 550;
+    border: none;
+}

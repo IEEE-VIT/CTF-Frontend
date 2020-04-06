@@ -1,16 +1,14 @@
 // import '../../assets/globe_dark.jpg';
-import React, {useState} from 'react';
+import React from 'react';
 
 import ReactGlobe from 'react-globe';
-import { defaultBarMarkerOptions, defaultDotMarkerOptions } from "react-globe";
+//import { defaultBarMarkerOptions, defaultDotMarkerOptions } from "react-globe";
+import '../globe/globe.css';
 
 import markers from './markers.ts';
-// import './planetaryjs.min.js';
-// var Planetaryjs=require('../../../node_modules/planetary.js');
-// import '../../../node_modules/planetary.js';
-const globe2=require('./globe_dark.jpg');
-// const [globe, setGlobe] = useState(globe1);
-let globee;
+const globe2=
+// require('./globe_dark.jpg');
+require('./earth-planet-night.jpg');
 
 class Globe extends React.Component{
     constructor(){
@@ -19,29 +17,10 @@ class Globe extends React.Component{
             focus: undefined
         };
     }
-
-    something(){        
-        const [globe, setGlobe] = useState(globe2);
-        globee=globe;
-        setGlobe(globe2);
-    }
-    // buttonLay=()=>{
-    //     const [focus, setFocus] = useState(undefined);
-    //     return(
-    //         <div>
-    //             <button onClick={() => setFocus([1.3521, 103.8198])}>Singapore</button>
-    //         </div>
-    //     );
-    // }
     render(){
         return(            
-            <div className="globe-container">
-                {/* <canvas id='globe' width='500' height='500' onClick={(event)=>{
-                    console.log(event);
-                    this.getOffset(event);
-                }}></canvas> */}
-                {/* Namastey Duniyaa! */}
-                <button onClick={()=>{
+            <div className="globe-container" style={{"opacity": '1', "filter": 'blur(0px)'}}>
+                {/* <button onClick={()=>{
                     // this.something();
                     var arr=[
                         [1.3521, 103.8198],
@@ -56,14 +35,15 @@ class Globe extends React.Component{
                         focus: a
                     });
                     console.log(a);
-                }}>Change Focus Location</button>
+                }}>Change Focus Location</button> */}
                 <ReactGlobe 
-                size={[900, 600]}
                 globeOptions={{
                     cloudsOpacity: 0.6,
                     enableClouds: false,
                     // texture: `https://raw.githubusercontent.com/chrisrzhou/react-globe/master/textures/globe_dark.jpg`,
-                    texture: `https://raw.githubusercontent.com/mayankshah1607/Cle-Air/master/earth-planet-night.jpg`,
+                    // texture: `https://raw.githubusercontent.com/mayankshah1607/Cle-Air/master/earth-planet-night.jpg`,
+                    texture: globe2,
+                    // glowPower: 0.1,
                 }}
                 cameraOptions={{
                     enableZoom: true,
@@ -77,7 +57,7 @@ class Globe extends React.Component{
                 }}
                 lightOptions={{
                     pointLightColor: 'white',
-                    pointLightIntensity: 2,
+                    pointLightIntensity: 1.5,
                     pointLightPositionRadiusScales: [2, 1, -1],
                   }}
                 focus={this.state.focus}
@@ -99,10 +79,13 @@ class Globe extends React.Component{
                     enterEasingFunction: ['Bounce', 'InOut'],
                     exitAnimationDuration: 3000,
                     exitEasingFunction: ['Cubic', 'Out'],
-                    getTooltipContent: marker => `${marker.city} (Sales: ${marker.value}.0M)`,
+                    getTooltipContent: (marker)=>{
+                        console.log(marker.city);
+                        console.log(marker.value);
+                        return `${marker.city} (Sales: ${marker.value}.0M)`;
+                    },
                     radiusScaleRange: [0.01, 0.05],
                   }}
-                
                 />
             </div>
         );
