@@ -52,13 +52,8 @@ body {
 }
 
 .nav__score {
-    /* height: 100%; */
     width: 210px;
-    /* border: 2px solid blue; */
     color: white;
-    font-family: 'Nova Square';
-    vertical-align: middle;
-    padding: 10px;
-    padding-top: 18px;
     font-size: 18px;
+    cursor: cell;
 }
