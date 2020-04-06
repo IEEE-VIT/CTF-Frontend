@@ -27,8 +27,8 @@ const AppRouter=()=> {
       <BrowserRouter>
         <Switch>
           {/* <Route path="/signup" component={SignUpPage} exact={true}/> */}
-          <Route path="/login" component={LoginSignUpScreen} exact={true}/>
           <Route path='/' component={LandingScreen} exact={true}  />
+          <Route path="/login" component={LoginSignUpScreen} exact={true}/>
           <Route path='/play' component={HomeScreen} exact={true}  />
           {/* <Route component={Error404Page} /> */}
         </Switch>
