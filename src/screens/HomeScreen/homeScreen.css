@@ -23,11 +23,13 @@ body {
     padding-right: 20px;
 }
 
-.nav__ctf image {
-    /* border: 2px solid red; */
-    height: fit-content;
-    width: fit-content;
+.nav__ctf {
+    width: 210px !important;
+}
+
+.nav__ctf img {
     padding: 10px;
+    width: 60px !important;
 }
 
 .nav__buttons-container {

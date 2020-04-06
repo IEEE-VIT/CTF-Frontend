@@ -8,8 +8,7 @@ import QuestionModal from '../../uiComponents/questionModal/questionModal.js';
 import InfoScreen from '../InfoScreen/infoScreen.js';
 import ProfileScreen from '../ProfileScreen/profileScreen.js';
 
-import ctfLogo from '../../assets/CTF.png';
-// const ctf =require('../../assets/CTF.png');
+import ctfLogo from '../../assets/CTF.svg';
 
 class HomeScreen extends React.Component {
 
