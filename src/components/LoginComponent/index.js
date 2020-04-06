@@ -32,7 +32,7 @@ class LoginComponent extends Component {
                         InputLabelProps="textLight"
                     />
 
-                    <a className="button loginBtn" >Log In</a>
+                    <a className="button loginBtn" onClick={() => window.location.href ="/play"}>Log In</a>
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
@@ -43,7 +43,7 @@ class LoginComponent extends Component {
                         <h4>OR</h4>
                     </div>
                     <div className="googleContainer">
-                        <a onClick={() => console.log("Pressed")}>
+                        <a onClick={() => window.location.href ="/play"}>
                             <img src={require("../../assets/cg.png")} alt="Continue With Google" />
                         </a>
                     </div>
