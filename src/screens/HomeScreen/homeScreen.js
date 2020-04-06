@@ -5,6 +5,7 @@ import './homeScreen.css';
 import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIcons.js';
 import LeaderBoard from '../LeaderBoard/leaderBoard.js';
 import QuestionModal from '../../uiComponents/questionModal/questionModal.js';
+import InfoScreen from '../InfoScreen/infoScreen.js';
 
 import ctfLogo from '../../assets/CTF.png';
 // const ctf =require('../../assets/CTF.png');
@@ -15,7 +16,8 @@ class HomeScreen extends React.Component {
 		super();
 		this.state={
 			// 'page': 'map',
-			'page': 'leaderboard',
+			// 'page': 'leaderboard',
+			'page': 'info',
 			isOpen: false
 		};
 	}
@@ -55,6 +57,10 @@ class HomeScreen extends React.Component {
 					this.state.page==='leaderboard'
 					?
 					<LeaderBoard />
+					:
+					this.state.page==='info'
+					?
+					<InfoScreen />
 					:
 					<div></div>
 				}

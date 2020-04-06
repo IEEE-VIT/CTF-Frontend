@@ -103,6 +103,27 @@ class LeaderBoard extends React.Component {
                             <td>200</td>
                             <td>2</td>
                         </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Ajmal</td>
+                            <td className="empty-td"> </td>
+                            <td>200</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>Ajmal</td>
+                            <td className="empty-td"> </td>
+                            <td>200</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>Ajmal</td>
+                            <td className="empty-td"> </td>
+                            <td>200</td>
+                            <td>2</td>
+                        </tr>
                     </table>
                 </div>
             </div>
