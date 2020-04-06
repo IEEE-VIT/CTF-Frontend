@@ -41,12 +41,25 @@ class HomeScreen extends React.Component {
 					<div className="nav__buttons-container">
 						<div className="nav__button" onClick={()=>{
 							this.setState({
-								isOpen: true
+								// isOpen: true
+								page: 'map'
 							});
 						}}>Map</div>
-						<div className="nav__button">Leaderboard</div>
-						<div className="nav__button">Information</div>
-						<div className="nav__button">Profile</div>
+						<div className="nav__button" onClick={()=>{
+							this.setState({
+								page: 'leaderboard'
+							});
+						}}>Leaderboard</div>
+						<div className="nav__button" onClick={()=>{
+							this.setState({
+								page: 'info'
+							});
+						}}>Information</div>
+						<div className="nav__button" onClick={()=>{
+							this.setState({
+								page: 'profile'
+							});
+						}}>Profile</div>
 					</div>
 					<div className="nav__score">Your score: 100</div>
 				</nav>
