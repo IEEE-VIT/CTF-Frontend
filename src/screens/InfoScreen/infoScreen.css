@@ -44,6 +44,8 @@
 
 dl {
     font-size: 21px;
+    /* margin-left: -30px; */
+    align-self: flex-start;
 }
 
 li {
