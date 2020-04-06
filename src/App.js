@@ -6,8 +6,6 @@ import HomeScreen from './screens/HomeScreen/homeScreen.js';
 
 import './App.css';
 
-// importing screens
-
 class App extends React.Component{
 
   render(){

@@ -25,10 +25,44 @@ body {
     align-items: center;
 }
 
+.textSmall {
+    font-family: Nova Square;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+}
+
 .textLight {
     font-family: Nova Square;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 24px;
+}
+
+.textMedium {
+    font-family: Nova Square;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.button {
+    margin-top: 40px;
+    padding: 16px 50px;
+    border-radius: 8px;
+    align-self: center;  
+
+    color: black;
+    background-color: white;
+
+    transition-duration: 0.5s;
+}
+
+.button:hover {
+    background-color: rgb(255, 255, 255, 0.1);
+    color: white;
 }
