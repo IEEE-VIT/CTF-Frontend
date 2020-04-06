@@ -1,18 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
 
+body {
+    background-color: black;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    font-family: 'Nova Square' !important;
+}
+
 .nav {
     position: fixed;
-    height: 10vh;
+    height: 8vh;
     width: 100vw;
     top: 0px;
     background-color: black;
-    /* border: 2px solid red; */
     z-index: 1;
-    /* padding: 10px; */
+
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.nav__ctf {
+.nav__ctf image {
     /* border: 2px solid red; */
     height: fit-content;
     width: fit-content;
@@ -20,22 +31,24 @@
 }
 
 .nav__buttons-container {
-    height: fit-content;
     width: 100%;
-    /* border: 2px solid red; */
+
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
-    color: white;
-    padding: 10px;
-    padding-top: 18px;
-    font-family: 'Nova Square';
 }
 
 .nav__button {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: auto 16px;
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+}
+
+.nav__button:hover {
+    cursor: pointer;
+    color: green;
 }
 
 .nav__score {

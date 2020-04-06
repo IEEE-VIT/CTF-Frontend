@@ -1,18 +1,16 @@
 .leaderboard-container {
-    /* height: calc(fit-content+100vh); */
-    /* height: fit-content; */
-    /* height: 100vh;
-	width: 100vw; */
-    overflow: hidden;
-    /* border: 2px solid red; */
-    margin-top: 10vh;
-    z-index: 0;
+    position: absolute;
+    top: 8vh;
+    height: 92vh;
+    width: 100vw;
+    z-index: 100;
+
+    color: white;
+    background-color: rgba(10, 10, 10, 0.8);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    /* background-color: rgb(12, 11, 11); */
-    background-color: black;
 }
 .leaderboard-card-container {
     height: fit-content;

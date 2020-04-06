@@ -16,10 +16,9 @@ class HomeScreen extends React.Component {
 	constructor() {
 		super();
 		this.state={
-			// 'page': 'map',
 			// 'page': 'leaderboard',
 			// 'page': 'info',
-			'page': 'profile',
+			// 'page': 'profile',
 			isOpen: false
 		};
 	}
@@ -51,11 +50,8 @@ class HomeScreen extends React.Component {
 					</div>
 					<div className="nav__score">Your score: 100</div>
 				</nav>
+				<Globe />
 				{
-					this.state.page==="map"
-					?
-					<Globe />
-					:
 					this.state.page==='leaderboard'
 					?
 					<LeaderBoard />
@@ -68,7 +64,7 @@ class HomeScreen extends React.Component {
 					?
 					<ProfileScreen />
 					:
-					<div></div>
+					null
 				}
 				<QuestionModal isOpen={this.state.isOpen} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
 				<SocialMediaIcons />
