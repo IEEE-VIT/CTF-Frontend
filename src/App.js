@@ -9,17 +9,6 @@ import LandingScreen from './screens/LandingScreen';
 
 import './App.css';
 
-// class App extends React.Component{
-
-//   render(){
-//     return(
-//         // <HomeScreen />
-//         // <LoginSignUpScreen />
-//         <LandingScreen />
-//     );
-//   }
-// }
-
 const AppRouter=()=> {
   return (
     <div>
