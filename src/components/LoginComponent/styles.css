@@ -80,9 +80,26 @@
 }
 
 .googleContainer {
-    padding: 5px 10px;
+    align-items: center;
+
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 8px;
 }
 
 .googleContainer:hover {
     cursor: pointer;
+}
+
+.googleContainer a {
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
