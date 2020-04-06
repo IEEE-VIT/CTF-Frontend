@@ -1,0 +1,67 @@
+.leaderboard-container {
+    position: absolute;
+    top: 8vh;
+    height: 92vh;
+    width: 100vw;
+    z-index: 10;
+
+    color: white;
+    background-color: rgba(10, 10, 10, 0.8);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+leaderboard-subcontainer {
+    align-self: center;
+    width: 40vw;
+    max-height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaderboard-card-container {
+    align-self: center;
+    width: 40vw;
+    max-height: 60vh;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-3dlight-color: aqua;
+    scrollbar-color: #00629b;
+    scrollbar-track-color: transparent;
+    scrollbar-face-color: white;
+    scrollbar-width: 10px;
+}
+
+table{
+    width: 100%;
+    height: 100%;
+    /* border: 2px solid black; */
+    text-align: center;
+    border-collapse: separate;
+}
+
+table th{
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+}
+
+.table-one {
+    height: 10px;
+}
+
+tr{
+    height: 50px;
+    font-size: 15px;
+}
+
+.empty-td {
+    width: 30%;
+}

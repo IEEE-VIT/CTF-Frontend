@@ -1,18 +1,16 @@
 import React from 'react';
 import Globe from './uiComponents/globe/globe.js';
 
-import './App.css';
+// importing Screens
+import HomeScreen from './screens/HomeScreen/homeScreen.js';
 
-// importing screens
-import LoginSignUpScreen from './screens/LoginSignUpScreen';
+import './App.css';
 
 class App extends React.Component{
 
   render(){
     return(
-      <div> 
-        <LoginSignUpScreen />
-      </div>
+        <HomeScreen />
     );
   }
 }
