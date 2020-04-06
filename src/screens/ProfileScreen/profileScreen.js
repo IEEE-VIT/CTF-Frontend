@@ -53,7 +53,7 @@ class ProfileScreen extends React.Component {
                         <div className='info__details__heading'>Username</div>
                         <div className='info__details__text'>gaganvarma</div>
                     </div>
-                    <button className='info__logout-btn'>Log out</button>
+                    <button className='info__logout-btn' onClick={() => window.location.href ="/"} >Log out</button>
                 </div>
             </div>
         );
