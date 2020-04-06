@@ -7,7 +7,7 @@ import '../../Styles.css';
 import './styles.css';
 
 class LoginComponent extends Component {
-    
+
     render() {
         return (
             <div className="loginTextColor">

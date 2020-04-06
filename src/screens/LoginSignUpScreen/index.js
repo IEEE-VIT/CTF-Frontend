@@ -9,7 +9,7 @@ import LoginComponent from '../../components/LoginComponent';
 
 class LoginSignUpScreen extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
