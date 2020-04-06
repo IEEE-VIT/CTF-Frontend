@@ -43,6 +43,7 @@ class Globe extends React.Component{
                     // texture: `https://raw.githubusercontent.com/chrisrzhou/react-globe/master/textures/globe_dark.jpg`,
                     // texture: `https://raw.githubusercontent.com/mayankshah1607/Cle-Air/master/earth-planet-night.jpg`,
                     texture: globe2,
+                    // glowPower: 0.1,
                 }}
                 cameraOptions={{
                     enableZoom: true,
@@ -56,7 +57,7 @@ class Globe extends React.Component{
                 }}
                 lightOptions={{
                     pointLightColor: 'white',
-                    pointLightIntensity: 0,
+                    pointLightIntensity: 1.5,
                     pointLightPositionRadiusScales: [2, 1, -1],
                   }}
                 focus={this.state.focus}
