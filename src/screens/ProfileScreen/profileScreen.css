@@ -131,3 +131,10 @@
     font-weight: 550;
     border: none;
 }
+
+.info__logout-btn:hover {
+    color: white;
+    border: 1px solid white;
+    background-color: transparent;
+    cursor: pointer;
+}
