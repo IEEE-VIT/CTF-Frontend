@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { TextField } from '@material-ui/core';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+// import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-// importing styles
+// Importing styles
 import '../../Styles.css';
-import './styles.css';
+import './loginComponent.css';
 
 class LoginComponent extends Component {
 
@@ -32,20 +32,20 @@ class LoginComponent extends Component {
                         InputLabelProps="textLight"
                     />
 
-                    <a className="button loginBtn" onClick={() => window.location.href ="/play"}>Log In</a>
+                    <div className="button loginBtn" onClick={() => window.location.href ="/play"}>Log In</div>
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
                         <span>Don't have an account? </span> 
-                        <a className="signUpBtn">Sign Up</a>
+                        <div className="signUpBtn">Sign Up</div>
                     </div>
                     <div className="orText">
                         <h4>OR</h4>
                     </div>
                     <div className="googleContainer">
-                        <a onClick={() => window.location.href ="/play"}>
+                        <div onClick={() => window.location.href ="/play"}>
                             <img src={require("../../assets/cg.png")} alt="Continue With Google" />
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

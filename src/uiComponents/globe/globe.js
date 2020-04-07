@@ -1,14 +1,12 @@
-// import '../../assets/globe_dark.jpg';
 import React from 'react';
-
 import ReactGlobe from 'react-globe';
 //import { defaultBarMarkerOptions, defaultDotMarkerOptions } from "react-globe";
 import '../globe/globe.css';
 
 import markers from './markers.ts';
-const globe2=
-// require('./globe_dark.jpg');
-require('./earth-planet-night.jpg');
+// const globe2=
+// // require('./globe_dark.jpg');
+// require('./earth-planet-night.jpg');
 
 class Globe extends React.Component{
     constructor(){

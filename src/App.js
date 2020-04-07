@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Globe from './uiComponents/globe/globe.js';
+// import Globe from './uiComponents/globe/globe.js';
 
-// importing Screens
+// Importing Screens
 import HomeScreen from './screens/HomeScreen/homeScreen.js';
-import LoginSignUpScreen from './screens/LoginSignUpScreen';
-import LandingScreen from './screens/LandingScreen';
+import LoginSignUpScreen from './screens/LoginSignUpScreen/loginSignUpScreen.js';
+import LandingScreen from './screens/LandingScreen/landingScreen.js';
 
 import './App.css';
 

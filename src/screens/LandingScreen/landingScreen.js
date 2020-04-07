@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 
 // importing StyleSheets
-import './styles.css';
+import './landingScreen.css';
 import '../../Styles.css';
 
 class LandingScreen extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (
