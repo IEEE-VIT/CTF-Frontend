@@ -1,0 +1,11 @@
+{
+    "name": "ctf",
+    "version": "1.0.1-alpha",
+    "scope": "ieee-vit",
+    "env": {
+
+    },
+    "build": {
+        
+    }
+}
