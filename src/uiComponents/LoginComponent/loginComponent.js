@@ -17,23 +17,9 @@ class LoginComponent extends Component {
         super(props);
         
         this.state = {
-            isLoading: true,
             email: '',
             password: '',
         }
-    }
-
-    componentDidMount(){
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                window.location.href ="/play"
-                return;
-            }
-            console.log('user not logged in')
-            this.setState({
-                isLoading: false,
-            })
-        })
     }
 
     setEmail = (email) => {
@@ -49,13 +35,12 @@ class LoginComponent extends Component {
     }
 
     onLoginSubmit = () => {
-        this.setState({
-            isLoading: true,
-        })
+        this.props.toggleLoading();
         const { email, password } = this.state;
         const validCreds = checkUserEmailAndPassword(email, password);
         if (!validCreds) {
             console.log("invalid credentials");
+            this.props.toggleLoading();
             return;
         }
 
@@ -67,26 +52,17 @@ class LoginComponent extends Component {
             })
             .then((user) => {
                 console.log(user);
+                window.location.href = "/play";
                 return;
             })
             .catch((err) => {
                 console.log(err);
+                this.props.toggleLoading();
             })
     }
 
     render() {
-        const { email, password, isLoading } = this.state;
-
-        if (isLoading) {
-            return (
-                <LoadingScreen
-                    loading={isLoading}
-                    bgColor='black'
-                    spinnerColor='blue'
-                    logoSrc={require('../../assets/ctfLogo.png')}
-                /> 
-            );
-        }
+        const { email, password } = this.state;
 
         return (
             <div className="loginTextColor">
@@ -125,7 +101,7 @@ class LoginComponent extends Component {
                 <div className="subContainer">
                     <div className="signUpSection">
                         <span>Don't have an account? </span> 
-                        <div className="signUpBtn">Sign Up</div>
+                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Sign Up</div>
                     </div>
                     <div className="orText">
                         <h4>OR</h4>

@@ -18,25 +18,11 @@ class LoginComponent extends Component {
         super(props);
         
         this.state = {
-            isLoading: true,
             username: '',
             email: '',
             password: '',
             confirmPassword: ''
         }
-    }
-
-    componentDidMount(){
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                window.location.href ="/play"
-                return;
-            }
-            console.log('user not logged in')
-            this.setState({
-                isLoading: false,
-            })
-        })
     }
 
     setUserName = (username) => {
@@ -64,18 +50,18 @@ class LoginComponent extends Component {
     }
 
     onLoginSubmit = () => {
-        this.setState({
-            isLoading: true,
-        })
+        this.props.toggleLoading();
         const { username, email, password, confirmPassword } = this.state;
         const validCreds = ( checkUserEmailAndPassword(email, password) && checkUsername(username) );
         if (!validCreds) {
             console.log("invalid credentials");
+            this.props.toggleLoading();
             return;
         }
 
         if (confirmPassword !== password) {
             console.log("passwords don't match");
+            this.props.toggleLoading();
             return;
         }
 
@@ -94,22 +80,12 @@ class LoginComponent extends Component {
             })
             .catch((err) => {
                 console.log(err);
+                this.props.toggleLoading();
             })
     }
 
     render() {
-        const { username, email, password, confirmPassword, isLoading } = this.state;
-
-        if (isLoading) {
-            return (
-                <LoadingScreen
-                    loading={isLoading}
-                    bgColor='black'
-                    spinnerColor='blue'
-                    logoSrc={require('../../assets/ctfLogo.png')}
-                /> 
-            );
-        }
+        const { username, email, password, confirmPassword } = this.state;
 
         return (
             <div className="loginTextColor">
@@ -141,7 +117,6 @@ class LoginComponent extends Component {
                         onChange={(email) => this.setEmail(email)}
                         required
                         type='email'
-                        autoFocus
                     />
                     <TextField
                         id='outlined-basic'
@@ -174,8 +149,8 @@ class LoginComponent extends Component {
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
-                        <span>Don't have an account? </span> 
-                        <div className="signUpBtn">Sign Up</div>
+                        <span>Already have an account? </span> 
+                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
                     </div>
                     <div className="orText">
                         <h4>OR</h4>

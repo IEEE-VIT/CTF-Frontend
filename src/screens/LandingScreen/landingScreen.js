@@ -11,7 +11,7 @@ class LandingScreen extends Component {
         return (
             <div className="mainContainer">
                 <img className="ctfLogo" src={require('../../assets/ctfLogo.png')} alt="CTF Logo" height={260} />
-                <button className='platBtn textLight' onClick={() => window.location.href ="/getStarted"}>Play</button>
+                <div className="button loginBtn" onClick={() => window.location.href = '/getStarted'}>Play</div>
             </div>
         );
     }
