@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { TextField } from '@material-ui/core';
+import LoadingScreen from 'react-loading-screen';
 
 // importing firebase
-import * as firebase from 'firebase';
+import firebase from '../../configs/firebase';
 
 // import utils
 import { checkUserEmailAndPassword } from '../../utils/userHelperFuncs';
@@ -16,10 +17,23 @@ class LoginComponent extends Component {
         super(props);
         
         this.state = {
-            isLoading: false,
+            isLoading: true,
             email: '',
             password: '',
         }
+    }
+
+    componentDidMount(){
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href ="/play"
+                return;
+            }
+            console.log('user not logged in')
+            this.setState({
+                isLoading: false,
+            })
+        })
     }
 
     setEmail = (email) => {
@@ -40,17 +54,39 @@ class LoginComponent extends Component {
         })
         const { email, password } = this.state;
         const validCreds = checkUserEmailAndPassword(email, password);
-        if (validCreds) {
-            console.log("goooooooood");
+        if (!validCreds) {
+            console.log("invalid credentials");
             return;
         }
 
-        console.log("invalid credentials");
-        return;
+        console.log("goooooooood");
+        firebase.auth()
+            .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => {
+                return firebase.auth().signInWithEmailAndPassword(email, password)
+            })
+            .then((user) => {
+                console.log(user);
+                return;
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     render() {
-        const { email, password } = this.state;
+        const { email, password, isLoading } = this.state;
+
+        if (isLoading) {
+            return (
+                <LoadingScreen
+                    loading={isLoading}
+                    bgColor='black'
+                    spinnerColor='blue'
+                    logoSrc={require('../../assets/ctfLogo.png')}
+                /> 
+            );
+        }
 
         return (
             <div className="loginTextColor">
