@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'firebase';
 
 // importing StyleSheets
 import './landingScreen.css';
