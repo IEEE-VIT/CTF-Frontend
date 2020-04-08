@@ -6,13 +6,14 @@ import '../../Styles.css';
 
 // importing components
 import LoginComponent from '../../uiComponents/LoginComponent/loginComponent.js';
+import SignUpComponent from '../../uiComponents/SignUpComponent/SignUpComponent.js';
 
 class LoginSignUpScreen extends Component {
 
     render() {
         return (
             <div className="mainContainer">
-                <LoginComponent />
+                <SignUpComponent />
             </div>
         );
     }

@@ -15,3 +15,17 @@ export const checkUserEmailAndPassword = (email, password) => {
 
     return true;
 }
+
+export const checkUsername = (username) => {
+    if (!validator.isAlphanumeric(username)) {
+        console.log("Username invalid");
+        return false;
+    }
+
+    if (username.length < 6 || username.length > 40) {
+        console.log("Username too short or long");
+        return false;
+    }
+
+    return true;
+}
