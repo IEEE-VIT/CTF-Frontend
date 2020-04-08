@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingScreen from 'react-loading-screen';
 
 import Globe from '../../uiComponents/globe/globe';
 import './homeScreen.css';
@@ -10,15 +11,40 @@ import ProfileScreen from '../ProfileScreen/profileScreen.js';
 
 import ctfLogo from '../../assets/CTF.svg';
 
+// importing firebase
+import firebase from '../../configs/firebase';
+
 class HomeScreen extends React.Component {
 
 	constructor() {
 		super();
 		this.state={
 			'page': 'map',
-			isOpen: false
+			isOpen: false,
+
+			isLoading: true,
 		};
 	}
+
+	componentDidMount(){
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href ="/"
+                return;
+            }
+            console.log('user logged in')
+            this.setState({
+                isLoading: false,
+            })
+        })
+	}
+	
+	toggleLoading = () => {
+        const { isLoading } = this.state;
+        this.setState({
+            isLoading: !isLoading
+        })
+    }
 
 	handleAnswerSubmit=()=>{
 		console.log('Trying to handle answer submit');
@@ -31,6 +57,19 @@ class HomeScreen extends React.Component {
 	}
 
 	render() {
+		const { isLoading } = this.state;
+
+		if (isLoading) {
+            return (
+                <LoadingScreen
+                    loading={isLoading}
+                    bgColor='black'
+                    spinnerColor='blue'
+                    logoSrc={require('../../assets/ctfLogo.png')}
+                /> 
+            );
+        }
+
 		return (
 			<div>
 				<nav className="nav">
@@ -72,7 +111,7 @@ class HomeScreen extends React.Component {
 					:
 					this.state.page==='profile'
 					?
-					<ProfileScreen />
+					<ProfileScreen toggleLoading={this.toggleLoading}/>
 					:
 					null
 				}

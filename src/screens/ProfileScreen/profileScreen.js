@@ -9,9 +9,13 @@ import editIcon from '../../assets/edit.png';
 //import firebase
 import firebase from '../../configs/firebase';
 
+// importing styles
+import '../../Styles.css';
+
 class ProfileScreen extends React.Component {
 
     onLogOut = () => {
+        this.props.toggleLoading();
         firebase.auth().signOut()
             .then((resp) => {
                 console.log(resp);
@@ -20,6 +24,7 @@ class ProfileScreen extends React.Component {
             })
             .catch((err) => {
                 console.log(err);
+                this.props.toggleLoading();
                 return;
             })
     }
@@ -70,7 +75,7 @@ class ProfileScreen extends React.Component {
                         <div className='info__details__heading'>Username</div>
                         <div className='info__details__text'>gaganvarma</div>
                     </div>
-                    <button className='info__logout-btn' onClick={() => this.onLogOut()} >Log out</button>
+                    <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
                 </div>
             </div>
         );
