@@ -1,6 +1,9 @@
 import validator from 'validator';
 import * as firebase from 'firebase';
 
+// import api
+import activityLayerApi from '../apis/activityLayerApi.js';
+
 export const checkUserEmailAndPassword = (email, password) => {
 
     if (!validator.isEmail(email)) {
@@ -14,7 +17,7 @@ export const checkUserEmailAndPassword = (email, password) => {
     }
 
     return true;
-}
+};
 
 export const checkUsername = (username) => {
     if (!validator.isAlphanumeric(username)) {
@@ -28,4 +31,40 @@ export const checkUsername = (username) => {
     }
 
     return true;
+};
+
+export const pingServer = () => {
+    return new Promise((resolve, reject) => {
+        activityLayerApi.get("getAllQuestions", {
+            headers: {
+                'Authorization': 'Bearer ',
+            }
+        })
+            .then((resp) => {
+                console.log(resp);
+                resolve();
+            })
+            .catch((err) => {
+                console.log(err);
+                resolve();
+            })
+    })
+}
+
+export const getUserProfile = () => {
+    return new Promise((resolve, reject) => {
+        activityLayerApi.get("/profile", {
+            headers: {
+                'Authorization': 'Bearer ' + firebase.auth().currentUser.uid,
+            }
+        })
+            .then((resp) => {
+                console.log(resp);
+                resolve();
+            })
+            .catch((err) => {
+                console.log(err);
+                resolve();
+            })
+    })
 }

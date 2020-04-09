@@ -9,10 +9,17 @@ import editIcon from '../../assets/edit.png';
 //import firebase
 import firebase from '../../configs/firebase';
 
+// importing utils
+import { getUserProfile } from '../../utils/userHelperFuncs';
+
 // importing styles
 import '../../Styles.css';
 
 class ProfileScreen extends React.Component {
+
+    componentDidMount() {
+        getUserProfile();
+    }
 
     onLogOut = () => {
         this.props.toggleLoading();

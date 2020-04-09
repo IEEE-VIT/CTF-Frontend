@@ -5,7 +5,13 @@ import 'firebase';
 import './landingScreen.css';
 import '../../Styles.css';
 
+import { pingServer } from '../../utils/userHelperFuncs';
+
 class LandingScreen extends Component {
+
+    componentDidMount() {
+        pingServer();
+    }
 
     render() {
         return (
