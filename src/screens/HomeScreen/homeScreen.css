@@ -46,11 +46,12 @@ body {
     font-weight: bold;
     font-size: 22px;
     color: white;
+    opacity: 0.64;
 }
 
 .nav__button:hover {
     cursor: pointer;
-    color: green;
+    opacity: 1;
 }
 
 .nav__score {

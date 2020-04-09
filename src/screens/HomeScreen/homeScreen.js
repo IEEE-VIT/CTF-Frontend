@@ -19,9 +19,8 @@ class HomeScreen extends React.Component {
 	constructor() {
 		super();
 		this.state={
-			'page': 'map',
+			page: 'map',
 			isOpen: false,
-
 			isLoading: true,
 		};
 	}

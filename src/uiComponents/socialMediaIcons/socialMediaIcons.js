@@ -9,13 +9,13 @@ import './socialMediaIcons.css';
 const SocialMediaIcons=()=> {
     return (
         <div className="social-media-icons-container">
-            <a href="https://www.facebook.com/IEEEVIT/" className="icons">
+            <a href="https://www.facebook.com/IEEEVIT/" className="icons" rel="author external noopener noreferrer" target="_blank" >
                 <img src={facebookLogo} alt=""/>
             </a>
-            <a href="https://www.instagram.com/ieeevitvellore/" className="icons">
+            <a href="https://www.instagram.com/ieeevitvellore/" className="icons" rel="author external noopener noreferrer" target="_blank">
                 <img src={instaLogo} alt=""/>
             </a>
-            <a href="https://twitter.com/ieeevitvellore" className="icons">
+            <a href="https://twitter.com/ieeevitvellore" className="icons" rel="author external noopener noreferrer" target="_blank">
                 <img src={twitterLogo} alt=""/>
             </a>
         </div>
