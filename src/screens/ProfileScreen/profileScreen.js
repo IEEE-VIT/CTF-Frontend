@@ -6,7 +6,29 @@ import pointsIcon from '../../assets/points.png';
 import flagsIcon from '../../assets/flags.png';
 import editIcon from '../../assets/edit.png';
 
+//import firebase
+import firebase from '../../configs/firebase';
+
+// importing styles
+import '../../Styles.css';
+
 class ProfileScreen extends React.Component {
+
+    onLogOut = () => {
+        this.props.toggleLoading();
+        firebase.auth().signOut()
+            .then((resp) => {
+                console.log(resp);
+                window.location.href ="/"
+                return;
+            })
+            .catch((err) => {
+                console.log(err);
+                this.props.toggleLoading();
+                return;
+            })
+    }
+
     render() {
         return (
             <div className="profile-container">
@@ -53,7 +75,7 @@ class ProfileScreen extends React.Component {
                         <div className='info__details__heading'>Username</div>
                         <div className='info__details__text'>gaganvarma</div>
                     </div>
-                    <button className='info__logout-btn' onClick={() => window.location.href ="/"} >Log out</button>
+                    <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
                 </div>
             </div>
         );

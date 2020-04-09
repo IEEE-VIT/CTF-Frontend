@@ -6,20 +6,29 @@ import LoadingScreen from 'react-loading-screen';
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword } from '../../utils/userHelperFuncs';
+import { checkUserEmailAndPassword, checkUsername } from '../../utils/userHelperFuncs';
+import { uodateUsername } from '../../utils/firebaseHelperFuncs';
 
 // Importing styles
 import '../../Styles.css';
-import './loginComponent.css';
+import './SignUpComponent.css';
 
 class LoginComponent extends Component {
     constructor(props){
         super(props);
         
         this.state = {
+            username: '',
             email: '',
             password: '',
+            confirmPassword: ''
         }
+    }
+
+    setUserName = (username) => {
+        this.setState({
+            username: username.target.value,
+        })
     }
 
     setEmail = (email) => {
@@ -34,12 +43,24 @@ class LoginComponent extends Component {
         })
     }
 
+    setConfirmPassword = (confirmPassword) => {
+        this.setState({
+            confirmPassword: confirmPassword.target.value
+        })
+    }
+
     onLoginSubmit = () => {
         this.props.toggleLoading();
-        const { email, password } = this.state;
-        const validCreds = checkUserEmailAndPassword(email, password);
+        const { username, email, password, confirmPassword } = this.state;
+        const validCreds = ( checkUserEmailAndPassword(email, password) && checkUsername(username) );
         if (!validCreds) {
             console.log("invalid credentials");
+            this.props.toggleLoading();
+            return;
+        }
+
+        if (confirmPassword !== password) {
+            console.log("passwords don't match");
             this.props.toggleLoading();
             return;
         }
@@ -48,12 +69,14 @@ class LoginComponent extends Component {
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(() => {
-                return firebase.auth().signInWithEmailAndPassword(email, password)
+                return firebase.auth().createUserWithEmailAndPassword(email, password)
             })
             .then((user) => {
-                console.log(user);
-                window.location.href = "/play";
-                return;
+                return uodateUsername(username);
+            })
+            .then(() => {
+                console.log(firebase.auth().currentUser.displayName);
+                // put data to db
             })
             .catch((err) => {
                 console.log(err);
@@ -62,11 +85,11 @@ class LoginComponent extends Component {
     }
 
     render() {
-        const { email, password } = this.state;
+        const { username, email, password, confirmPassword } = this.state;
 
         return (
             <div className="loginTextColor">
-                <span className="textMedium">Login in</span>
+                <span className="textMedium">Sign Up</span>
                 <div className="inputContainer">
                     <TextField
                         id='outlined-basic'
@@ -76,11 +99,24 @@ class LoginComponent extends Component {
                         margin='normal'
                         color="primary"
                         InputLabelProps="textLight"
+                        value={username}
+                        onChange={(username) => this.setUserName(username)}
+                        required
+                        type='text'
+                        autoFocus
+                    />
+                    <TextField
+                        id='outlined-basic'
+                        fullWidth={true}
+                        label="Email"
+                        variant="outlined"
+                        margin='normal'
+                        color="primary"
+                        InputLabelProps="textLight"
                         value={email}
                         onChange={(email) => this.setEmail(email)}
                         required
                         type='email'
-                        autoFocus
                     />
                     <TextField
                         id='outlined-basic'
@@ -95,13 +131,26 @@ class LoginComponent extends Component {
                         required
                         type='password'
                     />
+                    <TextField
+                        id='outlined-basic'
+                        fullWidth={true}
+                        label="Confirm Password"
+                        variant="outlined"
+                        margin='none'
+                        color="primary"
+                        InputLabelProps="textLight"
+                        value={confirmPassword}
+                        onChange={(confirmPassword) => this.setConfirmPassword(confirmPassword)}
+                        required
+                        type='text'
+                    />
 
-                    <div className="button loginBtn" onClick={() => this.onLoginSubmit()}>Log In</div>
+                    <div className="button loginBtn" onClick={() => this.onLoginSubmit()}>Sign Up</div>
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
-                        <span>Don't have an account? </span> 
-                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Sign Up</div>
+                        <span>Already have an account? </span> 
+                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
                     </div>
                     <div className="orText">
                         <h4>OR</h4>
