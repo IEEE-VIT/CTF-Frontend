@@ -7,8 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword, checkUsername } from '../../utils/userHelperFuncs';
-import { uodateUsername } from '../../utils/firebaseHelperFuncs';
+import { checkUserEmailAndPassword, checkName } from '../../utils/userHelperFuncs';
+import { updateName, googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
 import { toastError } from '../toasts/toasts.js';
@@ -22,16 +22,16 @@ class LoginComponent extends Component {
         super(props);
         
         this.state = {
-            username: '',
+            name: '',
             email: '',
             password: '',
             confirmPassword: ''
         }
     }
 
-    setUserName = (username) => {
+    setname = (name) => {
         this.setState({
-            username: username.target.value,
+            name: name.target.value,
         })
     }
 
@@ -53,19 +53,19 @@ class LoginComponent extends Component {
         })
     }
 
-    onLoginSubmit = () => {
+    onSignUpSubmit = () => {
         this.props.startLoading();
-        const { username, email, password, confirmPassword } = this.state;
+        const { name, email, password, confirmPassword } = this.state;
 
-        if ([username, email, password, confirmPassword].includes("")) {
+        if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
             this.props.stopLoading();
             toastError("Looks like you forgot to fill some fields.");
             return;
         }
 
-        if (!checkUsername(username)) {
+        if (!checkName(name)) {
             this.props.stopLoading();
-            toastError("Hey make sure your username has only Alphanumeric characters.");
+            toastError("Hey make sure your name has only Alphanumeric characters.");
             return;
         }
 
@@ -88,7 +88,7 @@ class LoginComponent extends Component {
                 return firebase.auth().createUserWithEmailAndPassword(email, password)
             })
             .then((user) => {
-                return uodateUsername(username);
+                return updateName(name);
             })
             .then(() => {
                 console.log(firebase.auth().currentUser.displayName);
@@ -101,8 +101,21 @@ class LoginComponent extends Component {
             })
     }
 
+    onGoogleAuth = () => {
+        this.props.startLoading();
+        googleOAuth()
+            .then((user) => {
+                console.log(user);
+            })
+            .catch((err) => {
+                console.log(err);
+                this.props.stopLoading();
+                toastError(err.message);
+            })
+    }
+
     render() {
-        const { username, email, password, confirmPassword } = this.state;
+        const { name, email, password, confirmPassword } = this.state;
 
         return (
             <div className="loginTextColor">
@@ -112,13 +125,13 @@ class LoginComponent extends Component {
                     <TextField
                         id='outlined-basic'
                         fullWidth={true}
-                        label="Username"
+                        label="Your name"
                         variant="outlined"
                         margin='normal'
                         color="primary"
                         InputLabelProps="textLight"
-                        value={username}
-                        onChange={(username) => this.setUserName(username)}
+                        value={name}
+                        onChange={(name) => this.setname(name)}
                         required
                         type='text'
                         autoFocus
@@ -163,7 +176,7 @@ class LoginComponent extends Component {
                         type='text'
                     />
 
-                    <div className="button loginBtn" onClick={() => this.onLoginSubmit()}>Sign Up</div>
+                    <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
@@ -174,9 +187,7 @@ class LoginComponent extends Component {
                         <h4>OR</h4>
                     </div>
                     <div className="googleContainer">
-                        <div onClick={() => window.location.href ="/play"}>
-                            <img src={require("../../assets/cg.png")} alt="Continue With Google" />
-                        </div>
+                        <img src={require("../../assets/cg.png")} alt="Continue With Google" />
                     </div>
                 </div>
             </div>

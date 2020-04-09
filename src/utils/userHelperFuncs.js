@@ -19,13 +19,13 @@ export const checkUserEmailAndPassword = (email, password) => {
     return true;
 };
 
-export const checkUsername = (username) => {
-    if (!validator.isAlphanumeric(username)) {
+export const checkName = (name) => {
+    if (!validator.isAlphanumeric(validator.blacklist(name, ' '))) {
         console.log("Username invalid");
         return false;
     }
 
-    if (username.length < 6 || username.length > 40) {
+    if (name.length < 6 || name.length > 40) {
         console.log("Username too short or long");
         return false;
     }

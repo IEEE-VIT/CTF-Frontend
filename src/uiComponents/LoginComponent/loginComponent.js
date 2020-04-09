@@ -8,6 +8,7 @@ import firebase from '../../configs/firebase';
 
 // import utils
 import { checkUserEmailAndPassword } from '../../utils/userHelperFuncs';
+import { googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
 import { toastError } from '../toasts/toasts.js';
@@ -42,7 +43,7 @@ class LoginComponent extends Component {
         this.props.startLoading();
         const { email, password } = this.state;
 
-        if ([email, password].includes("")) {
+        if ([email.trim(), password.trim()].includes("")) {
             this.props.stopLoading();
             toastError("Looks like you forgot to fill some fields.");
             return;
@@ -73,6 +74,19 @@ class LoginComponent extends Component {
             })
     }
 
+    onGoogleAuth = () => {
+        this.props.startLoading();
+        googleOAuth()
+            .then((user) => {
+                console.log(user);
+            })
+            .catch((err) => {
+                console.log(err);
+                this.props.stopLoading();
+                toastError(err.message);
+            })
+    }
+
     render() {
         const { email, password } = this.state;
 
@@ -84,7 +98,7 @@ class LoginComponent extends Component {
                     <TextField
                         id='outlined-basic'
                         fullWidth={true}
-                        label="Username"
+                        label="Email"
                         variant="outlined"
                         margin='normal'
                         color="primary"
@@ -119,10 +133,8 @@ class LoginComponent extends Component {
                     <div className="orText">
                         <h4>OR</h4>
                     </div>
-                    <div className="googleContainer">
-                        <div onClick={() => window.location.href ="/play"}>
-                            <img src={require("../../assets/cg.png")} alt="Continue With Google" />
-                        </div>
+                    <div className="googleContainer" onClick={() => this.onGoogleAuth()}>
+                        <img src={require("../../assets/cg.png")} alt="Continue With Google" />
                     </div>
                 </div>
             </div>
