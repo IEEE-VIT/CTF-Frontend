@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { TextField } from '@material-ui/core';
-import LoadingScreen from 'react-loading-screen';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // importing firebase
 import firebase from '../../configs/firebase';
 
 // import utils
 import { checkUserEmailAndPassword } from '../../utils/userHelperFuncs';
+
+// importing components
+import { toastError } from '../toasts/toasts.js';
 
 // Importing styles
 import '../../Styles.css';
@@ -37,10 +41,16 @@ class LoginComponent extends Component {
     onLoginSubmit = () => {
         this.props.startLoading();
         const { email, password } = this.state;
-        const validCreds = checkUserEmailAndPassword(email, password);
-        if (!validCreds) {
-            console.log("invalid credentials");
+
+        if ([email, password].includes("")) {
             this.props.stopLoading();
+            toastError("Looks like you forgot to fill some fields.");
+            return;
+        }
+        
+        if (!checkUserEmailAndPassword(email, password)) {
+            this.props.stopLoading();
+            toastError("Hey make sure your Email is correct and password has only Alphanumeric characters.");
             return;
         }
 
@@ -58,6 +68,8 @@ class LoginComponent extends Component {
             .catch((err) => {
                 console.log(err);
                 this.props.stopLoading();
+                toastError(err.message);
+                return;
             })
     }
 
@@ -66,6 +78,7 @@ class LoginComponent extends Component {
 
         return (
             <div className="loginTextColor">
+                <ToastContainer />
                 <span className="textMedium">Login in</span>
                 <div className="inputContainer">
                     <TextField

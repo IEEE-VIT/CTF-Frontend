@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TextField } from '@material-ui/core';
-import LoadingScreen from 'react-loading-screen';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // importing firebase
 import firebase from '../../configs/firebase';
@@ -8,6 +9,9 @@ import firebase from '../../configs/firebase';
 // import utils
 import { checkUserEmailAndPassword, checkUsername } from '../../utils/userHelperFuncs';
 import { uodateUsername } from '../../utils/firebaseHelperFuncs';
+
+// importing components
+import { toastError } from '../toasts/toasts.js';
 
 // Importing styles
 import '../../Styles.css';
@@ -52,16 +56,28 @@ class LoginComponent extends Component {
     onLoginSubmit = () => {
         this.props.startLoading();
         const { username, email, password, confirmPassword } = this.state;
-        const validCreds = ( checkUserEmailAndPassword(email, password) && checkUsername(username) );
-        if (!validCreds) {
-            console.log("invalid credentials");
+
+        if ([username, email, password, confirmPassword].includes("")) {
             this.props.stopLoading();
+            toastError("Looks like you forgot to fill some fields.");
+            return;
+        }
+
+        if (!checkUsername(username)) {
+            this.props.stopLoading();
+            toastError("Hey make sure your username has only Alphanumeric characters.");
+            return;
+        }
+
+        if (!checkUserEmailAndPassword(email, password)) {
+            this.props.stopLoading();
+            toastError("Hey make sure your Email is correct and password has only Alphanumeric characters.");
             return;
         }
 
         if (confirmPassword !== password) {
-            console.log("passwords don't match");
             this.props.stopLoading();
+            toastError("Hey your password and confirm password don't match.");
             return;
         }
 
@@ -81,6 +97,7 @@ class LoginComponent extends Component {
             .catch((err) => {
                 console.log(err);
                 this.props.stopLoading();
+                toastError(err.message);
             })
     }
 
@@ -89,6 +106,7 @@ class LoginComponent extends Component {
 
         return (
             <div className="loginTextColor">
+                <ToastContainer />
                 <span className="textMedium">Sign Up</span>
                 <div className="inputContainer">
                     <TextField
