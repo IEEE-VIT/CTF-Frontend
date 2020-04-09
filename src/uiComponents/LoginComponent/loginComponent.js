@@ -79,6 +79,7 @@ class LoginComponent extends Component {
         googleOAuth()
             .then((user) => {
                 console.log(user);
+                return;
             })
             .catch((err) => {
                 console.log(err);

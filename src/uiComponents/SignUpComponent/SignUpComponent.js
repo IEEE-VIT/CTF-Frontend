@@ -186,7 +186,7 @@ class LoginComponent extends Component {
                     <div className="orText">
                         <h4>OR</h4>
                     </div>
-                    <div className="googleContainer">
+                    <div className="googleContainer" onClick={() => this.onGoogleAuth()}>
                         <img src={require("../../assets/cg.png")} alt="Continue With Google" />
                     </div>
                 </div>
