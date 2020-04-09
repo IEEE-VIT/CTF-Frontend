@@ -36,10 +36,15 @@ class LoginSignUpScreen extends Component {
         })
     }
 
-    toggleLoading = () => {
-        const { isLoading } = this.state;
+    startLoading = () => {
         this.setState({
-            isLoading: !isLoading
+            isLoading: true,
+        })
+    }
+
+    stopLoading = () => {
+        this.setState({
+            isLoading: false,
         })
     }
 
@@ -75,9 +80,9 @@ class LoginSignUpScreen extends Component {
                 {
                     screen === "login"
                     ?
-                    <LoginComponent toggleLoading={this.toggleLoading} switchScreen={this.switchScreen}/>
+                    <LoginComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>
                     :
-                    <SignUpComponent toggleLoading={this.toggleLoading} switchScreen={this.switchScreen}/>
+                    <SignUpComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>
                 }
             </div>
         );

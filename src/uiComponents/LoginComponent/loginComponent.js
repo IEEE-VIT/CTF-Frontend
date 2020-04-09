@@ -35,12 +35,12 @@ class LoginComponent extends Component {
     }
 
     onLoginSubmit = () => {
-        this.props.toggleLoading();
+        this.props.startLoading();
         const { email, password } = this.state;
         const validCreds = checkUserEmailAndPassword(email, password);
         if (!validCreds) {
             console.log("invalid credentials");
-            this.props.toggleLoading();
+            this.props.stopLoading();
             return;
         }
 
@@ -57,7 +57,7 @@ class LoginComponent extends Component {
             })
             .catch((err) => {
                 console.log(err);
-                this.props.toggleLoading();
+                this.props.stopLoading();
             })
     }
 

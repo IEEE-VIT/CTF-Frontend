@@ -50,18 +50,18 @@ class LoginComponent extends Component {
     }
 
     onLoginSubmit = () => {
-        this.props.toggleLoading();
+        this.props.startLoading();
         const { username, email, password, confirmPassword } = this.state;
         const validCreds = ( checkUserEmailAndPassword(email, password) && checkUsername(username) );
         if (!validCreds) {
             console.log("invalid credentials");
-            this.props.toggleLoading();
+            this.props.stopLoading();
             return;
         }
 
         if (confirmPassword !== password) {
             console.log("passwords don't match");
-            this.props.toggleLoading();
+            this.props.stopLoading();
             return;
         }
 
@@ -80,7 +80,7 @@ class LoginComponent extends Component {
             })
             .catch((err) => {
                 console.log(err);
-                this.props.toggleLoading();
+                this.props.stopLoading();
             })
     }
 
