@@ -128,8 +128,8 @@ class LoginComponent extends Component {
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
-                        <span>Don't have an account? </span> 
-                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Sign Up</div>
+                        <span>Don't have an account? </span>
+                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}> Sign Up</div>
                     </div>
                     <div className="orText">
                         <h4>OR</h4>
