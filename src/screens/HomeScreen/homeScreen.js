@@ -38,12 +38,12 @@ class HomeScreen extends React.Component {
         })
 	}
 	
-	toggleLoading = () => {
-        const { isLoading } = this.state;
-        this.setState({
-            isLoading: !isLoading
-        })
-    }
+	// toggleLoading = () => {
+    //     const { isLoading } = this.state;
+    //     this.setState({
+    //         isLoading: !isLoading
+    //     })
+    // }
 
 	handleAnswerSubmit=()=>{
 		console.log('Trying to handle answer submit');
@@ -110,7 +110,7 @@ class HomeScreen extends React.Component {
 					:
 					this.state.page==='profile'
 					?
-					<ProfileScreen toggleLoading={this.toggleLoading}/>
+					<ProfileScreen />
 					:
 					null
 				}

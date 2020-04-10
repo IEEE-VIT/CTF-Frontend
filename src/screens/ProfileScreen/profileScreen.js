@@ -16,6 +16,14 @@ import { getUserProfile } from '../../utils/userHelperFuncs';
 import '../../Styles.css';
 
 class ProfileScreen extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            name: firebase.auth().currentUser.displayName,
+            email: firebase.auth().currentUser.email,
+        }
+    }
 
     componentDidMount() {
         getUserProfile();
@@ -37,6 +45,8 @@ class ProfileScreen extends React.Component {
     }
 
     render() {
+        const { name, email } = this.state;
+
         return (
             <div className="profile-container">
                 <div className="profile-card-container">
@@ -68,15 +78,15 @@ class ProfileScreen extends React.Component {
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Name</div>
                         <div className='info__details__text info__details__name'>
-                            Gagan Varma
-                            <div>
+                            { name }
+                            <div className="editNameBtn" onClick={() => console.log("Edit Profile")}>
                                 <img src={editIcon} alt='' className='info__details__edit'/>
                             </div>
                         </div>
                     </div>
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Email ID</div>
-                        <div className='info__details__text'>gaganv@gmail.com</div>
+                        <div className='info__details__text'>{ email }</div>
                     </div>
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Username</div>
