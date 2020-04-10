@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword, checkName } from '../../utils/userHelperFuncs';
+import { checkUserEmailAndPassword, checkName, createUser } from '../../utils/userHelperFuncs';
 import { updateName, googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
@@ -86,13 +86,22 @@ class SignUpComponent extends Component {
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(async () => {
-                return firebase.auth().createUserWithEmailAndPassword(email, password)
+                return firebase.auth().createUserWithEmailAndPassword(email, password)                
             })
-            .then(() => {
-                return updateName(name)
-            })
-            .then(() => {
-                window.location.href = "/play"
+            .then(async () => {
+                const {email, uid} = firebase.auth().currentUser;
+                createUser(email, name, uid)
+                    .then(async () => {
+                        await updateName(name);
+                        window.location.href = "/play"
+                    })
+                    .catch((err) => {
+                        const user = firebase.auth().currentUser;
+                        user.delete();
+                        this.props.stopLoading();
+                        toastError(err.message);
+                    })
+                
             })
             .catch((err) => {
                 console.log(err);

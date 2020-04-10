@@ -35,11 +35,7 @@ export const checkName = (name) => {
 
 export const pingServer = () => {
     return new Promise((resolve, reject) => {
-        activityLayerApi.get("getAllQuestions", {
-            headers: {
-                'Authorization': 'Bearer ',
-            }
-        })
+        activityLayerApi.get("/")
             .then((resp) => {
                 console.log(resp);
                 resolve();
@@ -51,11 +47,12 @@ export const pingServer = () => {
     })
 }
 
-export const getUserProfile = () => {
+export const getUserProfile = (uid) => {
     return new Promise((resolve, reject) => {
-        activityLayerApi.get("/profile", {
-            headers: {
-                'Authorization': 'Bearer ' + firebase.auth().currentUser.uid,
+        activityLayerApi.post("/profile", {
+        }, {
+            headers:{
+                Authorization: "Bearer "+uid,
             }
         })
             .then((resp) => {
@@ -64,7 +61,50 @@ export const getUserProfile = () => {
             })
             .catch((err) => {
                 console.log(err);
+                reject(err);
+            })
+    });
+}
+
+export const createUser = (email, name, uid) => {
+    return new Promise((resolve, reject) => {
+        activityLayerApi.post("/user/create", {
+            email,
+            name,
+            uid,
+        }, {
+            headers:{
+                Authorization: "Bearer " + uid,
+            }
+        })
+            .then((resp) => {
+                console.log(resp);
                 resolve();
+            })
+            .catch((err) => {
+                console.log(err);
+                reject(err);
+            })
+    })
+}
+
+export const updateUserObject = (uid, { username, name }) => {
+    return new Promise((resolve, reject) => {
+        activityLayerApi.post("/user/create", {
+            username,
+            name,
+        }, {
+            headers:{
+                Authorization: "Bearer " + uid,
+            }
+        })
+            .then((resp) => {
+                console.log(resp);
+                resolve();
+            })
+            .catch((err) => {
+                console.log(err);
+                reject(err);
             })
     })
 }
