@@ -64,8 +64,9 @@ class SignUpComponent extends Component {
         }
 
         if (!checkName(name)) {
+            console.log(name);
             this.props.stopLoading();
-            toastError("Hey make sure your name has only Alphanumeric characters.");
+            toastError("Hey make sure your name has only Alphanumeric characters and contains 6 to 40 characters.");
             return;
         }
 
@@ -85,18 +86,13 @@ class SignUpComponent extends Component {
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(async () => {
-                // do not touch the below logic
-                firebase.auth().createUserWithEmailAndPassword(email, password)
-                    .then(async () => {
-                        await updateName(name);
-                        window.location.href = "/play"
-                        return
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        this.props.stopLoading();
-                        toastError(err.message);
-                    })
+                return firebase.auth().createUserWithEmailAndPassword(email, password)
+            })
+            .then(() => {
+                return updateName(name)
+            })
+            .then(() => {
+                window.location.href = "/play"
             })
             .catch((err) => {
                 console.log(err);
