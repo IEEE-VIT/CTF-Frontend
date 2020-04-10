@@ -58,11 +58,8 @@ class LoginComponent extends Component {
         console.log("goooooooood");
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(() => {
-                return firebase.auth().signInWithEmailAndPassword(email, password)
-            })
-            .then((user) => {
-                console.log(user);
+            .then(async () => {
+                await firebase.auth().signInWithEmailAndPassword(email, password)
                 window.location.href = "/play";
                 return;
             })
@@ -79,6 +76,7 @@ class LoginComponent extends Component {
         googleOAuth()
             .then((user) => {
                 console.log(user);
+                window.location.href="/play"
                 return;
             })
             .catch((err) => {

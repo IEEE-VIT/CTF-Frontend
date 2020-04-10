@@ -36,6 +36,10 @@ class ProfileScreen extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log(firebase.auth().currentUser);
+    }
+
     openChangeModel = () => {
         this.setState({
             isChangeModalOpen: true,
@@ -68,7 +72,7 @@ class ProfileScreen extends React.Component {
                 this.setState({
                     name: user.displayName,
                 })
-                this.closeModal();
+                this.closeChangeModal();
             })
             .catch((err) => {
                 console.log(err);

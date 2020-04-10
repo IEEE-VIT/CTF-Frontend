@@ -17,7 +17,7 @@ import { toastError } from '../toasts/toasts.js';
 import '../../Styles.css';
 import './SignUpComponent.css';
 
-class LoginComponent extends Component {
+class SignUpComponent extends Component {
     constructor(props){
         super(props);
         
@@ -29,7 +29,7 @@ class LoginComponent extends Component {
         }
     }
 
-    setname = (name) => {
+    setName = (name) => {
         this.setState({
             name: name.target.value,
         })
@@ -84,15 +84,19 @@ class LoginComponent extends Component {
         console.log("goooooooood");
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(() => {
-                return firebase.auth().createUserWithEmailAndPassword(email, password)
-            })
-            .then((user) => {
-                return updateName(name);
-            })
-            .then(() => {
-                console.log(firebase.auth().currentUser.displayName);
-                // put data to db
+            .then(async () => {
+                // do not touch the below logic
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(async () => {
+                        await updateName(name);
+                        window.location.href = "/play"
+                        return
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        this.props.stopLoading();
+                        toastError(err.message);
+                    })
             })
             .catch((err) => {
                 console.log(err);
@@ -106,6 +110,7 @@ class LoginComponent extends Component {
         googleOAuth()
             .then((user) => {
                 console.log(user);
+                window.location.href="/play";
             })
             .catch((err) => {
                 console.log(err);
@@ -134,7 +139,7 @@ class LoginComponent extends Component {
                         color="primary"
                         InputLabelProps="textLight"
                         value={name}
-                        onChange={(name) => this.setname(name)}
+                        onChange={(name) => this.setName(name)}
                         required
                         type='text'
                         autoFocus
@@ -198,4 +203,4 @@ class LoginComponent extends Component {
     }
 }
 
-export default LoginComponent;
+export default SignUpComponent;
