@@ -1,4 +1,12 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+
+// importing components
+import ChangeModal from '../../uiComponents/ChangeModal/ChangeModal.js';
+import LogOutModal from '../../uiComponents/LogOutModal/LogOutModal.js'
+import { toastError, toastSuccess } from '../../uiComponents/toasts/toasts.js';
+
+
 
 import './profileScreen.css';
 import rankIcon from '../../assets/rank.png';
@@ -11,6 +19,7 @@ import firebase from '../../configs/firebase';
 
 // importing utils
 import { getUserProfile } from '../../utils/userHelperFuncs';
+import { updateName } from '../../utils/firebaseHelperFuncs';
 
 // importing styles
 import '../../Styles.css';
@@ -22,15 +31,53 @@ class ProfileScreen extends React.Component {
         this.state = {
             name: firebase.auth().currentUser.displayName,
             email: firebase.auth().currentUser.email,
+            isChangeModalOpen: false,
+            isLogOutModalOpen: false,
         }
     }
 
-    componentDidMount() {
-        getUserProfile();
+    openChangeModel = () => {
+        this.setState({
+            isChangeModalOpen: true,
+        })
+    }
+
+    closeChangeModal = () => {
+        this.setState({
+            isChangeModalOpen: false,
+        })
+    }
+
+    openLogModal = () => {
+        this.setState({
+            isLogOutModalOpen: true,
+        })
+    }
+
+    closeLogModal = () => {
+        this.setState({
+            isLogOutModalOpen: false,
+        })
+    }
+
+    onSubmitName = (name) => {
+        updateName(name)
+            .then(() => {
+                toastSuccess("Your name was successfully changed to " + name);
+                const user = firebase.auth().currentUser;
+                this.setState({
+                    name: user.displayName,
+                })
+                this.closeModal();
+            })
+            .catch((err) => {
+                console.log(err);
+                toastError(err.message);
+            })
     }
 
     onLogOut = () => {
-        this.props.toggleLoading();
+        this.props.openLoading();
         firebase.auth().signOut()
             .then((resp) => {
                 console.log(resp);
@@ -39,16 +86,32 @@ class ProfileScreen extends React.Component {
             })
             .catch((err) => {
                 console.log(err);
-                this.props.toggleLoading();
+                this.props.closeLoading();
                 return;
             })
     }
 
     render() {
-        const { name, email } = this.state;
+        const { name, email, isChangeModalOpen, isLogOutModalOpen } = this.state;
 
         return (
             <div className="profile-container">
+                <ToastContainer
+                    draggable
+                    position="bottom-right"
+                />
+                <ChangeModal
+                    title="Change Your Name"
+                    type="name_modal"
+                    modalIsOpen={isChangeModalOpen}
+                    closeModal={this.closeChangeModal}
+                    onSubmitName={this.onSubmitName}
+                />
+                <LogOutModal
+                    modalIsOpen={isLogOutModalOpen}
+                    onLogOut={this.onLogOut}
+                    closeModal={this.closeLogModal}
+                />
                 <div className="profile-card-container">
                     <div className='info__heading'>Stats</div>
                     <div className='info__stats-container'>
@@ -79,7 +142,7 @@ class ProfileScreen extends React.Component {
                         <div className='info__details__heading'>Name</div>
                         <div className='info__details__text info__details__name'>
                             { name }
-                            <div className="editNameBtn" onClick={() => console.log("Edit Profile")}>
+                            <div className="editNameBtn" onClick={() => this.openChangeModel()}>
                                 <img src={editIcon} alt='' className='info__details__edit'/>
                             </div>
                         </div>
@@ -92,7 +155,7 @@ class ProfileScreen extends React.Component {
                         <div className='info__details__heading'>Username</div>
                         <div className='info__details__text'>gaganvarma</div>
                     </div>
-                    <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
+                    <div className="button loginBtn" onClick={() => this.openLogModal()}>Log Out</div>
                 </div>
             </div>
         );

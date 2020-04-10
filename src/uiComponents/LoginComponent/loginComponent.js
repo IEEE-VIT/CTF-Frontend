@@ -93,7 +93,10 @@ class LoginComponent extends Component {
 
         return (
             <div className="loginTextColor">
-                <ToastContainer />
+                <ToastContainer
+                    draggable
+                    position="bottom-right"
+                />
                 <span className="textMedium">Login in</span>
                 <div className="inputContainer">
                     <TextField

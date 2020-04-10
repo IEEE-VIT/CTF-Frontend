@@ -22,6 +22,7 @@ class HomeScreen extends React.Component {
 			page: 'map',
 			isOpen: false,
 			isLoading: true,
+			user: '',
 		};
 	}
 
@@ -33,17 +34,23 @@ class HomeScreen extends React.Component {
             }
             console.log('user logged in')
             this.setState({
-                isLoading: false,
+				isLoading: false,
+				user: user,
             })
         })
 	}
+
+	openLoading = () => {
+		this.setState({
+			isLoading: true,
+		})
+	}
 	
-	// toggleLoading = () => {
-    //     const { isLoading } = this.state;
-    //     this.setState({
-    //         isLoading: !isLoading
-    //     })
-    // }
+	closeLoading = () => {
+		this.setState({
+			isLoading: false,
+		})
+	}
 
 	handleAnswerSubmit=()=>{
 		console.log('Trying to handle answer submit');
@@ -110,7 +117,7 @@ class HomeScreen extends React.Component {
 					:
 					this.state.page==='profile'
 					?
-					<ProfileScreen />
+					<ProfileScreen openLoading={this.openLoading} closeLoading={this.closeLoading} />
 					:
 					null
 				}

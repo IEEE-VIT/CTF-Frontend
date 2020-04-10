@@ -9,3 +9,13 @@ export const toastError = (message) => {
         }
     )
 }
+
+export const toastSuccess = (message) => {
+    toast(
+        message,
+        {
+            autoClose: 5000,
+            type: toast.TYPE.SUCCESS
+        }
+    )
+}

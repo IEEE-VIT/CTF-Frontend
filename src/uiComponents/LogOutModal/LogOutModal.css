@@ -1,0 +1,11 @@
+.logOutBtn {
+    margin: 20px opx !important;
+    background-color: black;
+    color: white;
+}
+
+.logOutBtn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: black;
+    cursor: pointer;
+}
