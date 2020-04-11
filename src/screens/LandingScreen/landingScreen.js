@@ -10,7 +10,6 @@ import { createUser, getUserProfile } from '../../utils/userHelperFuncs';
 class LandingScreen extends Component {
 
     componentDidMount() {
-        createUser("sdfd", "sdf", "sfsdf");
         getUserProfile();
     }
 

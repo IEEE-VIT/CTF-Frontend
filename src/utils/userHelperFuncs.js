@@ -50,13 +50,8 @@ export const pingServer = () => {
 export const getUserProfile = (uid) => {
     return new Promise((resolve, reject) => {
         activityLayerApi.get("/user/profile", {
-            params: {
-                uid: "Yx6XyNS1subpWa54dkyZWVzk1aG2"
-            },
             headers: {
                 Authorization: "Bearer Yx6XyNS1subpWa54dkyZWVzk1aG2",
-                'Access-Control-Allow-Origin': 'https://ctf-ieee.appspot.com',
-                'content-length': 500,
             } 
         })
             .then((resp) => {
