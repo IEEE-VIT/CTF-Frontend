@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword, checkName, createUser } from '../../utils/userHelperFuncs';
+import { checkUserEmailAndPassword, checkName, createUser, getUserProfile } from '../../utils/userHelperFuncs';
 import { updateName, googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
@@ -113,10 +113,11 @@ class SignUpComponent extends Component {
     onGoogleAuth = () => {
         this.props.startLoading();
         googleOAuth()
-            .then((user) => {
+            .then(async () => {
                 const {email, uid, displayName} = firebase.auth().currentUser;
                 createUser(email, displayName, uid)
                     .then(async () => {
+                        const user = getUserProfile(uid)
                         window.location.href = "/play"
                     })
                     .catch((err) => {
