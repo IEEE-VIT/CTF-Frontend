@@ -14,9 +14,6 @@ import ctfLogo from '../../assets/CTF.svg';
 // importing firebase
 import firebase from '../../configs/firebase';
 
-// importing helper functions
-import {getLeaderBoard} from '../../utils/userHelperFuncs';
-
 class HomeScreen extends React.Component {
 
 	constructor() {
@@ -35,25 +32,12 @@ class HomeScreen extends React.Component {
                 window.location.href ="/"
                 return;
             }
-			console.log(user.uid);
 			this.setState({
 				isLoading: false,
 				user: user,
 			})
             
         })
-	}
-
-	openLoading = () => {
-		this.setState({
-			isLoading: true,
-		})
-	}
-	
-	closeLoading = () => {
-		this.setState({
-			isLoading: false,
-		})
 	}
 
 	handleAnswerSubmit=()=>{
@@ -88,7 +72,7 @@ class HomeScreen extends React.Component {
 						<div className="nav__button" onClick={()=>{
 							this.setState({
 								// isOpen: true
-								page: 'map'
+								page: 'map',
 							});
 						}}>Map</div>
 						<div className="nav__button" onClick={()=>{
@@ -98,12 +82,12 @@ class HomeScreen extends React.Component {
 						}}>Leaderboard</div>
 						<div className="nav__button" onClick={()=>{
 							this.setState({
-								page: 'info'
+								page: 'info',
 							});
 						}}>Information</div>
 						<div className="nav__button" onClick={()=>{
 							this.setState({
-								page: 'profile'
+								page: 'profile',
 							});
 						}}>Profile</div>
 					</div>
@@ -121,7 +105,7 @@ class HomeScreen extends React.Component {
 					:
 					this.state.page==='profile'
 					?
-					<ProfileScreen openLoading={this.openLoading} closeLoading={this.closeLoading} />
+					<ProfileScreen />
 					:
 					null
 				}

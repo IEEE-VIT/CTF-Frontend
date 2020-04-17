@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingScreen from 'react-loading-screen';
 import { ToastContainer } from 'react-toastify';
 
 // importing components
@@ -31,13 +32,24 @@ class ProfileScreen extends React.Component {
         this.state = {
             name: firebase.auth().currentUser.displayName,
             email: firebase.auth().currentUser.email,
+            userProfile: null,
+            isLoading: true,
             isChangeModalOpen: false,
             isLogOutModalOpen: false,
         }
     }
 
-    componentDidMount() {
-        console.log(firebase.auth().currentUser);
+    async componentDidMount() {
+        const uid = firebase.auth().currentUser.uid;
+        try {
+            const userProfile = await getUserProfile(uid);
+            this.setState({
+                userProfile,
+                isLoading: false,
+            });
+        } catch (err) {
+            alert("Oops! We couldn't retrieve your profile details. Please try again later!")
+        }
     }
 
     openChangeModel = () => {
@@ -81,7 +93,9 @@ class ProfileScreen extends React.Component {
     }
 
     onLogOut = () => {
-        this.props.openLoading();
+        this.setState({
+            isLoading: true,
+        });
         firebase.auth().signOut()
             .then((resp) => {
                 console.log(resp);
@@ -90,13 +104,26 @@ class ProfileScreen extends React.Component {
             })
             .catch((err) => {
                 console.log(err);
-                this.props.closeLoading();
+                this.setState({
+                    isLoading: false,
+                });
                 return;
             })
     }
 
     render() {
-        const { name, email, isChangeModalOpen, isLogOutModalOpen } = this.state;
+        const { name, email, userProfile, isChangeModalOpen, isLogOutModalOpen, isLoading} = this.state;
+
+        if (isLoading) {
+            return (
+                <LoadingScreen
+                    loading={isLoading}
+                    bgColor='black'
+                    spinnerColor='blue'
+                    logoSrc={require('../../assets/ctfLogo.png')}
+                /> 
+            );
+        }
 
         return (
             <div className="profile-container">
@@ -130,7 +157,7 @@ class ProfileScreen extends React.Component {
                             <div className='info__stats__icon-container'>
                                 <img src= {pointsIcon} alt='' className='info__stats__icon'/>
                             </div>
-                            <div className='info__stats__number'>100</div>
+                            <div className='info__stats__number'>{userProfile.points}</div>
                             <div className='info__stats__text'>Points</div>
                         </div>
                         <div className='info__stats__box-container'>

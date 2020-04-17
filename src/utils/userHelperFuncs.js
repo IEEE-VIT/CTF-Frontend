@@ -58,12 +58,15 @@ export const getUserProfile = (uid) => {
             } 
         })
             .then((resp) => {
-                console.log(resp.data);
-                resolve();
+                if (resp.data.statusCode === 200) {
+                    resolve(resp.data.payload.userProfile);
+                    return;
+                } 
+                throw new Error("Server did not respond with status 200");
             })
             .catch((err) => {
                 console.log(err);
-                reject(err);
+                reject();
             })
     })
 }

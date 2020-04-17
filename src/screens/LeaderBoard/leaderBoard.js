@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingScreen from 'react-loading-screen';
 import * as firebase from 'firebase';
 
 import './leaderBoard.css';
@@ -37,19 +38,39 @@ class LeaderBoard extends React.Component {
     }
 
     render() {
-        const {leaderBoard} = this.state;
-        console.log(leaderBoard);
+        const {leaderBoard, isLoading} = this.state;
+
+        if (isLoading) {
+            return (
+                <LoadingScreen
+                    loading={isLoading}
+                    bgColor='black'
+                    spinnerColor='blue'
+                    logoSrc={require('../../assets/ctfLogo.png')}
+                /> 
+            );
+        }
+        
         return (
             <div className="leaderboard-container">
                 <div className="leaderboard-subcontainer">
                     <table cellSpacing="0px" cellPadding="0px" className="table-one">
-                        <thead>
-                            <th>Rank</th>
-                            <th>Username</th>
-                            <th className="empty-td">  </th>
-                            <th>Points</th>
-                            <th>Flags</th>
-                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style={{
+                                    width: '10%',
+                                }}>Rank</td>
+                                <td style={{
+                                    width: '50%',
+                                }}>Username</td>
+                                <td style={{
+                                    width: '20%',
+                                }}>Points</td>
+                                <td style={{
+                                    width: '20%',
+                                }}>Flags</td>
+                            </tr>
+                        </tbody>
                     </table>
                     <div className="leaderboard-card-container">
                     <table cellSpacing="0px" cellPadding="0px" className="table-one">
@@ -58,11 +79,18 @@ class LeaderBoard extends React.Component {
                                 leaderBoard.map((player, index) => {
                                     return (
                                         <tr>
-                                            <td>{index + 1}</td>
-                                            <td>{player.name}</td>
-                                            <td className="empty-td"> </td>
-                                            <td>{player.points}</td>
-                                            <td>2</td>
+                                            <td style={{
+                                                width: '10%',
+                                            }}>{index + 1}</td>
+                                            <td style={{
+                                                width: '50%',
+                                            }}>{player.name}</td>
+                                            <td style={{
+                                                width: '20%',
+                                            }}>{player.points}</td>
+                                            <td style={{
+                                                width: '20%',
+                                            }}>2</td>
                                         </tr>
                                     );
                                 })
