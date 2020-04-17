@@ -111,20 +111,18 @@ class SignUpComponent extends Component {
     }
 
     onGoogleAuth = () => {
-        this.props.startLoading();
         googleOAuth()
-            .then((user) => {
-                const {email, uid, displayName} = firebase.auth().currentUser;
-                createUser(email, displayName, uid)
-                    .then(async () => {
-                        window.location.href = "/play"
-                    })
-                    .catch((err) => {
-                        const user = firebase.auth().currentUser;
-                        user.delete();
-                        this.props.stopLoading();
-                        toastError(err.message);
-                    })
+            .then(async (user) => {
+                const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid);
+                if (isRegSuccess) {
+                    window.location.href="/play"
+                } else {
+                    if (wasUserRegistered) {
+                        window.location.href="/play"
+                    }
+                    alert("Looks like something went Wrong, Please reach out to us!")
+                }
+                return;
             })
             .catch((err) => {
                 console.log(err);

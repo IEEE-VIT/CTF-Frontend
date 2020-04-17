@@ -32,24 +32,12 @@ class HomeScreen extends React.Component {
                 window.location.href ="/"
                 return;
             }
-            console.log('user logged in')
-            this.setState({
+			this.setState({
 				isLoading: false,
 				user: user,
-            })
+			})
+            
         })
-	}
-
-	openLoading = () => {
-		this.setState({
-			isLoading: true,
-		})
-	}
-	
-	closeLoading = () => {
-		this.setState({
-			isLoading: false,
-		})
 	}
 
 	handleAnswerSubmit=()=>{
@@ -84,7 +72,7 @@ class HomeScreen extends React.Component {
 						<div className="nav__button" onClick={()=>{
 							this.setState({
 								// isOpen: true
-								page: 'map'
+								page: 'map',
 							});
 						}}>Map</div>
 						<div className="nav__button" onClick={()=>{
@@ -94,12 +82,12 @@ class HomeScreen extends React.Component {
 						}}>Leaderboard</div>
 						<div className="nav__button" onClick={()=>{
 							this.setState({
-								page: 'info'
+								page: 'info',
 							});
 						}}>Information</div>
 						<div className="nav__button" onClick={()=>{
 							this.setState({
-								page: 'profile'
+								page: 'profile',
 							});
 						}}>Profile</div>
 					</div>
@@ -117,7 +105,7 @@ class HomeScreen extends React.Component {
 					:
 					this.state.page==='profile'
 					?
-					<ProfileScreen openLoading={this.openLoading} closeLoading={this.closeLoading} />
+					<ProfileScreen />
 					:
 					null
 				}
