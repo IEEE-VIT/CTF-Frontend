@@ -5,12 +5,12 @@ import 'firebase';
 import './landingScreen.css';
 import '../../Styles.css';
 
-import { createUser, getUserProfile } from '../../utils/userHelperFuncs';
+import { pingServer } from '../../utils/userHelperFuncs';
 
 class LandingScreen extends Component {
 
     componentDidMount() {
-        getUserProfile();
+        pingServer();
     }
 
     render() {

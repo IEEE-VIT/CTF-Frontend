@@ -49,13 +49,16 @@ export const pingServer = () => {
 
 export const getUserProfile = (uid) => {
     return new Promise((resolve, reject) => {
-        activityLayerApi.get("/user/profile", {
+        activityLayerApi.post("/user/profile", {
+
+        }, 
+        {
             headers: {
-                Authorization: "Bearer Yx6XyNS1subpWa54dkyZWVzk1aG2",
+                Authorization: "Bearer "+uid,
             } 
         })
             .then((resp) => {
-                console.log(resp);
+                console.log(resp.data);
                 resolve();
             })
             .catch((err) => {
@@ -105,5 +108,43 @@ export const updateUserObject = (uid, { username, name }) => {
                 console.log(err);
                 reject(err);
             })
+    })
+}
+
+export const handleContinueWithGoogleOAuth = (uid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await getUserProfile(firebase.auth().currentUser.uid)    ;
+            if (user) {
+
+            }
+        } catch (err) {
+
+        }
+    })
+}
+
+export const getLeaderBoard = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            activityLayerApi.post('/user/leaderboard', {}, {
+                headers: {
+                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                }
+            })
+                .then((resp) => {
+                    if (resp.data.statusCode === 200) {
+                        resolve(resp.data.payload.data);
+                        return;
+                    }
+                    throw new Error("Server did not respond with status 200")
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject();
+                })
+        } catch (err) {
+
+        }
     })
 }

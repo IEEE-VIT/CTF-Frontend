@@ -1,10 +1,44 @@
 import React from 'react';
+import * as firebase from 'firebase';
 
 import './leaderBoard.css';
 
+// importing helper functions
+import {getLeaderBoard} from '../../utils/userHelperFuncs';
+
 class LeaderBoard extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            leaderBoard: [],
+            user: null,
+            isLoading: true,
+        }
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = '/'
+            }
+            getLeaderBoard()
+				.then((leaderBoard) => {
+					this.setState({
+                        leaderBoard,
+						isLoading: false,
+						user: user,
+					})
+				})
+				.catch((err) => {
+					alert("Unrecognized Error while fetching LeaderBoard, Please come back later!");
+				})
+        })
+    }
 
     render() {
+        const {leaderBoard} = this.state;
+        console.log(leaderBoard);
         return (
             <div className="leaderboard-container">
                 <div className="leaderboard-subcontainer">
@@ -20,111 +54,19 @@ class LeaderBoard extends React.Component {
                     <div className="leaderboard-card-container">
                     <table cellSpacing="0px" cellPadding="0px" className="table-one">
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>Ajmal</td>
-                                <td className="empty-td"> </td>
-                                <td>200</td>
-                                <td>2</td>
-                            </tr>
+                            {
+                                leaderBoard.map((player, index) => {
+                                    return (
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{player.name}</td>
+                                            <td className="empty-td"> </td>
+                                            <td>{player.points}</td>
+                                            <td>2</td>
+                                        </tr>
+                                    );
+                                })
+                            }                            
                         </tbody>
                     </table>
                     <div className="divider"></div>

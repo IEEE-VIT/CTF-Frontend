@@ -14,6 +14,9 @@ import ctfLogo from '../../assets/CTF.svg';
 // importing firebase
 import firebase from '../../configs/firebase';
 
+// importing helper functions
+import {getLeaderBoard} from '../../utils/userHelperFuncs';
+
 class HomeScreen extends React.Component {
 
 	constructor() {
@@ -32,11 +35,12 @@ class HomeScreen extends React.Component {
                 window.location.href ="/"
                 return;
             }
-            console.log('user logged in')
-            this.setState({
+			console.log(user.uid);
+			this.setState({
 				isLoading: false,
 				user: user,
-            })
+			})
+            
         })
 	}
 
