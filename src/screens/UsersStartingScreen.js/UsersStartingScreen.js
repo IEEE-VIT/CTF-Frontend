@@ -25,7 +25,7 @@ class LoginSignUpScreen extends Component {
 
     componentDidMount(){
         firebase.auth().onAuthStateChanged((user) => {
-            if (user && user.displayName) {
+            if (user && user.displayName && this.state.isLoading) {
                 window.location.href ="/play"
                 return;
             }
@@ -36,9 +36,6 @@ class LoginSignUpScreen extends Component {
                     isLoading: false,
                 })
             }
-        })
-        this.setState({
-            isLoading: false,
         })
     }
 

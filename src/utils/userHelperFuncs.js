@@ -73,15 +73,13 @@ export const createUser = (email, name, uid) => {
         activityLayerApi.post("/user/create", {
             email,
             name,
-            uid,
         }, {
-            headers:{
-                Authorization: "Bearer " + uid,
-            }
+            headers: {
+                Authorization: "Bearer "+uid,
+            },
         })
             .then((resp) => {
-                console.log(resp);
-                resolve();
+                resolve(resp.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -108,19 +106,6 @@ export const updateUserObject = (uid, { username, name }) => {
                 console.log(err);
                 reject(err);
             })
-    })
-}
-
-export const handleContinueWithGoogleOAuth = (uid) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const user = await getUserProfile(firebase.auth().currentUser.uid)    ;
-            if (user) {
-
-            }
-        } catch (err) {
-
-        }
     })
 }
 

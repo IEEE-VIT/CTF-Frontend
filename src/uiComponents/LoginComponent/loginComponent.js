@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword } from '../../utils/userHelperFuncs';
+import { checkUserEmailAndPassword, createUser } from '../../utils/userHelperFuncs';
 import { googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
@@ -72,11 +72,17 @@ class LoginComponent extends Component {
     }
 
     onGoogleAuth = () => {
-        this.props.startLoading();
         googleOAuth()
-            .then((user) => {
-                console.log(user);
-                window.location.href="/play"
+            .then(async (user) => {
+                const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid);
+                if (isRegSuccess) {
+                    window.location.href="/play"
+                } else {
+                    if (wasUserRegistered) {
+                        window.location.href="/play"
+                    }
+                     alert("Looks like something went Wrong, Please reach out to us!")
+                }
                 return;
             })
             .catch((err) => {
