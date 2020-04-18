@@ -3,6 +3,7 @@
     margin: 20px;
     width: 20vw;
     height: auto;
+    z-index: 10;
 }
 
 .platBtn {
@@ -15,9 +16,111 @@
     background-color: white;
 
     transition-duration: 0.5s;
+    z-index: 10;
 }
 
 .platBtn:hover {
     background-color: rgb(255, 255, 255, 0.1);
     color: white;
+}
+
+.button {
+    z-index: 10;
+}
+
+#animatedContainer {
+    cursor: crosshair;
+    --cursorX: 50vw;
+    --cursorY: 50vh;
+    --cursorX2: 50vw;
+    --cursorY2: 50vh;
+    --animationDuration: 10s;
+    --animationDelay: 15s;
+}
+  
+#animatedContainer:before {
+content: '';
+position: fixed;
+display: block;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-blend-mode: normal, overlay;
+background-position: center center;
+background-size: auto, auto, cover;
+background-image:
+    radial-gradient(
+    circle 16vmax at var(--cursorX2) var(--cursorY2),
+    rgba(0,0,0,0) 30%,
+    rgba(0,5,5,.1) 40%,
+    rgba(5,5,0,.5) 60%,
+    rgba(0,0,0,.75) 70%,
+    rgba(0,0,0,.95) 100%
+    ),
+    radial-gradient(
+    circle 12vmax at var(--cursorX) var(--cursorY),
+    rgba(255,255,255,1) 30%,
+    rgba(255,255,255,.3) 50%,
+    rgba(255,255,255,.05) 100%
+    ),
+    url(https://cdna.artstation.com/p/assets/images/images/008/784/520/large/valentinus-adrian-2017-502-military-base.jpg);
+
+animation: torch var(--animationDuration) linear var(--animationDelay) infinite alternate;
+}
+
+@keyframes torch {
+    0%, 1%, 2%, 3%, 4%, 5%, 20%, 21%, 60%, 61%, 62%, 100% { background-image:
+    radial-gradient(
+        circle 16vmax at var(--cursorX2) var(--cursorY2),
+        rgba(0,0,0,0) 30%,
+        rgba(0,5,5,.1) 40%,
+        rgba(5,5,0,.5) 60%,
+        rgba(0,0,0,.75) 70%,
+        rgba(0,0,0,.95) 100%
+    ),
+    radial-gradient(
+        circle 12vmax at var(--cursorX) var(--cursorY),
+        rgba(255,255,255,1) 30%,
+        rgba(255,255,255,.3) 50%,
+        rgba(255,255,255,.05) 100%
+    ),
+    url(https://cdna.artstation.com/p/assets/images/images/008/784/520/large/valentinus-adrian-2017-502-military-base.jpg);
+    }
+
+    0.5%, 1.5%, 60.5% { background-image:
+    radial-gradient(
+        circle 12vmax at var(--cursorX2) var(--cursorY2),
+        rgba(0,0,0,0) 30%,
+        rgba(0,5,5,.1) 40%,
+        rgba(5,5,0,.5) 60%,
+        rgba(0,0,0,.75) 70%,
+        rgba(0,0,0,.95) 100%
+    ),
+    radial-gradient(
+        circle 8vmax at var(--cursorX) var(--cursorY),
+        rgba(255,255,255,1) 30%,
+        rgba(255,255,255,.3) 50%,
+        rgba(255,255,255,.05) 100%
+    ),
+    url(https://cdna.artstation.com/p/assets/images/images/008/784/520/large/valentinus-adrian-2017-502-military-base.jpg);
+    }
+
+    2.5%, 3.5%, 4.5%, 20.5%, 61.5% { background-image:
+    radial-gradient(
+        circle 8vmax at var(--cursorX) var(--cursorY),
+        rgba(0,0,0,0) 30%,
+        rgba(0,5,5,.1) 40%,
+        rgba(5,5,0,.5) 60%,
+        rgba(0,0,0,.75) 70%,
+        rgba(0,0,0,.95) 100%
+    ),
+    radial-gradient(
+        circle 4vmax at var(--cursorX) var(--cursorY),
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,.5) 50%,
+        rgba(255,255,255,.05) 100%
+    ),
+    url(https://cdna.artstation.com/p/assets/images/images/008/784/520/large/valentinus-adrian-2017-502-military-base.jpg);
+    }
 }
