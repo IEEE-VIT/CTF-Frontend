@@ -136,3 +136,30 @@ export const getLeaderBoard = () => {
         }
     })
 }
+
+export const getQuestions = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            activityLayerApi.post('/user/getAllQuestions', {}, {
+                headers: {
+                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                }
+            })
+                .then((resp) => {
+                    console.log(resp.data);
+                    if (resp.data.statusCode === 200) {
+                        resolve(resp.data.payload.body);
+                        return;
+                    }
+                    throw new Error("Server did not respond with status 200")
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject();
+                })
+        } catch (err) {
+            console.log(err);
+            reject();
+        }
+    })
+}

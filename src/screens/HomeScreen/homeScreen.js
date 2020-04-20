@@ -14,6 +14,9 @@ import ctfLogo from '../../assets/CTF.svg';
 // importing firebase
 import firebase from '../../configs/firebase';
 
+// importing utils
+import {getQuestions} from '../../utils/userHelperFuncs';
+
 class HomeScreen extends React.Component {
 
 	constructor() {
@@ -22,22 +25,24 @@ class HomeScreen extends React.Component {
 			page: 'map',
 			isOpen: false,
 			isLoading: true,
+			questions: [],
 			user: '',
 		};
 	}
 
 	componentDidMount(){
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
                 window.location.href ="/"
                 return;
-            }
-			this.setState({
-				isLoading: false,
-				user: user,
-			})
-            
-        })
+						}
+						const questions = await getQuestions();
+						this.setState({
+							isLoading: false,
+							questions,
+							user: user,
+						});
+        });
 	}
 
 	handleAnswerSubmit=()=>{
