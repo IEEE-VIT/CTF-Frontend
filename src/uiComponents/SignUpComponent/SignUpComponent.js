@@ -193,7 +193,7 @@ class SignUpComponent extends Component {
                         value={confirmPassword}
                         onChange={(confirmPassword) => this.setConfirmPassword(confirmPassword)}
                         required
-                        type='text'
+                        type='password'
                     />
 
                     <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
