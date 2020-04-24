@@ -1,0 +1,119 @@
+.loginTextColor {
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 400px;
+}
+
+.inputContainer {
+    margin-top: 32px;
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#outlined-basic {
+    border-color: white !important;
+    color: white !important;
+}
+
+.MuiTextField-root {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+}
+
+.MuiFormLabel-root {
+    color: white !important;
+    font-weight: normal !important;
+    font-size: 16px !important;
+}
+
+.MuiInputBase-input {
+    width: 300px !important ;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: white !important;
+}
+
+.loginBtn {
+    margin-top: 24px !important;
+}
+
+.loginBtn:hover {
+    cursor: pointer;
+}
+
+.subContainer {
+    margin-top: 32px;
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUpSection {
+    align-self: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.signUpBtn {
+    text-decoration: underline;
+    color: white;
+    font-family: Nova Square;
+}
+
+.signUpBtn:hover {
+    color: 'blue';
+    cursor: pointer;
+}
+
+.orText {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-weight: 100 !important;
+    font-size: 24px !important;
+}
+
+.googleContainer {
+    align-items: center;
+
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.googleContainer img {
+    height: 100%;
+    width: auto;
+}
+
+.googleContainer:hover {
+    cursor: pointer;
+}
+
+.googleContainer a {
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

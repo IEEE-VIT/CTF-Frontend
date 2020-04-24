@@ -43,6 +43,7 @@ class ProfileScreen extends React.Component {
         const uid = firebase.auth().currentUser.uid;
         try {
             const userProfile = await getUserProfile(uid);
+            console.log(userProfile);
             this.setState({
                 userProfile,
                 isLoading: false,
@@ -184,7 +185,7 @@ class ProfileScreen extends React.Component {
                     </div>
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Username</div>
-                        <div className='info__details__text'>gaganvarma</div>
+                        <div className='info__details__text'>{userProfile["user name"]}</div>
                     </div>
                     <div className="button loginBtn" onClick={() => this.openLogModal()}>Log Out</div>
                 </div>
