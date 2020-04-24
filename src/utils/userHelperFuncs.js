@@ -93,7 +93,7 @@ export const createUser = (email, name, uid) => {
 
 export const updateUserObject = (uid, { username, name }) => {
     return new Promise((resolve, reject) => {
-        activityLayerApi.post("/user/create", {
+        activityLayerApi.post("/user/updateProfile", {
             username,
             name,
         }, {
@@ -102,8 +102,8 @@ export const updateUserObject = (uid, { username, name }) => {
             }
         })
             .then((resp) => {
-                console.log(resp);
-                resolve();
+                console.log(resp.data);
+                resolve(resp.data);
             })
             .catch((err) => {
                 console.log(err);

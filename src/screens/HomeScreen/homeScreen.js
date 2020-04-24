@@ -4,6 +4,7 @@ import LoadingScreen from 'react-loading-screen';
 import Globe from '../../uiComponents/globe/globe';
 import './homeScreen.css';
 import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIcons.js';
+import ChangeName from '../../uiComponents/ChangeName/ChangeName';
 import LeaderBoard from '../LeaderBoard/leaderBoard.js';
 import QuestionModal from '../../uiComponents/questionModal/questionModal.js';
 import InfoScreen from '../InfoScreen/infoScreen.js';
@@ -15,7 +16,7 @@ import ctfLogo from '../../assets/CTF.svg';
 import firebase from '../../configs/firebase';
 
 // importing utils
-import {getQuestions} from '../../utils/userHelperFuncs';
+import {getQuestions, getUserProfile} from '../../utils/userHelperFuncs';
 
 class HomeScreen extends React.Component {
 
@@ -36,11 +37,13 @@ class HomeScreen extends React.Component {
                 window.location.href ="/"
                 return;
 						}
+						const userProfile = await getUserProfile(user.uid);
 						const questions = await getQuestions();
 						this.setState({
 							isLoading: false,
 							questions,
 							user: user,
+							userProfile,
 						});
         });
 	}
@@ -56,18 +59,27 @@ class HomeScreen extends React.Component {
 	}
 
 	render() {
-		const { isLoading } = this.state;
+		const { isLoading, userProfile } = this.state;
 
 		if (isLoading) {
-            return (
-                <LoadingScreen
-                    loading={isLoading}
-                    bgColor='black'
-                    spinnerColor='blue'
-                    logoSrc={require('../../assets/ctfLogo.png')}
-                /> 
-            );
-        }
+			return (
+					<LoadingScreen
+							loading={isLoading}
+							bgColor='black'
+							spinnerColor='blue'
+							logoSrc={require('../../assets/ctfLogo.png')}
+					/> 
+			);
+		}
+
+		//uncomment when the backend team updates the route
+		// if (userProfile.defaultName) {
+		// 	return (
+		// 		<div className="mainContainer">
+		// 			<ChangeName user={this.state.user} />
+		// 		</div>
+		// 	);
+		// }
 
 		return (
 			<div>
@@ -96,7 +108,7 @@ class HomeScreen extends React.Component {
 							});
 						}}>Profile</div>
 					</div>
-					<div className="nav__score">Your score: 100</div>
+					<div className="nav__score">Your score: {userProfile.points}</div>
 				</nav>
 				<Globe />
 				{
