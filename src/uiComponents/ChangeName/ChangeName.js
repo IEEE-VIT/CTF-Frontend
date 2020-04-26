@@ -44,16 +44,16 @@ class ChangeName extends Component {
             return;
         }
 
-        updateUserObject(user.uid, { username, name: user.displayName})
+        updateUserObject(user.uid, {username})
             .then((resp) => {
                 if (resp.statusCode === 200) {
                     return window.location.href = "/play";
                 }
-                toastError('Something went wrong! Please try again later.');
+                toastError(resp.payload.status);
             })
             .catch((err) => {
                 console.log(err);
-                toastError(err.error ? err.error : 'Something went wrong! Please try again later.');
+                toastError(err.error ? err.error : 'Sorry that username is already taken, try something else!');
             });
     }
 
