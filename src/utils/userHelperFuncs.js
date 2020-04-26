@@ -94,7 +94,7 @@ export const createUser = (email, name, uid) => {
 export const updateUserObject = (uid, { username, name }) => {
     return new Promise((resolve, reject) => {
         activityLayerApi.post("/user/updateProfile", {
-            name: username,
+            userName: username,
         }, {
             headers:{
                 Authorization: "Bearer " + uid,

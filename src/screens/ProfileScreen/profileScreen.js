@@ -165,7 +165,7 @@ class ProfileScreen extends React.Component {
                             <div className='info__stats__icon-container'>
                                 <img src= {flagsIcon} alt='' className='info__stats__icon'/>
                             </div>
-                            <div className='info__stats__number'>1</div>
+                            <div className='info__stats__number'>{userProfile.qAnswered.length}</div>
                             <div className='info__stats__text'>Flags</div>
                         </div>
                     </div>

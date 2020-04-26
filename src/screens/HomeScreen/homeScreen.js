@@ -73,13 +73,13 @@ class HomeScreen extends React.Component {
 		}
 
 		//uncomment when the backend team updates the route
-		// if (userProfile.defaultName) {
-		// 	return (
-		// 		<div className="mainContainer">
-		// 			<ChangeName user={this.state.user} />
-		// 		</div>
-		// 	);
-		// }
+		if (userProfile.defaultName) {
+			return (
+				<div className="mainContainer">
+					<ChangeName user={this.state.user} />
+				</div>
+			);
+		}
 
 		return (
 			<div>
