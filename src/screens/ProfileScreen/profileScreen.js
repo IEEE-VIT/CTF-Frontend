@@ -151,7 +151,7 @@ class ProfileScreen extends React.Component {
                             <div className='info__stats__icon-container'>
                                 <img src= {rankIcon} alt='' className='info__stats__icon'/>
                             </div>
-                            <div className='info__stats__number'>16</div>
+                            <div className='info__stats__number'>{userProfile.rank}</div>
                             <div className='info__stats__text'>Rank</div>
                         </div>
                         <div className='info__stats__box-container'>

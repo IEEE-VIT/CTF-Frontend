@@ -78,19 +78,19 @@ class LeaderBoard extends React.Component {
                             {
                                 leaderBoard.map((player, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={player.userName}>
                                             <td style={{
                                                 width: '10%',
                                             }}>{index + 1}</td>
                                             <td style={{
                                                 width: '50%',
-                                            }}>{player.name}</td>
+                                            }}>{player.userName}</td>
                                             <td style={{
                                                 width: '20%',
                                             }}>{player.points}</td>
                                             <td style={{
                                                 width: '20%',
-                                            }}>2</td>
+                                            }}>{player.questionAnswered.length}</td>
                                         </tr>
                                     );
                                 })
