@@ -25,18 +25,12 @@ class LoginSignUpScreen extends Component {
 
     componentDidMount(){
         firebase.auth().onAuthStateChanged((user) => {
-            // if (user && user.displayName && this.state.isLoading) {
-            //     window.location.href ="/play"
-            //     return;
-            // }
+            if (user && user.displayName && this.state.isLoading) {
+                window.location.href ="/play"
+                return;
+            }
 
-            // if (!user) {
-            //     console.log('user not logged in')
-            //     this.setState({
-            //         isLoading: false,
-            //     })
-            // }
-            if (true) {
+            if (!user) {
                 console.log('user not logged in')
                 this.setState({
                     isLoading: false,
