@@ -1,7 +1,8 @@
 import React from 'react';
 import LoadingScreen from 'react-loading-screen';
 
-import Globe from '../../uiComponents/globe/globe';
+import Globe from '../../uiComponents/globe/globe.js';
+import {Globe2} from '../../uiComponents/globe2/globe2.js';
 import './homeScreen.css';
 import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIcons.js';
 import ChangeName from '../../uiComponents/ChangeName/ChangeName';
@@ -110,7 +111,7 @@ class HomeScreen extends React.Component {
 					</div>
 					<div className="nav__score">Your score: {userProfile.points}</div>
 				</nav>
-				<Globe />
+				<Globe2 questions={this.state.questions}/>
 				{
 					this.state.page==='leaderboard'
 					?
