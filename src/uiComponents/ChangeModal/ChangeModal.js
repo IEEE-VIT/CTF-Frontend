@@ -22,7 +22,7 @@ const ChangeModal = ({ title, type, modalIsOpen, closeModal, onSubmitName }) => 
             contentLabel="Example Modal"
         >
           <div className="modal_title_container">
-          <h3 className="modal__title">{ title }</h3>
+            <h3 className="modal__title">{ title }</h3>
             <div className="modal_close_button" onClick={()=>closeModal()}>x</div>
           </div>
           <div className="modal__answer-container">
