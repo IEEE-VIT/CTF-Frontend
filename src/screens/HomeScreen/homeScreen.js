@@ -29,6 +29,7 @@ class HomeScreen extends React.Component {
 			isLoading: true,
 			questions: [],
 			user: '',
+			clickedQuestion: '',
 		};
 	}
 
@@ -60,11 +61,15 @@ class HomeScreen extends React.Component {
 		});
 	}
 
-	showQuestionModal=()=>{
+	showQuestionModal=(point)=>{
 		this.setState({
 			isOpen: true
-		});	
+		});
 		// console.log('something '+questionNumber);
+		this.setState({
+			clickedQuestion: this.state.questions[point['index']]['data'],
+		});
+		console.log(this.state.questions[point['index']]['data']);
 	}
 
 	render() {
@@ -134,7 +139,7 @@ class HomeScreen extends React.Component {
 					:
 					null
 				}
-				<QuestionModal isOpen={this.state.isOpen} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
+				<QuestionModal isOpen={this.state.isOpen} question={this.state.clickedQuestion} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
 				<SocialMediaIcons />
 			</div>
 		);

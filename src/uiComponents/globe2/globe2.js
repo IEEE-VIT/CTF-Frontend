@@ -19,6 +19,7 @@ import starryBG from '../../assets/starryBG.jpg';
           city: 'Los Angeles',
           color: 'gold',
           coordinates: [questions[i]['data']['latitude'], questions[i]['data']['longitude']],
+          index: i
         });
 
         for(j = 0; j < questions.length ; j++) {
@@ -43,8 +44,8 @@ import starryBG from '../../assets/starryBG.jpg';
           }
         }
       }
-      console.log(questionLocations);
-      console.log(questionArcs);
+      // console.log(questionLocations);
+      // console.log(questionArcs);
     });
   
     let routes = [
@@ -82,14 +83,14 @@ import starryBG from '../../assets/starryBG.jpg';
         // onArcHover={setHoverArc}
 
         pointsData={questionLocations}
-        pointLabel={point => point.city}
+        pointLabel={point => point.id}
         pointLat={point => +point.coordinates[0]}
         pointLng={point => +point.coordinates[1]}
         // pointColor={point => +point.color}
         pointAltitude={0}
         pointRadius={2}
-        pointsMerge={true}
-        onPointClick={showQuestionModal}
+        pointsMerge={false}
+        onPointClick={(point)=>{showQuestionModal(point);}}
         />
 			</div>
     );

@@ -76,6 +76,7 @@
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid red;
 }
 
 .modal__answer__input {
@@ -84,18 +85,12 @@
     border-radius: 5px;
     padding: 7px;
     font-size: 15px;
-    width: 100%;
+    width: 80%;
     font-family: 'Nova Square';
 }
 
 .modal__answer__button {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    /* margin: auto; */
     background-color: black;
-    height: fit-content;
-    width: fit-content;
     padding: 8px;
     margin-left: 10px;
     border-radius: 5px;
