@@ -62,7 +62,7 @@ import starryBG from '../../assets/starryBG.jpg';
 			<div>
 				<Globe
         globeImageUrl={'https://raw.githubusercontent.com/mayankshah1607/Cle-Air/master/earth-planet-night.jpg'}
-        backgroundImageUrl={starryBG}
+        // backgroundImageUrl={starryBG}
         showAtmosphere={true}
         animateIn={true}
         arcsData={questionArcs}
