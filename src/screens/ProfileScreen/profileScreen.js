@@ -43,6 +43,7 @@ class ProfileScreen extends React.Component {
         const uid = firebase.auth().currentUser.uid;
         try {
             const userProfile = await getUserProfile(uid);
+            console.log(userProfile);
             this.setState({
                 userProfile,
                 isLoading: false,
@@ -77,9 +78,14 @@ class ProfileScreen extends React.Component {
     }
 
     onSubmitName = (name) => {
+        // check parameters
+        if (name.length > 60 || name.length < 4) {
+            return toastError("Your username needs to be 4-60 characters long!");
+        }
+
         updateName(name)
             .then(() => {
-                toastSuccess("Your name was successfully changed to " + name);
+                toastSuccess("Your name was successfully updated");
                 const user = firebase.auth().currentUser;
                 this.setState({
                     name: user.displayName,
@@ -150,7 +156,7 @@ class ProfileScreen extends React.Component {
                             <div className='info__stats__icon-container'>
                                 <img src= {rankIcon} alt='' className='info__stats__icon'/>
                             </div>
-                            <div className='info__stats__number'>16</div>
+                            <div className='info__stats__number'>{userProfile.rank}</div>
                             <div className='info__stats__text'>Rank</div>
                         </div>
                         <div className='info__stats__box-container'>
@@ -164,7 +170,7 @@ class ProfileScreen extends React.Component {
                             <div className='info__stats__icon-container'>
                                 <img src= {flagsIcon} alt='' className='info__stats__icon'/>
                             </div>
-                            <div className='info__stats__number'>1</div>
+                            <div className='info__stats__number'>{userProfile.qAnswered.length}</div>
                             <div className='info__stats__text'>Flags</div>
                         </div>
                     </div>
@@ -172,7 +178,9 @@ class ProfileScreen extends React.Component {
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Name</div>
                         <div className='info__details__text info__details__name'>
-                            { name }
+                            <div className='info__details__username' >
+                                { name }
+                            </div>
                             <div className="editNameBtn" onClick={() => this.openChangeModel()}>
                                 <img src={editIcon} alt='' className='info__details__edit'/>
                             </div>
@@ -184,7 +192,7 @@ class ProfileScreen extends React.Component {
                     </div>
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Username</div>
-                        <div className='info__details__text'>gaganvarma</div>
+                        <div className='info__details__text'>{userProfile["user name"]}</div>
                     </div>
                     <div className="button loginBtn" onClick={() => this.openLogModal()}>Log Out</div>
                 </div>

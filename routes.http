@@ -1,0 +1,52 @@
+
+//root
+GET http://127.0.0.1:8000/
+content-type: application/json
+Authorization: NCJ58s1v59WjGKF3X7uYdeNA1413
+
+
+#####
+
+//user create
+POST http://127.0.0.1:8000/user/create
+content-type: application/json
+Authorization: Yx6XyNS1subpWa54dkyZWVzk1aG2
+
+{
+    "name": "TestUser",
+    "email": "TestUser@gmail.com"
+}
+
+#####
+
+//user profile
+POST http://127.0.0.1:8000/user/profile
+content-type: application/json
+Authorization: XAvpYLfU9eTCTfCkEvQIH8nXpy62
+
+
+#####
+
+//update profile
+PUT http://127.0.0.1:8000/user/updateProfile
+content-type: application/json
+Authorization: XAvpYLfU9eTCTfCkEvQIH8nXpy62
+
+{
+    "userName":"beta user"
+} 
+
+
+#####
+
+//leaderboard
+POST http://127.0.0.1:8000/user/leaderboard
+content-type: application/json
+
+
+#####
+
+//Get All Questions
+POST http://127.0.0.1:8000/user/getAllQuestions
+content-type: application/json
+Authorization: XAvpYLfU9eTCTfCkEvQIH8nXpy62

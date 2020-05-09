@@ -1,9 +1,11 @@
 import React from 'react';
 import LoadingScreen from 'react-loading-screen';
 
-import Globe from '../../uiComponents/globe/globe';
+import Globe from '../../uiComponents/globe/globe.js';
+import {Globe2} from '../../uiComponents/globe2/globe2.js';
 import './homeScreen.css';
 import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIcons.js';
+import ChangeName from '../../uiComponents/ChangeName/ChangeName';
 import LeaderBoard from '../LeaderBoard/leaderBoard.js';
 import QuestionModal from '../../uiComponents/questionModal/questionModal.js';
 import InfoScreen from '../InfoScreen/infoScreen.js';
@@ -14,6 +16,9 @@ import ctfLogo from '../../assets/CTF.svg';
 // importing firebase
 import firebase from '../../configs/firebase';
 
+// importing utils
+import {getQuestions, getUserProfile} from '../../utils/userHelperFuncs';
+
 class HomeScreen extends React.Component {
 
 	constructor() {
@@ -22,22 +27,26 @@ class HomeScreen extends React.Component {
 			page: 'map',
 			isOpen: false,
 			isLoading: true,
+			questions: [],
 			user: '',
 		};
 	}
 
 	componentDidMount(){
-        firebase.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
                 window.location.href ="/"
                 return;
-            }
-			this.setState({
-				isLoading: false,
-				user: user,
-			})
-            
-        })
+						}
+						const userProfile = await getUserProfile(user.uid);
+						const questions = await getQuestions();
+						this.setState({
+							isLoading: false,
+							questions,
+							user: user,
+							userProfile,
+						});
+        });
 	}
 
 	handleAnswerSubmit=()=>{
@@ -51,18 +60,27 @@ class HomeScreen extends React.Component {
 	}
 
 	render() {
-		const { isLoading } = this.state;
+		const { isLoading, userProfile } = this.state;
 
 		if (isLoading) {
-            return (
-                <LoadingScreen
-                    loading={isLoading}
-                    bgColor='black'
-                    spinnerColor='blue'
-                    logoSrc={require('../../assets/ctfLogo.png')}
-                /> 
-            );
-        }
+			return (
+					<LoadingScreen
+							loading={isLoading}
+							bgColor='black'
+							spinnerColor='blue'
+							logoSrc={require('../../assets/ctfLogo.png')}
+					/> 
+			);
+		}
+
+		//uncomment when the backend team updates the route
+		if (userProfile.defaultName) {
+			return (
+				<div className="mainContainer">
+					<ChangeName user={this.state.user} />
+				</div>
+			);
+		}
 
 		return (
 			<div>
@@ -91,9 +109,9 @@ class HomeScreen extends React.Component {
 							});
 						}}>Profile</div>
 					</div>
-					<div className="nav__score">Your score: 100</div>
+					<div className="nav__score">Your score: {userProfile.points}</div>
 				</nav>
-				<Globe />
+				<Globe2 questions={this.state.questions}/>
 				{
 					this.state.page==='leaderboard'
 					?

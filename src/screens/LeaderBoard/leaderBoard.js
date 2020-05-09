@@ -73,34 +73,33 @@ class LeaderBoard extends React.Component {
                         </tbody>
                     </table>
                     <div className="leaderboard-card-container">
-                    <table cellSpacing="0px" cellPadding="0px" className="table-one">
-                        <tbody>
-                            {
-                                leaderBoard.map((player, index) => {
-                                    return (
-                                        <tr>
-                                            <td style={{
-                                                width: '10%',
-                                            }}>{index + 1}</td>
-                                            <td style={{
-                                                width: '50%',
-                                            }}>{player.name}</td>
-                                            <td style={{
-                                                width: '20%',
-                                            }}>{player.points}</td>
-                                            <td style={{
-                                                width: '20%',
-                                            }}>2</td>
-                                        </tr>
-                                    );
-                                })
-                            }                            
-                        </tbody>
-                    </table>
-                    <div className="divider"></div>
-                    <table cellSpacing="0px" cellPadding="0px">
-                        
-                    </table>
+                        <table cellSpacing="0px" cellPadding="0px" className="table-one">
+                            <tbody>
+                                {
+                                    leaderBoard.map((player, index) => {
+                                        return (
+                                            <tr key={player.userName}>
+                                                <td style={{
+                                                    width: '10%',
+                                                }}>{index + 1}</td>
+                                                <td style={{
+                                                    width: '50%',
+                                                }}>{player.userName}</td>
+                                                <td style={{
+                                                    width: '20%',
+                                                }}>{player.points}</td>
+                                                <td style={{
+                                                    width: '20%',
+                                                }}>{player.questionAnswered.length}</td>
+                                            </tr>
+                                        );
+                                    })
+                                }                            
+                            </tbody>
+                        </table>
+                        <div className="divider"></div>
+                        <table cellSpacing="0px" cellPadding="0px">
+                        </table>
                 </div>
                 </div>
             </div>

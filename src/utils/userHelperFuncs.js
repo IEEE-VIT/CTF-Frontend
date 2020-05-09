@@ -91,19 +91,18 @@ export const createUser = (email, name, uid) => {
     })
 }
 
-export const updateUserObject = (uid, { username, name }) => {
+export const updateUserObject = (uid, { username }) => {
     return new Promise((resolve, reject) => {
-        activityLayerApi.post("/user/create", {
-            username,
-            name,
+        activityLayerApi.put("/user/updateProfile", {
+            userName: username,
         }, {
             headers:{
                 Authorization: "Bearer " + uid,
             }
         })
             .then((resp) => {
-                console.log(resp);
-                resolve();
+                console.log(resp.data);
+                resolve(resp.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -133,6 +132,33 @@ export const getLeaderBoard = () => {
                 })
         } catch (err) {
 
+        }
+    })
+}
+
+export const getQuestions = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            activityLayerApi.post('/user/getAllQuestions', {}, {
+                headers: {
+                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                }
+            })
+                .then((resp) => {
+                    console.log(resp.data);
+                    if (resp.data.statusCode === 200) {
+                        resolve(resp.data.payload.body);
+                        return;
+                    }
+                    throw new Error("Server did not respond with status 200")
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject();
+                })
+        } catch (err) {
+            console.log(err);
+            reject();
         }
     })
 }
