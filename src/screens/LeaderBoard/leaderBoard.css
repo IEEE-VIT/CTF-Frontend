@@ -14,10 +14,16 @@
     justify-content: center;
 }
 
+.leaderboard-card-container::-webkit-scrollbar {
+    display: none;
+}
+
 .leaderboard-card-container {
     align-self: center;
     width: 40vw;
     max-height: 60vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 table{
