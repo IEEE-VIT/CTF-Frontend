@@ -4,7 +4,7 @@ import Globe from 'react-globe.gl';
 import markers from '../globe/markers.ts';
 import starryBG from '../../assets/starryBG.jpg';
 
-  export const Globe2 = ({questions}) => {
+  export const Globe2 = ({questions, showQuestionModal}) => {
 
     let a=[], questionLocations=[], questionArcs=[];
 
@@ -89,6 +89,7 @@ import starryBG from '../../assets/starryBG.jpg';
         pointAltitude={0}
         pointRadius={2}
         pointsMerge={true}
+        onPointClick={showQuestionModal}
         />
 			</div>
     );

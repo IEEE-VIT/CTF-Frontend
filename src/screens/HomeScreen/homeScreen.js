@@ -39,7 +39,8 @@ class HomeScreen extends React.Component {
                 return;
 						}
 						const userProfile = await getUserProfile(user.uid);
-						const questions = await getQuestions();
+						const questions = (await getQuestions());
+						console.log(questions);
 						this.setState({
 							isLoading: false,
 							questions,
@@ -57,6 +58,13 @@ class HomeScreen extends React.Component {
 		this.setState({
 			isOpen: false
 		});
+	}
+
+	showQuestionModal=()=>{
+		this.setState({
+			isOpen: true
+		});	
+		// console.log('something '+questionNumber);
 	}
 
 	render() {
@@ -89,7 +97,6 @@ class HomeScreen extends React.Component {
 					<div className="nav__buttons-container">
 						<div className="nav__button" onClick={()=>{
 							this.setState({
-								// isOpen: true
 								page: 'map',
 							});
 						}}>Map</div>
@@ -111,7 +118,7 @@ class HomeScreen extends React.Component {
 					</div>
 					<div className="nav__score">Your score: {userProfile.points}</div>
 				</nav>
-				<Globe2 questions={this.state.questions}/>
+				<Globe2 questions={this.state.questions} showQuestionModal={this.showQuestionModal}/>
 				{
 					this.state.page==='leaderboard'
 					?
