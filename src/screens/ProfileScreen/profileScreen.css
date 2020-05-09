@@ -88,10 +88,14 @@
 
 .info__details__name {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    /* border: 1px solid orange; */
     width: 100%;
+}
+
+.info__details__username {
+    width: 80%;
+    word-wrap: break-word;
+    flex-wrap: wrap;
 }
 
 .info__details__edit {
@@ -100,15 +104,15 @@
 }
 
 .info__details__container {
-    width: 36%;
-    height: fit-content;
-    /* border: 1px solid yellow; */
+    width: 240px;
+    height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     margin-top: 5px;
     margin-bottom: 5px;
+    flex-wrap: wrap;
 }
 
 .info__details__heading {

@@ -78,9 +78,14 @@ class ProfileScreen extends React.Component {
     }
 
     onSubmitName = (name) => {
+        // check parameters
+        if (name.length > 60 || name.length < 4) {
+            return toastError("Your username needs to be 4-60 characters long!");
+        }
+
         updateName(name)
             .then(() => {
-                toastSuccess("Your name was successfully changed to " + name);
+                toastSuccess("Your name was successfully updated");
                 const user = firebase.auth().currentUser;
                 this.setState({
                     name: user.displayName,
@@ -173,7 +178,9 @@ class ProfileScreen extends React.Component {
                     <div className='info__details__container'>
                         <div className='info__details__heading'>Name</div>
                         <div className='info__details__text info__details__name'>
-                            { name }
+                            <div className='info__details__username' >
+                                { name }
+                            </div>
                             <div className="editNameBtn" onClick={() => this.openChangeModel()}>
                                 <img src={editIcon} alt='' className='info__details__edit'/>
                             </div>
