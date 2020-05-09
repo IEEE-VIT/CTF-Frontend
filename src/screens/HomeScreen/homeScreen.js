@@ -84,6 +84,7 @@ class HomeScreen extends React.Component {
 
 		return (
 			<div>
+				<audio src="https://firebasestorage.googleapis.com/v0/b/ctf-ieee.appspot.com/o/track.mp3?alt=media&token=6938ac94-fb42-4845-a405-670b993230b4" autoPlay loop />
 				<nav className="nav">
 					<div className="nav__ctf"><img src={ctfLogo} alt=""/></div>
 					<div className="nav__buttons-container">

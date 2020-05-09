@@ -5,12 +5,8 @@ import 'firebase';
 import './landingScreen.css';
 import '../../Styles.css';
 
-import { pingServer } from '../../utils/userHelperFuncs';
-
 class LandingScreen extends Component {
-
     componentDidMount() {
-        pingServer();
 
         const W = window.innerWidth;
         const H = window.innerHeight
@@ -51,6 +47,7 @@ class LandingScreen extends Component {
     render() {
         return (
             <div className="mainContainer" id="animatedContainer">
+                <audio src="https://firebasestorage.googleapis.com/v0/b/ctf-ieee.appspot.com/o/track.mp3?alt=media&token=6938ac94-fb42-4845-a405-670b993230b4" autoPlay loop />
                 <img className="ctfLogo" src={require('../../assets/ctfLogo.png')} alt="CTF Logo" height={260} />
                 <div className="button loginBtn ctf-landing-play-btn" onClick={() => window.location.href = '/get_started'}>Play</div>
             </div>
