@@ -10,24 +10,24 @@ const QuestionModal=({isOpen, handleAnswerSubmit, closeModal, question})=>(
         onRequestClose={handleAnswerSubmit}
         contentLabel={question['description']}
         closeTimeoutMS={200}
-        className="modal"
+        className="question_modal"
     >
-        <div className="modal_title_container">
-            <h3 className="modal__title">{question['name']} - 100 points</h3>
-            <div className="modal_close_button" onClick={()=>closeModal()}>X</div>
+        <div className="question_modal_title_container">
+            <h3 className="question_modal__title">{question['name']} - 100 points</h3>
+            <div className="question_modal_close_button" onClick={()=>closeModal()}>X</div>
         </div>
         <div className="modal__question">
-            {/* "Lorem ipsum dolor sit amet, consectetur adipiscing elit." */}
-            {question['description']}
+            {/* {question['description']} */}
+            Model Question Model Question Model Question Model Question Model Question Model Question Model Question Model Question Model Question
         </div>
         <div className="modal__link">
             <a href="https://ieeevit.org">{question['url']}</a>
         </div>
-        <div className="modal__answer-container">
+        <div className="question_modal__answer_container">
             <input type='text' className="modal__answer__input" placeholder="Answer here"/>
-            <div className="modal__answer__button"><img src={arrow} alt="" /></div>
+            <div className="question_modal__answer__button"><img src={arrow} alt="" /></div>
         </div>
-        <div className="modal__hint">Use a hint</div>
+        <div className="question_modal__hint">Use a hint</div>
     </Modal>
 );
 

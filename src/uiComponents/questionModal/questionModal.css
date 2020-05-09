@@ -20,33 +20,31 @@
     opacity: 0;
 }
 
-.modal{
+.question_modal{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
     background-color: white;
     padding: 15px;
     border-radius: 8px;
     font-family: 'Nova Square';
-    width: 24vw;
-    height: 42vh;
+    width: 30vw;
+    height: auto;
 }
 
-.modal_title_container {
+.question_modal_title_container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    /* border: 2px solid red; */
 }
 
-.modal__title {
+.question_modal__title {
     font-weight: 500;
 }
 
-.modal_close_button {
+.question_modal_close_button {
     /* top: 1px;
     right: 1px; */
     margin-left: 0px;
@@ -58,7 +56,6 @@
     text-align: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    /* height: 0px; */
 }
 
 .modal__link {
@@ -68,19 +65,17 @@
     margin-bottom: 10px;
 }
 
-.modal__answer-container {
+.question_modal__answer_container {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid red;
 }
 
 .modal__answer__input {
-    /* outline: none; */
     border: 1px solid black;
     border-radius: 5px;
     padding: 7px;
@@ -89,10 +84,13 @@
     font-family: 'Nova Square';
 }
 
-.modal__answer__button {
+.question_modal__answer__button {
     background-color: black;
     padding: 8px;
-    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -102,7 +100,7 @@ img {
     width: 80%;
 }
 
-.modal__hint {
+.question_modal__hint {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
@@ -111,22 +109,6 @@ img {
     cursor: pointer;
 }
 
-/* .modal__title{
-    padding-left: 20px;
-    padding-right: 20px;
-} */
-
-/*text-align: center;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    color:black;
-    width: 60vh;
-    padding:20px;
-    outline: none;
-    height: 55vh;
-    text-align:center;
-    font-style: "Saira";
-    border-radius: 16px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.24);
-    background-color: white;*/
+.question_modal__hint:hover {
+    text-decoration: underline;
+}
