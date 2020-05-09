@@ -52,7 +52,7 @@ class LandingScreen extends Component {
         return (
             <div className="mainContainer" id="animatedContainer">
                 <img className="ctfLogo" src={require('../../assets/ctfLogo.png')} alt="CTF Logo" height={260} />
-                <div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Play</div>
+                <div className="button loginBtn ctf-landing-play-btn" onClick={() => window.location.href = '/get_started'}>Play</div>
             </div>
         );
     }
