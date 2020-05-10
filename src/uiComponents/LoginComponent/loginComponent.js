@@ -101,7 +101,7 @@ class LoginComponent extends Component {
                     draggable
                     position="bottom-right"
                 />
-                <span className="textMedium">Login in</span>
+                <span className="textMedium">Login</span>
                 <div className="inputContainer">
                     <TextField
                         id='outlined-basic'
