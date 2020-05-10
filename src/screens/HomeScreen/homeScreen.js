@@ -73,7 +73,7 @@ class HomeScreen extends React.Component {
 	}
 
 	render() {
-		const { isLoading, userProfile } = this.state;
+		const { isLoading, userProfile, page } = this.state;
 
 		if (isLoading) {
 			return (
@@ -101,22 +101,22 @@ class HomeScreen extends React.Component {
 				<nav className="nav">
 					<div className="nav__ctf"><img src={ctfLogo} alt=""/></div>
 					<div className="nav__buttons-container">
-						<div className="nav__button" onClick={()=>{
+						<div className="nav__button" style={{opacity: page === "map" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
 								page: 'map',
 							});
 						}}>Map</div>
-						<div className="nav__button" onClick={()=>{
+						<div className="nav__button" style={{opacity: page === "leaderboard" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
 								page: 'leaderboard'
 							});
 						}}>Leaderboard</div>
-						<div className="nav__button" onClick={()=>{
+						<div className="nav__button" style={{opacity: page === "info" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
 								page: 'info',
 							});
 						}}>Information</div>
-						<div className="nav__button" onClick={()=>{
+						<div className="nav__button" style={{opacity: page === "profile" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
 								page: 'profile',
 							});

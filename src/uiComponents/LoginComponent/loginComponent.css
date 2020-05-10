@@ -43,6 +43,10 @@
     border-color: white !important;
 }
 
+.MuiIconButton-root {
+    color: white !important;
+}
+
 .loginBtn {
     margin-top: 24px !important;
 }
