@@ -130,6 +130,9 @@ class LoginComponent extends Component {
                         required
                         type='password'
                     />
+                    <div style={{alignSelf: 'flex-end', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.props.showForgotPassword()}>
+                    Forgot Password?
+                    </div>
 
                     <div className="button loginBtn" onClick={() => this.onLoginSubmit()}>Log In</div>
                 </div>
