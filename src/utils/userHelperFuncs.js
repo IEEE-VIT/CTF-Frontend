@@ -163,3 +163,31 @@ export const getQuestions = () => {
         }
     })
 }
+
+export const getHint = (questionID) => {
+    return new Promise((resolve, reject) => {
+        try {
+            activityLayerApi.post('/user/hint', {
+                questionID,
+            }, {
+                headers: {
+                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                }
+            })
+                .then((resp) => {
+                    if (resp.data.statusCode === 200) {
+                        resolve(resp.data.payload.hint);
+                        return;
+                    }
+                    throw new Error("Server did not respond with status 200")
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject();
+                });
+        } catch (err) {
+            console.log(err);
+            reject();
+        }
+    });
+};

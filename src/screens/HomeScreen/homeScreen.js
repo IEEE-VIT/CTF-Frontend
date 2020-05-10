@@ -30,6 +30,7 @@ class HomeScreen extends React.Component {
 			questions: [],
 			user: '',
 			clickedQuestion: '',
+			clickedQuestionId: '',
 		};
 	}
 
@@ -65,9 +66,10 @@ class HomeScreen extends React.Component {
 		this.setState({
 			isOpen: true
 		});
-		// console.log('something '+questionNumber);
+		console.log();
 		this.setState({
 			clickedQuestion: this.state.questions[point['index']]['data'],
+			clickedQuestionId: this.state.questions[point['index']].id,
 		});
 		console.log(this.state.questions[point['index']]['data']);
 	}
@@ -139,7 +141,7 @@ class HomeScreen extends React.Component {
 					:
 					null
 				}
-				<QuestionModal isOpen={this.state.isOpen} question={this.state.clickedQuestion} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
+				<QuestionModal hindUsed={false} isOpen={this.state.isOpen} question={this.state.clickedQuestion} qid={this.state.clickedQuestionId} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
 				<SocialMediaIcons />
 			</div>
 		);
