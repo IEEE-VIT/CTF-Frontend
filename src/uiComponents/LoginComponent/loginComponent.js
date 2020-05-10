@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, InputAdornment, IconButton } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,7 +26,15 @@ class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
+            showPassword: false,
         }
+    }
+
+    toggleShowPassword = () => {
+        const {showPassword} = this.state;
+        this.setState({
+            showPassword: !showPassword,
+        });
     }
 
     setEmail = (email) => {
@@ -93,7 +103,7 @@ class LoginComponent extends Component {
     }
 
     render() {
-        const { email, password } = this.state;
+        const { email, password, showPassword } = this.state;
 
         return (
             <div className="loginTextColor">
@@ -128,7 +138,19 @@ class LoginComponent extends Component {
                         value={password}
                         onChange={(password) => this.setPassword(password)}
                         required
-                        type='password'
+                        type={showPassword ? 'text' : 'password'}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => this.toggleShowPassword()}
+                                  >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                  </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}                        
                     />
                     <div style={{alignSelf: 'flex-end', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.props.showForgotPassword()}>
                     Forgot Password?

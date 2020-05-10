@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, InputAdornment, IconButton } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,6 +29,7 @@ class SignUpComponent extends Component {
             password: '',
             confirmPassword: '',
             reCaptcha: '',
+            showPassword: false,
         }
 
         this.reCaptcha = null;
@@ -45,6 +48,13 @@ class SignUpComponent extends Component {
             }
         });
         this.reCaptcha.render();
+    }
+
+    toggleShowPassword = () => {
+        const {showPassword} = this.state;
+        this.setState({
+            showPassword: !showPassword,
+        });
     }
 
     setName = (name) => {
@@ -150,7 +160,7 @@ class SignUpComponent extends Component {
     }
 
     render() {
-        const { name, email, password, confirmPassword } = this.state;
+        const { name, email, password, confirmPassword, showPassword } = this.state;
 
         return (
             <div className="loginTextColor">
@@ -198,7 +208,19 @@ class SignUpComponent extends Component {
                         value={password}
                         onChange={(password) => this.setPassword(password)}
                         required
-                        type='password'
+                        type={showPassword ? 'text' : 'password'}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => this.toggleShowPassword()}
+                                  >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                  </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <TextField
                         id='outlined-basic'
