@@ -17,8 +17,7 @@ const QuestionModal=({isOpen, handleAnswerSubmit, closeModal, question})=>(
             <div className="question_modal_close_button" onClick={()=>closeModal()}>X</div>
         </div>
         <div className="modal__question">
-            {/* {question['description']} */}
-            Model Question Model Question Model Question Model Question Model Question Model Question Model Question Model Question Model Question
+            {question['description']}
         </div>
         <div className="modal__link">
             <a href="https://ieeevit.org">{question['url']}</a>
