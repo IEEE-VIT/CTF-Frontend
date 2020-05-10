@@ -92,7 +92,7 @@ import starryBG from '../../assets/starryBG.jpg';
           pointLat={point => point.coordinates[0]}
           pointLng={point => point.coordinates[1]}
           pointColor={point => point.color}
-          pointAltitude={0}
+          pointAltitude={0.2}
           pointRadius={1}
           pointsMerge={false}
           onPointClick={(point)=>{showQuestionModal(point);}}
