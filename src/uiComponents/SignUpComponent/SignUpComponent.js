@@ -25,8 +25,26 @@ class SignUpComponent extends Component {
             name: '',
             email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            reCaptcha: '',
         }
+
+        this.reCaptcha = null;
+    }
+
+    componentDidMount() {
+        this.reCaptcha = new firebase.auth.RecaptchaVerifier('recaptcha', {
+            'callback': (token) => {
+                this.setState({
+                    reCaptcha: token,
+                });
+            },
+            'expired-callback': () => {
+                console.log("ReCaptcha expired... resetting")
+                this.reCaptcha.clear();
+            }
+        });
+        this.reCaptcha.render();
     }
 
     setName = (name) => {
@@ -55,7 +73,7 @@ class SignUpComponent extends Component {
 
     onSignUpSubmit = () => {
         this.props.startLoading();
-        const { name, email, password, confirmPassword } = this.state;
+        const { name, email, password, confirmPassword, reCaptcha } = this.state;
 
         if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
             this.props.stopLoading();
@@ -90,7 +108,7 @@ class SignUpComponent extends Component {
             })
             .then(async () => {
                 const {email, uid} = firebase.auth().currentUser;
-                createUser(email, name, uid)
+                createUser(email, name, uid, reCaptcha)
                     .then(async () => {
                         await updateName(name);
                         window.location.href = "/play"
@@ -195,7 +213,7 @@ class SignUpComponent extends Component {
                         required
                         type='password'
                     />
-
+                    <div id="recaptcha" className="recaptcha"></div>
                     <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
                 </div>
                 <div className="subContainer">
