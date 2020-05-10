@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import firebase from '../../configs/firebase';
 
 // importing components
-import { toastError } from '../toasts/toasts.js';
+import { toastError, toastSuccess } from '../toasts/toasts.js';
 
 // Importing styles
 import '../../Styles.css';
@@ -26,6 +26,29 @@ class LoginComponent extends Component {
         this.setState({
             email: email.target.value
         })
+    }
+
+    sendPasswordResetEmail = () => {
+        const {email} = this.state;
+        this.props.startLoading();
+
+        if (email === '') {
+            return toastError("Please provide an email!");
+        }
+
+        firebase.auth().sendPasswordResetEmail(email)
+            .then((resp) => {
+                this.props.stopLoading();
+                return toastSuccess("Hey! a password reset email is on it's way. Check your email");
+            })
+            .catch((err) => {
+                console.log(err);
+                this.props.stopLoading();
+                if (err.code === "auth/user-not-found") {
+                    return toastError("Sorry that email Id is not registered with us. Try signing up!");
+                }
+                return toastError(err.message);
+            })
     }
 
     render() {
@@ -56,7 +79,7 @@ class LoginComponent extends Component {
                     Login Instead!
                     </div>
 
-                    <div className="button loginBtn" onClick={() => console.log('reset hit')}>Reset</div>
+                    <div className="button loginBtn" onClick={() => this.sendPasswordResetEmail()} >Reset</div>
                 </div>
             </div>
         );

@@ -89,7 +89,7 @@ class LoginSignUpScreen extends Component {
         }
 
         if (screen === "forgot") {
-            return <ForgotPassword hideForgotPassword={this.hideForgotPassword} />
+            return <ForgotPassword hideForgotPassword={this.hideForgotPassword} startLoading={this.startLoading} stopLoading={this.stopLoading} />
         }
 
         return <LoginComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>;
