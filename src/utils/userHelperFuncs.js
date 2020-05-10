@@ -191,3 +191,33 @@ export const getHint = (questionID) => {
         }
     });
 };
+
+export const answerQuestion = (questionId, answer) => {
+    return new Promise((resolve, reject) => {
+        try {
+            activityLayerApi.post('/user/checkFlag', {
+                questionId,
+                answer,
+            }, {
+                headers: {
+                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                }
+            })
+                .then((resp) => {
+                    console.log(resp.data);
+                    if (resp.data.statusCode === 200) {
+                        resolve(resp.data.payload.msg);
+                        return;
+                    }
+                    throw new Error("Server did not respond with status 200")
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject();
+                });
+        } catch (err) {
+            console.log(err);
+            reject();
+        }
+    });
+}

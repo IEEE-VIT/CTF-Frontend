@@ -5,11 +5,13 @@ import arrow from '../../assets/arrow.png';
 import './questionModal.css';
 
 // importing helper function
-import {getHint} from '../../utils/userHelperFuncs'
+import {getHint, answerQuestion} from '../../utils/userHelperFuncs'
 
 const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed}) => {
     const [confirm, setConfirm] = useState(false);
     const [hint, setHint] = useState('')
+    const [answer, setAnswer] = useState('');
+    const [respCheck, setCheck] = useState('');
 
     const getHintFromAPI = async () => {
         try {
@@ -17,6 +19,16 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             setHint(hint);
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    const checkAnswer = async () => {
+        try {
+            const check = await answerQuestion(qid, answer);
+            setCheck(check);
+        } catch (err) {
+            console.log(err);
+            setCheck('Wrong Answer');
         }
     }
 
@@ -35,6 +47,8 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
         } else {
             setHint('');
             setConfirm(false);
+            setAnswer('');
+            setCheck('');
         }
     },
     [hindUsed, qid]);
@@ -78,9 +92,10 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 <a href="https://ieeevit.org">{question['url']}</a>
             </div>
             <div className="question_modal__answer_container">
-                <input type='text' className="modal__answer__input" placeholder="Answer here"/>
-                <div className="question_modal__answer__button"><img src={arrow} alt="" /></div>
+                <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)}/>
+                <div className="question_modal__answer__button" onClick={() => checkAnswer()}><img src={arrow} alt="" /></div>
             </div>
+            <div>{respCheck}</div>
             {renderHint()}
         </Modal>
     );
