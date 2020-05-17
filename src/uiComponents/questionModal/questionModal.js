@@ -7,7 +7,7 @@ import './questionModal.css';
 // importing helper function
 import {getHint, answerQuestion} from '../../utils/userHelperFuncs'
 
-const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed}) => {
+const QuestionModal = ({setHomeScreenLoading, isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed}) => {
     const [confirm, setConfirm] = useState(false);
     const [hint, setHint] = useState('')
     const [answer, setAnswer] = useState('');
@@ -24,8 +24,13 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
 
     const checkAnswer = async () => {
         try {
+            setHomeScreenLoading(true);
             const check = await answerQuestion(qid, answer);
             setCheck(check);
+            setTimeout(() => {
+                setHomeScreenLoading(false);
+                closeModal();
+            }, 2000);
         } catch (err) {
             console.log(err);
             setCheck('Wrong Answer');
