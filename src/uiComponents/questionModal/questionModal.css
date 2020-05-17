@@ -25,14 +25,15 @@
     flex-direction: column;
     align-items: flex-start;
     background-color: white;
-    padding: 15px;
+    padding: 15px 30px;
     border-radius: 8px;
     font-family: 'Nova Square';
-    width: 30vw;
+    width: 25vw;
     height: auto;
 }
 
 .question_modal_title_container {
+    align-self: flex-start;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -95,14 +96,13 @@
     cursor: pointer;
 }
 
-img {
-    height: 80%;
-    width: 80%;
+.img_answer {
+    width: 20px;
+    height: auto-;
 }
 
 .question_modal__hint {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 8px auto;
     text-align: center;
     width: 100%;
     font-size: 14px;

@@ -196,8 +196,8 @@ export const answerQuestion = (questionId, answer) => {
     return new Promise((resolve, reject) => {
         try {
             activityLayerApi.post('/user/checkFlag', {
-                questionId,
-                answer,
+                id: questionId,
+                flag: answer,
             }, {
                 headers: {
                     Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
