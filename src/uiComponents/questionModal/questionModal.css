@@ -96,8 +96,8 @@
     cursor: pointer;
 }
 
-img {
-    width: 80%;
+.img_answer {
+    width: 20px;
     height: auto-;
 }
 

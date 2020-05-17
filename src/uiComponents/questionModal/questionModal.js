@@ -93,7 +93,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             </div>
             <div className="question_modal__answer_container">
                 <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)}/>
-                <div className="question_modal__answer__button" onClick={() => checkAnswer()}><img src={arrow} alt="" /></div>
+                <div className="question_modal__answer__button" onClick={() => checkAnswer()}><img src={arrow} className="img_answer" alt="" /></div>
             </div>
             <div>{respCheck}</div>
             {renderHint()}
