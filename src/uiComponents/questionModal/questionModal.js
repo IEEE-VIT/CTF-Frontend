@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, {useState, useEffect} from 'react';
 import Modal from 'react-modal';
 
@@ -97,7 +98,7 @@ const QuestionModal = ({setHomeScreenLoading, isOpen, handleAnswerSubmit, closeM
                 {question['description']}
             </div>
             <div className="modal__link">
-                <a href="https://ieeevit.org">{question['url']}</a>
+                <a href={question['url']} target="_blank">{question['url']}</a>
             </div>
             <div className="question_modal__answer_container">
                 <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)}/>
