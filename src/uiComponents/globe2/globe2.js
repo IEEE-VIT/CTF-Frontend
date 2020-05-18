@@ -6,17 +6,12 @@ import starryBG from '../../assets/starryBG.jpg';
 
   export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
 
-    let a=[], questionLocations=[], questionArcs=[];
+    let a = [], questionLocations=[], questionArcs=[];
 
     useEffect(() => {
       let i = 0;
       let j = 0;
-
-      console.log(userProfile['qAnswered']);
-
       for(i = 0 ; i < (questions.length) ; i++) {
-
-        console.log(questions[i]['id']);
 
         let flag = false;
         
@@ -26,26 +21,22 @@ import starryBG from '../../assets/starryBG.jpg';
           }
         }
 
-        console.log(flag);
-
-        if(!flag) {
-          continue;
-        }
-
-        if(questions[i]['id'] in userProfile['qAnswered']) {
-          console.log(`Not taking ${i} question`);
-        }
 
         questionLocations.push({
-          id: questions[i]['data']['id'],
+          id: questions[i]['id'],
           city: 'Los Angeles',
-          color: ['green', 'yellow', 'red', 'black'][Math.round(Math.random()*3)],
+          color: flag ? 'green' : 'red',
           coordinates: [questions[i]['data']['latitude'], questions[i]['data']['longitude']],
           index: i
         });
 
+        if(flag) {
+          continue;
+        }
+
         for(j = 0; j < questions.length ; j++) {
 
+          // display only a few arcs not all
           if (Math.round(Math.random()) === 1) {
             continue;
           }
@@ -86,7 +77,6 @@ import starryBG from '../../assets/starryBG.jpg';
           arcDashAnimateTime={loc => loc.arcDashAnimateTime}
           arcsTransitionDuration={0}
           arcAltitude={loc => loc.arcAltitude}
-          // onArcHover={setHoverArc}
 
           pointsData={questionLocations}
           pointLabel={point => point.id}
@@ -96,7 +86,12 @@ import starryBG from '../../assets/starryBG.jpg';
           pointAltitude={0.2}
           pointRadius={1}
           pointsMerge={false}
-          onPointClick={(point)=>{showQuestionModal(point);}}
+          onPointClick={(point)=>{
+            if (userProfile['qAnswered'].includes(point.id)) {
+              return null;
+            }
+            showQuestionModal(point);
+          }}
         />
 			</div>
     );

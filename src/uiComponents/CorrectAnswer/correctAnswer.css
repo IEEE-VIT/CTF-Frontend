@@ -1,0 +1,125 @@
+.ReactModalPortal > div {
+    opacity:0;
+}
+
+.ReactModalPortal .ReactModal__Overlay{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    transition: opacity 200ms ease-in-out;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.answer_modal{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-family: 'Nova Square';
+    width: 25vw;
+    height: auto;
+}
+
+.answer_modal_title_container {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.answer_modal__title {
+    font-weight: 500;
+}
+
+.answer_modal_close_button {
+    /* top: 1px;
+    right: 1px; */
+    margin-left: 0px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal__answer {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal__link {
+    color: blue;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.answer_modal__answer_container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal__answer__input {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7px;
+    font-size: 15px;
+    width: 80%;
+    font-family: 'Nova Square';
+}
+
+.answer_modal__answer__button {
+    background-color: black;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.img_answer {
+    width: 20px;
+    height: auto-;
+}
+
+.answer_modal__hint {
+    margin: 8px auto;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.answer_modal__hint:hover {
+    text-decoration: underline;
+}
+
+.continueBtn {
+    cursor: pointer;
+    margin-top: 40px;
+    padding: 16px 50px;
+    border-radius: 8px;
+    align-self: center;
+    color: black;
+    background-color: white;
+    transition-duration: 0.5s;
+}
