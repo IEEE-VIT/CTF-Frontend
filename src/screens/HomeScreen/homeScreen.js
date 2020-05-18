@@ -1,7 +1,6 @@
 import React from 'react';
 import LoadingScreen from 'react-loading-screen';
 
-import Globe from '../../uiComponents/globe/globe.js';
 import {Globe2} from '../../uiComponents/globe2/globe2.js';
 import './homeScreen.css';
 import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIcons.js';
@@ -10,6 +9,7 @@ import LeaderBoard from '../LeaderBoard/leaderBoard.js';
 import QuestionModal from '../../uiComponents/questionModal/questionModal.js';
 import InfoScreen from '../InfoScreen/infoScreen.js';
 import ProfileScreen from '../ProfileScreen/profileScreen.js';
+import CorrectAnswer from '../../uiComponents/CorrectAnswer/CorrectAnswer.js'
 
 import ctfLogo from '../../assets/CTF.svg';
 
@@ -27,6 +27,7 @@ class HomeScreen extends React.Component {
 			page: 'map',
 			isOpen: false,
 			isLoading: true,
+			isOpenAnswer: false,
 			questions: [],
 			user: '',
 			clickedQuestion: '',
@@ -42,7 +43,6 @@ class HomeScreen extends React.Component {
 						}
 						const userProfile = await getUserProfile(user.uid);
 						const questions = (await getQuestions());
-						console.log(questions);
 						this.setState({
 							isLoading: false,
 							questions,
@@ -72,6 +72,37 @@ class HomeScreen extends React.Component {
 			clickedQuestionId: this.state.questions[point['index']].id,
 		});
 		console.log(this.state.questions[point['index']]['data']);
+	}
+
+	startHomeScreenLoading = () => {
+		this.setState({
+			isLoading: true,
+		});
+	}
+
+	closeModalAnswer = () => {
+		this.setState({
+			isOpenAnswer: false,
+		});
+	}
+
+	onAnswerCorrect = async () => {
+		this.startHomeScreenLoading();
+		const {user} = this.state;
+		const userProfile = await getUserProfile(user.uid);
+		const questions = (await getQuestions());
+		this.setState({
+			isLoading: false,
+			questions,
+			userProfile,
+			isOpenAnswer: true,
+		});
+	}
+
+	setHomeScreenLoading = (value) => {
+		this.setState({
+			isLoading: value,
+		});
 	}
 
 	render() {
@@ -126,7 +157,7 @@ class HomeScreen extends React.Component {
 					</div>
 					<div className="nav__score">Your score: {userProfile.points}</div>
 				</nav>
-				<Globe2 questions={this.state.questions} showQuestionModal={this.showQuestionModal}/>
+				<Globe2 userProfile={this.state.userProfile} questions={this.state.questions} showQuestionModal={this.showQuestionModal}/>
 				{
 					this.state.page==='leaderboard'
 					?
@@ -142,7 +173,8 @@ class HomeScreen extends React.Component {
 					:
 					null
 				}
-				<QuestionModal hindUsed={false} isOpen={this.state.isOpen} question={this.state.clickedQuestion} qid={this.state.clickedQuestionId} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
+				<QuestionModal onAnswerCorrect={this.onAnswerCorrect} setHomeScreenLoading={this.setHomeScreenLoading} hindUsed={false} isOpen={this.state.isOpen} question={this.state.clickedQuestion} qid={this.state.clickedQuestionId} handleAnswerSubmit={this.handleAnswerSubmit} closeModal={this.closeModal}/>
+				<CorrectAnswer isOpenAnswer={this.state.isOpenAnswer} closeModalAnswer={this.closeModalAnswer} />
 				<SocialMediaIcons />
 			</div>
 		);

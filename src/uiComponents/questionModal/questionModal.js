@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, {useState, useEffect} from 'react';
 import Modal from 'react-modal';
 
@@ -7,7 +8,7 @@ import './questionModal.css';
 // importing helper function
 import {getHint, answerQuestion} from '../../utils/userHelperFuncs'
 
-const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed}) => {
+const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed, onAnswerCorrect}) => {
     const [confirm, setConfirm] = useState(false);
     const [hint, setHint] = useState('')
     const [answer, setAnswer] = useState('');
@@ -25,7 +26,14 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
     const checkAnswer = async () => {
         try {
             const check = await answerQuestion(qid, answer);
-            setCheck(check);
+            console.log(check);
+            if (check) {
+                onAnswerCorrect();
+                closeModal();
+                return;
+            }
+            setCheck('Answer incorrect');
+            console.log(respCheck);
         } catch (err) {
             console.log(err);
             setCheck('Wrong Answer');
@@ -89,7 +97,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 {question['description']}
             </div>
             <div className="modal__link">
-                <a href="https://ieeevit.org">{question['url']}</a>
+                <a href={question['url']} target="_blank">{question['url']}</a>
             </div>
             <div className="question_modal__answer_container">
                 <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)}/>

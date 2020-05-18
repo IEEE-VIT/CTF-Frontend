@@ -58,6 +58,7 @@ export const getUserProfile = (uid) => {
             } 
         })
             .then((resp) => {
+                console.log(resp.data);
                 if (resp.data.statusCode === 200) {
                     resolve(resp.data.payload.userProfile);
                     return;
@@ -146,7 +147,6 @@ export const getQuestions = () => {
                 }
             })
                 .then((resp) => {
-                    console.log(resp.data);
                     if (resp.data.statusCode === 200) {
                         resolve(resp.data.payload.body);
                         return;
@@ -206,7 +206,7 @@ export const answerQuestion = (questionId, answer) => {
                 .then((resp) => {
                     console.log(resp.data);
                     if (resp.data.statusCode === 200) {
-                        resolve(resp.data.payload.msg);
+                        resolve(resp.data.payload.msg === "Answer correct");
                         return;
                     }
                     throw new Error("Server did not respond with status 200")

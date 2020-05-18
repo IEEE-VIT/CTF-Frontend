@@ -4,40 +4,44 @@ import Globe from 'react-globe.gl';
 import markers from '../globe/markers.ts';
 import starryBG from '../../assets/starryBG.jpg';
 
-  export const Globe2 = ({questions, showQuestionModal}) => {
+  export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
 
-    let a=[], questionLocations=[], questionArcs=[];
+    let a = [], questionLocations=[], questionArcs=[];
 
     useEffect(() => {
-      // console.log(questions);
       let i = 0;
       let j = 0;
       for(i = 0 ; i < (questions.length) ; i++) {
+
+        let flag = false;
         
+        for(j = 0 ; j <= userProfile['qAnswered'].length ; j++) {
+          if(userProfile['qAnswered'][j] === questions[i]['id']) {
+            flag = true;
+          }
+        }
+
+
         questionLocations.push({
-          id: questions[i]['data']['name'],
+          id: questions[i]['id'],
           city: 'Los Angeles',
-          color: ['green', 'yellow', 'red', 'black'][Math.round(Math.random()*3)],
+          color: flag ? 'green' : 'red',
           coordinates: [questions[i]['data']['latitude'], questions[i]['data']['longitude']],
           index: i
         });
 
+        if(flag) {
+          continue;
+        }
+
         for(j = 0; j < questions.length ; j++) {
 
+          // display only a few arcs not all
           if (Math.round(Math.random()) === 1) {
             continue;
           }
 
           if(i!==j) {
-            // console.log();
-            // a.push({
-            //   arcLabel: `${markers[i]['city']} to ${markers[j]['city']}`,
-            //   arcStartLat: markers[i]['coordinates'][0],
-            //   arcStartLng: markers[i]['coordinates'][1],
-            //   arcEndLat: markers[j]['coordinates'][0],
-            //   arcEndLng: markers[j]['coordinates'][0],
-            //   arcColor: 'red',
-            // });
             questionArcs.push({
               arcLabel: `${questions[i]['data']['name']} to ${questions[j]['data']['name']}`,
               arcStartLat: questions[i]['data']['latitude'],
@@ -51,21 +55,9 @@ import starryBG from '../../assets/starryBG.jpg';
           }
         }
       }
-      // console.log(questionLocations);
-      // console.log(questionArcs);
+
     });
-  
-    let routes = [
-      {
-        arcLabel: 'something',
-        arcStartLat: '40.73061',
-        arcStartLng: '-73.935242',
-        arcEndLat: '37.773972',
-        arcEndLng: '-122.431297',
-        arcColor: 'red',
-      },
-    ];
-  
+
 		return(
 			<div>
 				<Globe
@@ -85,7 +77,6 @@ import starryBG from '../../assets/starryBG.jpg';
           arcDashAnimateTime={loc => loc.arcDashAnimateTime}
           arcsTransitionDuration={0}
           arcAltitude={loc => loc.arcAltitude}
-          // onArcHover={setHoverArc}
 
           pointsData={questionLocations}
           pointLabel={point => point.id}
@@ -95,10 +86,13 @@ import starryBG from '../../assets/starryBG.jpg';
           pointAltitude={0.2}
           pointRadius={1}
           pointsMerge={false}
-          onPointClick={(point)=>{showQuestionModal(point);}}
+          onPointClick={(point)=>{
+            if (userProfile['qAnswered'].includes(point.id)) {
+              return null;
+            }
+            showQuestionModal(point);
+          }}
         />
 			</div>
     );
   }
-
-// export default Globe2;
