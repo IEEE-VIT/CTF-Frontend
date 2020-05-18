@@ -87,6 +87,7 @@ class HomeScreen extends React.Component {
 	}
 
 	onAnswerCorrect = async () => {
+		this.startHomeScreenLoading();
 		const {user} = this.state;
 		const userProfile = await getUserProfile(user.uid);
 		const questions = (await getQuestions());
