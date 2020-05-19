@@ -29,7 +29,7 @@ import starryBG from '../../assets/starryBG.jpg';
           coordinates: [questions[i]['data']['latitude'], questions[i]['data']['longitude']],
           index: i
         });
-
+        
         if(flag) {
           continue;
         }
