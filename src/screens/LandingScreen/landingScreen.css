@@ -132,3 +132,11 @@
             url('../../assets/bg-land.jpg');
     }
 }
+@media only screen and (max-width: 600px) {
+    .ctfLogo {
+        align-self: center;
+        margin: 20px;
+        width: 80vw;
+        height: auto;
+    }
+  }

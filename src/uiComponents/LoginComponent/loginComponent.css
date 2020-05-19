@@ -121,3 +121,33 @@
     justify-content: center;
     align-items: center;
 }
+
+@media only screen and (max-width: 600px) {
+    .loginTextColor {    
+        width: 90vw !important;
+    }
+
+    .inputContainer {
+        margin-top: 12px !important;
+    }
+
+    .MuiInputBase-fullWidth {
+        width: 90vw !important;
+    }
+
+    .MuiInputBase-input {
+        width: 90vw !important ;
+    }
+
+    .loginBtn {
+        padding: 8px 16px;
+    }
+
+    .subContainer {
+        margin-top: 12px !important;
+    }
+
+    .orText h4 {
+        margin: 6px auto;
+    }
+  }

@@ -163,13 +163,13 @@ class SignUpComponent extends Component {
         const { name, email, password, confirmPassword, showPassword } = this.state;
 
         return (
-            <div className="loginTextColor">
+            <div className="signUpContainer">
                 <ToastContainer
                     draggable
                     position="bottom-right"
                 />
                 <span className="textMedium">Sign Up</span>
-                <div className="inputContainer">
+                <div className="signUpInputContainer">
                     <TextField
                         id='outlined-basic'
                         fullWidth={true}
