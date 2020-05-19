@@ -18,6 +18,7 @@ import firebase from '../../configs/firebase';
 
 // importing utils
 import {getQuestions, getUserProfile} from '../../utils/userHelperFuncs';
+import MobileView from '../../uiComponents/MobileView/MobileView.js';
 
 class HomeScreen extends React.Component {
 
@@ -107,6 +108,13 @@ class HomeScreen extends React.Component {
 
 	render() {
 		const { isLoading, userProfile, page } = this.state;
+
+		console.log(window.screen.width);
+		if(window.screen.width <= 768) {
+			return (
+				<MobileView />
+			);
+		}
 
 		if (isLoading) {
 			return (
