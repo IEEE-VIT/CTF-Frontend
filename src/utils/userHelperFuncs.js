@@ -72,12 +72,11 @@ export const getUserProfile = (uid) => {
     })
 }
 
-export const createUser = (email, name, uid, reCaptcha) => {
+export const createUser = (email, name, uid) => {
     return new Promise((resolve, reject) => {
         activityLayerApi.post("/user/create", {
             email,
             name,
-            reCaptcha,
         }, {
             headers: {
                 Authorization: "Bearer "+uid,

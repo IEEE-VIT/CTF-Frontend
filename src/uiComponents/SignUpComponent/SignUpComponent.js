@@ -43,8 +43,11 @@ class SignUpComponent extends Component {
                 });
             },
             'expired-callback': () => {
-                console.log("ReCaptcha expired... resetting")
-                this.reCaptcha.clear();
+                console.log("ReCaptcha expired... resetting");
+                this.setState({
+                    reCaptcha: '',
+                })
+                this.reCaptcha.clear(); 
             }
         });
         this.reCaptcha.render();
@@ -110,6 +113,12 @@ class SignUpComponent extends Component {
             return;
         }
 
+        if (reCaptcha === '') {
+            this.props.stopLoading();
+            toastError("Hey you forgot to do the reCaptcha!");
+            return;
+        }
+
         console.log("goooooooood");
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -118,7 +127,7 @@ class SignUpComponent extends Component {
             })
             .then(async () => {
                 const {email, uid} = firebase.auth().currentUser;
-                createUser(email, name, uid, reCaptcha)
+                createUser(email, name, uid)
                     .then(async () => {
                         await updateName(name);
                         window.location.href = "/play"
