@@ -1,68 +1,54 @@
+<div align = "center">
+
+<image src="./src/assets/ctf-black.svg" alt="CTF - Conquer The World" />
+
+![GitHub top language](https://img.shields.io/github/languages/top/Devil39/ctf)
+![GitHub repo size](https://img.shields.io/github/repo-size/Devil39/ctf)
+![GitHub](https://img.shields.io/github/license/Devil/ctf)
+[![GitHub stars](https://img.shields.io/github/stars/Devil39/ctf)](https://github.com/Devil39/ctf/stargazers)
+[![Github All Contributors](https://img.shields.io/github/all-contributors/Devil39/ctf)](https://github.com/Devil39/ctf/graphs/contributors)
+
+</div>
+
+## Introduction
+<p>
+Capture The Flag or CTF is a information security competition which challenges its participants to solve a variety of tasks which may range from decryptions to hacking a server to win this contest. Hence making it a Cyber Security event. IEEE-VIT present you CTF-Conquer The World. This online CTF presents an innovate clean design build with Reactjs library and absolutely mouth dropping questions.
+</p>
+
+## Link to Hosted Event
+Yet to be hosted
+
+## For Developers
+Please make sure you have npm and nodejs installed before following the below steps
+1. `git clone https://github.com/Devil39/ctf.git`
+2. `cd ctf`
+3. `npm install`
+4. `npm start`
+* For running this project successfully you'll need to create a `.env` file and store your firebase credentials there like following
+```
+REACT_APP_apiKey = <YOUR_API_KEY>
+REACT_APP_authDomain = <YOUR_AUTH_DOMAIN>
+REACT_APP_databaseURL = <YOUR_DATABASE_URL>
+REACT_APP_projectId = <YOUR_PROJECT_ID>
+REACT_APP_storageBucket = <YOUR_STORAGE_BUCKET>
+REACT_APP_messagingSenderId = <YOUR_MESSAGING_ID>
+REACT_APP_appId = <YOUR_APP_ID>
+REACT_APP_measurementId = <YOUR_MEASUREMENT_ID>
+REACT_APP_layerApi = <YOUR_HOSTED_API_LAYER>
+```
+Here `REACT_APP_layerApi` refers to the helper backend service created for this react site, so to keep all computational load off the frontend. 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+#### Available Scripts
+* `npm start` - runs the app in development mode
+* `npm run build` - builds the app for production 
 
-In the project directory, you can run:
+## Contributors
+* [Devil39](https://github.com/Devil39)
+* [sarthakpranesh](https://github.com/sarthakpranesh)
 
-### `npm start`
+<div align="center">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Made with ❤ by IEEE-VIT
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+</div>
