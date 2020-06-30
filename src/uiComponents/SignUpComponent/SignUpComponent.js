@@ -4,6 +4,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Recaptcha from 'react-recaptcha';
 
 // importing firebase
 import firebase from '../../configs/firebase';
@@ -19,6 +20,13 @@ import { toastError } from '../toasts/toasts.js';
 import '../../Styles.css';
 import './SignUpComponent.css';
 
+let reCaptchaInstance;
+
+const executeCaptcha = () => {
+    console.log(reCaptchaInstance);
+    reCaptchaInstance.execute();
+};
+
 class SignUpComponent extends Component {
     constructor(props){
         super(props);
@@ -28,29 +36,16 @@ class SignUpComponent extends Component {
             email: '',
             password: '',
             confirmPassword: '',
-            reCaptcha: '',
             showPassword: false,
+            token: '',
         }
-
-        this.reCaptcha = null;
     }
 
     componentDidMount() {
-        this.reCaptcha = new firebase.auth.RecaptchaVerifier('recaptcha', {
-            'callback': (token) => {
-                this.setState({
-                    reCaptcha: token,
-                });
-            },
-            'expired-callback': () => {
-                console.log("ReCaptcha expired... resetting");
-                this.setState({
-                    reCaptcha: '',
-                })
-                this.reCaptcha.clear(); 
-            }
-        });
-        this.reCaptcha.render();
+        setTimeout(() => {
+            console.log("Nothing is happening")
+            executeCaptcha();
+        }, 3000);
     }
 
     toggleShowPassword = () => {
@@ -84,9 +79,19 @@ class SignUpComponent extends Component {
         })
     }
 
+    verifyCallback=(token)=>{
+        if (token) {
+            this.setState({token});
+        }
+        else {
+            toastError("ReCaptcha verification failed!");
+        }
+    }
+
     onSignUpSubmit = () => {
         this.props.startLoading();
-        const { name, email, password, confirmPassword, reCaptcha } = this.state;
+        const { name, email, password, confirmPassword, token } = this.state;
+        console.log(token);
 
         if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
             this.props.stopLoading();
@@ -113,13 +118,6 @@ class SignUpComponent extends Component {
             return;
         }
 
-        if (reCaptcha === '') {
-            this.props.stopLoading();
-            toastError("Hey you forgot to do the reCaptcha!");
-            return;
-        }
-
-        console.log("goooooooood");
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(async () => {
@@ -177,6 +175,7 @@ class SignUpComponent extends Component {
                     draggable
                     position="bottom-right"
                 />
+                <div className="g-recaptcha" id="g-recaptcha"></div>
                 <span className="textMedium">Sign Up</span>
                 <div className="signUpInputContainer">
                     <TextField
@@ -244,8 +243,17 @@ class SignUpComponent extends Component {
                         required
                         type='password'
                     />
-                    <div id="recaptcha" className="recaptcha"></div>
                     <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
+                    <Recaptcha
+                        ref={e => reCaptchaInstance = e}
+                        sitekey={process.env.REACT_APP_siteKey}
+                        render="explicit"
+                        // size="invisible"
+                        verifyCallback={this.verifyCallback}
+                        onloadCallback={(res)=>{
+                            console.log("Loaded captcha")
+                        }} 
+                    />
                 </div>
                 <div className="subContainer">
                     <div className="signUpSection">
