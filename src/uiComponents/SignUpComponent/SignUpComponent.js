@@ -20,13 +20,6 @@ import { toastError } from '../toasts/toasts.js';
 import '../../Styles.css';
 import './SignUpComponent.css';
 
-let reCaptchaInstance;
-
-const executeCaptcha = () => {
-    console.log(reCaptchaInstance);
-    reCaptchaInstance.execute();
-};
-
 class SignUpComponent extends Component {
     constructor(props){
         super(props);
@@ -38,14 +31,9 @@ class SignUpComponent extends Component {
             confirmPassword: '',
             showPassword: false,
             token: '',
+						verified: false,
         }
-    }
-
-    componentDidMount() {
-        setTimeout(() => {
-            console.log("Nothing is happening")
-            executeCaptcha();
-        }, 3000);
+				this.verifyCallback = this.verifyCallback.bind(this);
     }
 
     toggleShowPassword = () => {
@@ -82,6 +70,7 @@ class SignUpComponent extends Component {
     verifyCallback=(token)=>{
         if (token) {
             this.setState({token});
+						this.setState({verified: true});
         }
         else {
             toastError("ReCaptcha verification failed!");
@@ -91,11 +80,17 @@ class SignUpComponent extends Component {
     onSignUpSubmit = () => {
         this.props.startLoading();
         const { name, email, password, confirmPassword, token } = this.state;
-        console.log(token);
+
 
         if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
             this.props.stopLoading();
             toastError("Looks like you forgot to fill some fields.");
+            return;
+        }
+
+        if (!this.state.verified) {
+            this.props.stopLoading();
+            toastError("Please confirm you are a human");
             return;
         }
 
@@ -244,9 +239,10 @@ class SignUpComponent extends Component {
                         type='password'
                     />
                     <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
+                </div>
+                <div className="subContainer">
                     <Recaptcha
-                        ref={e => reCaptchaInstance = e}
-                        sitekey={process.env.REACT_APP_siteKey}
+                        sitekey={process.env.REACT_APP_SITEKEY}
                         render="explicit"
                         // size="invisible"
                         verifyCallback={this.verifyCallback}
@@ -254,8 +250,6 @@ class SignUpComponent extends Component {
                             console.log("Loaded captcha")
                         }} 
                     />
-                </div>
-                <div className="subContainer">
                     <div className="signUpSection">
                         <span>Already have an account? </span> 
                         <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
