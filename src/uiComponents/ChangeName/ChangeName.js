@@ -42,7 +42,7 @@ class ChangeName extends Component {
         setTimeout(() => {
             executeCaptcha();
         }, 2000);
-        toastSuccess("Just a few more steps, Setup a username to start your journey!");
+        toastSuccess("Just a few more steps, Setup a username to start your journey! Make sure you pick a good one, you can't change it later ;)");
     }
 
     verifyCallback = (token) => {
