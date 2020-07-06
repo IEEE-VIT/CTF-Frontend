@@ -39,9 +39,9 @@ class SignUpComponent extends Component {
             confirmPassword: '',
             showPassword: false,
             token: '',
-						verified: false,
+			verified: false,
         }
-				this.verifyCallback = this.verifyCallback.bind(this);
+		this.verifyCallback = this.verifyCallback.bind(this);
     }
 
     componentDidMount () {
