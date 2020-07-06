@@ -4,12 +4,13 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Recaptcha from 'react-recaptcha';
 
 // importing firebase
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword, checkName, createUser } from '../../utils/userHelperFuncs';
+import { checkUserEmailAndPassword, checkName, createUser, reCaptchaCheck } from '../../utils/userHelperFuncs';
 import { updateName, googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
@@ -18,6 +19,14 @@ import { toastError } from '../toasts/toasts.js';
 // Importing styles
 import '../../Styles.css';
 import './SignUpComponent.css';
+
+// create a variable to store the component instance
+let recaptchaInstance;
+ 
+// manually trigger reCAPTCHA execution
+const executeCaptcha = function () {
+  recaptchaInstance.execute();
+};
 
 class SignUpComponent extends Component {
     constructor(props){
@@ -28,29 +37,17 @@ class SignUpComponent extends Component {
             email: '',
             password: '',
             confirmPassword: '',
-            reCaptcha: '',
             showPassword: false,
+            token: '',
+			verified: false,
         }
-
-        this.reCaptcha = null;
+		this.verifyCallback = this.verifyCallback.bind(this);
     }
 
-    componentDidMount() {
-        this.reCaptcha = new firebase.auth.RecaptchaVerifier('recaptcha', {
-            'callback': (token) => {
-                this.setState({
-                    reCaptcha: token,
-                });
-            },
-            'expired-callback': () => {
-                console.log("ReCaptcha expired... resetting");
-                this.setState({
-                    reCaptcha: '',
-                })
-                this.reCaptcha.clear(); 
-            }
-        });
-        this.reCaptcha.render();
+    componentDidMount () {
+        setTimeout(() => {
+            executeCaptcha();
+        }, 2000);
     }
 
     toggleShowPassword = () => {
@@ -84,9 +81,33 @@ class SignUpComponent extends Component {
         })
     }
 
-    onSignUpSubmit = () => {
+    verifyCallback = (token) => {
+        if (token) {
+            this.setState({token});
+            this.setState({verified: true});
+            console.log('Token: ', token);
+        }
+        else {
+            toastError("ReCaptcha verification failed!");
+        }
+    }
+
+    expiredCallback = () => {
+        console.log('################## Token expired #################')
+        this.setState({token: "", verified: false});
+        toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
+    }
+
+    onSignUpSubmit = async () => {
         this.props.startLoading();
-        const { name, email, password, confirmPassword, reCaptcha } = this.state;
+        const { name, email, password, confirmPassword, token, verified } = this.state;
+
+        if (!verified) {
+            this.props.stopLoading();
+            toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.");
+            return;
+        }
+
 
         if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
             this.props.stopLoading();
@@ -113,18 +134,9 @@ class SignUpComponent extends Component {
             return;
         }
 
-        if (reCaptcha === '') {
-            this.props.stopLoading();
-            toastError("Hey you forgot to do the reCaptcha!");
-            return;
-        }
-
-        console.log("goooooooood");
-        firebase.auth()
-            .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(async () => {
-                return firebase.auth().createUserWithEmailAndPassword(email, password)                
-            })
+        reCaptchaCheck(token)
+            .then(() => firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL))
+            .then(() => firebase.auth().createUserWithEmailAndPassword(email, password))
             .then(async () => {
                 const {email, uid} = firebase.auth().currentUser;
                 createUser(email, name, uid)
@@ -177,6 +189,7 @@ class SignUpComponent extends Component {
                     draggable
                     position="bottom-right"
                 />
+                <div className="g-recaptcha" id="g-recaptcha"></div>
                 <span className="textMedium">Sign Up</span>
                 <div className="signUpInputContainer">
                     <TextField
@@ -244,10 +257,20 @@ class SignUpComponent extends Component {
                         required
                         type='password'
                     />
-                    <div id="recaptcha" className="recaptcha"></div>
                     <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
                 </div>
                 <div className="subContainer">
+                    <Recaptcha
+                        ref={e => recaptchaInstance = e}
+                        sitekey={process.env.REACT_APP_SITEKEY}
+                        render="explicit"
+                        size="invisible"
+                        verifyCallback={this.verifyCallback}
+                        expiredCallback={this.expiredCallback}
+                        onloadCallback={(res)=>{
+                            console.log("Loaded captcha")
+                        }} 
+                    />
                     <div className="signUpSection">
                         <span>Already have an account? </span> 
                         <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
