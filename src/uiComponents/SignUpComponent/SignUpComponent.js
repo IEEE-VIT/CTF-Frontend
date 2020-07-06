@@ -10,7 +10,7 @@ import Recaptcha from 'react-recaptcha';
 import firebase from '../../configs/firebase';
 
 // import utils
-import { checkUserEmailAndPassword, checkName, createUser } from '../../utils/userHelperFuncs';
+import { checkUserEmailAndPassword, checkName, createUser, reCaptchaCheck } from '../../utils/userHelperFuncs';
 import { updateName, googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
@@ -19,6 +19,14 @@ import { toastError } from '../toasts/toasts.js';
 // Importing styles
 import '../../Styles.css';
 import './SignUpComponent.css';
+
+// create a variable to store the component instance
+let recaptchaInstance;
+ 
+// manually trigger reCAPTCHA execution
+const executeCaptcha = function () {
+  recaptchaInstance.execute();
+};
 
 class SignUpComponent extends Component {
     constructor(props){
@@ -34,6 +42,12 @@ class SignUpComponent extends Component {
 						verified: false,
         }
 				this.verifyCallback = this.verifyCallback.bind(this);
+    }
+
+    componentDidMount () {
+        setTimeout(() => {
+            executeCaptcha();
+        }, 2000);
     }
 
     toggleShowPassword = () => {
@@ -67,30 +81,37 @@ class SignUpComponent extends Component {
         })
     }
 
-    verifyCallback=(token)=>{
+    verifyCallback = (token) => {
         if (token) {
             this.setState({token});
-						this.setState({verified: true});
+            this.setState({verified: true});
+            console.log('Token: ', token);
         }
         else {
             toastError("ReCaptcha verification failed!");
         }
     }
 
-    onSignUpSubmit = () => {
+    expiredCallback = () => {
+        console.log('################## Token expired #################')
+        this.setState({token: "", verified: false});
+        toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
+    }
+
+    onSignUpSubmit = async () => {
         this.props.startLoading();
-        const { name, email, password, confirmPassword, token } = this.state;
+        const { name, email, password, confirmPassword, token, verified } = this.state;
+
+        if (!verified) {
+            this.props.stopLoading();
+            toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.");
+            return;
+        }
 
 
         if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
             this.props.stopLoading();
             toastError("Looks like you forgot to fill some fields.");
-            return;
-        }
-
-        if (!this.state.verified) {
-            this.props.stopLoading();
-            toastError("Please confirm you are a human");
             return;
         }
 
@@ -113,11 +134,9 @@ class SignUpComponent extends Component {
             return;
         }
 
-        firebase.auth()
-            .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(async () => {
-                return firebase.auth().createUserWithEmailAndPassword(email, password)                
-            })
+        reCaptchaCheck(token)
+            .then(() => firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL))
+            .then(() => firebase.auth().createUserWithEmailAndPassword(email, password))
             .then(async () => {
                 const {email, uid} = firebase.auth().currentUser;
                 createUser(email, name, uid)
@@ -242,10 +261,12 @@ class SignUpComponent extends Component {
                 </div>
                 <div className="subContainer">
                     <Recaptcha
+                        ref={e => recaptchaInstance = e}
                         sitekey={process.env.REACT_APP_SITEKEY}
                         render="explicit"
-                        // size="invisible"
+                        size="invisible"
                         verifyCallback={this.verifyCallback}
+                        expiredCallback={this.expiredCallback}
                         onloadCallback={(res)=>{
                             console.log("Loaded captcha")
                         }} 

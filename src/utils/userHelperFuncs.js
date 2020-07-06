@@ -33,6 +33,28 @@ export const checkName = (name) => {
     return true;
 };
 
+export const reCaptchaCheck = (token) => {
+    return new Promise((resolve, reject) => {
+        activityLayerApi.post("/user/auth/recaptcha", {
+            token,
+        }, {
+
+        })
+            .then((resp) => {
+                console.log(resp.data.auth);
+                if (resp.data.auth !== 1) {
+                    throw new Error("Auth was not equal to 1");
+                }
+                resolve();
+            })
+            .catch((err) => {
+                console.log(err);
+                reject("Oops! Looks like your reCaptcha is failing, try refreshing this page or switch to a better network connection.");
+            })
+    })
+}
+
+
 export const pingServer = () => {
     return new Promise((resolve, reject) => {
         activityLayerApi.get("/")
