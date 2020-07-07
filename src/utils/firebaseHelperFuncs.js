@@ -3,16 +3,8 @@ import firebase from '../configs/firebase';
 export const googleOAuth = () => {
     return new Promise((resolve, reject) => {
         var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider)
-            .then((result) => {
-                var user = result.user;
-                resolve(user);
-            })
-            .catch((err) => {
-                console.log(err);
-                reject(err);
-            });
-          
+        firebase.auth().signInWithRedirect(provider); 
+        resolve();            
     })
 }
 

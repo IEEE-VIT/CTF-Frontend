@@ -5,6 +5,10 @@ import LoadingScreen from 'react-loading-screen';
 // import './loginSignUpScreen.css';
 import '../../Styles.css';
 
+
+// import utils
+import { createUser } from '../../utils/userHelperFuncs';
+
 // importing components
 import LoginComponent from '../../uiComponents/LoginComponent/loginComponent.js';
 import SignUpComponent from '../../uiComponents/SignUpComponent/SignUpComponent.js';
@@ -12,6 +16,9 @@ import ForgotPassword from '../../uiComponents/ForgotPassword/forgotPassword.js'
 
 // importing firebase
 import firebase from "../../configs/firebase";
+
+// importing components
+import { toastError } from '../../uiComponents/toasts/toasts.js';
 
 class LoginSignUpScreen extends Component {
     constructor(props) {
@@ -25,19 +32,40 @@ class LoginSignUpScreen extends Component {
 
 
     componentDidMount(){
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user && user.displayName && this.state.isLoading) {
-                window.location.href ="/play"
+        firebase.auth().getRedirectResult()
+            .then(async (result) => {
+                const user = result.user;
+                if (user === null) {
+                    console.log("User Was NULL @@@@@@@@@@@");
+                    this.setState({
+                        isLoading: false,
+                    })
+                    return;
+                }
+                const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid);
+                if (isRegSuccess) {
+                    window.location.href="/play"
+                } else {
+                    if (wasUserRegistered) {
+                        window.location.href="/play"
+                    }
+                    alert("Looks like something went Wrong, Please reach out to us!")
+                }
                 return;
-            }
-
-            if (!user) {
-                console.log('user not logged in')
+            })
+            .catch((err) => {
+                console.log("Redirect Error: ", err);
                 this.setState({
                     isLoading: false,
                 })
-            }
-        })
+                toastError(err.message);
+            });
+
+        const user = firebase.auth().currentUser;
+        if (user && user.displayName && this.state.isLoading) {
+            window.location.href ="/play"
+            return;
+        }
     }
 
     startLoading = () => {

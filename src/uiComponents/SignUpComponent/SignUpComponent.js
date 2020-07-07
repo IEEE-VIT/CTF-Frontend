@@ -159,27 +159,6 @@ class SignUpComponent extends Component {
             })
     }
 
-    onGoogleAuth = () => {
-        googleOAuth()
-            .then(async (user) => {
-                const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid);
-                if (isRegSuccess) {
-                    window.location.href="/play"
-                } else {
-                    if (wasUserRegistered) {
-                        window.location.href="/play"
-                    }
-                    alert("Looks like something went Wrong, Please reach out to us!")
-                }
-                return;
-            })
-            .catch((err) => {
-                console.log(err);
-                this.props.stopLoading();
-                toastError(err.message);
-            })
-    }
-
     render() {
         const { name, email, password, confirmPassword, showPassword } = this.state;
 
@@ -278,7 +257,10 @@ class SignUpComponent extends Component {
                     <div className="orText">
                         <h4>OR</h4>
                     </div>
-                    <div className="googleContainer" onClick={() => this.onGoogleAuth()}>
+                    <div className="googleContainer" onClick={() => {
+                        this.props.startLoading();
+                        googleOAuth();
+                    }}>
                         <img src={require("../../assets/cg.png")} alt="Continue With Google" />
                     </div>
                 </div>
