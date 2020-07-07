@@ -39,17 +39,34 @@ class HomeScreen extends React.Component {
 	componentDidMount(){
         firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
-                window.location.href ="/"
-                return;
-						}
-						const userProfile = await getUserProfile(user.uid);
-						const questions = (await getQuestions());
+				window.location.href ="/"
+				return;
+			}
+			try {
+				const userProfile = await getUserProfile(user.uid);
+				const questions = await getQuestions();
+				this.setState({
+					isLoading: false,
+					questions,
+					user: user,
+					userProfile,
+				});
+			} catch (err) {
+				alert("Oops their was an error and re had to sign you out! Please login again");
+				firebase.auth().signOut()
+					.then((resp) => {
+						console.log(resp);
+						window.location.href ="/"
+						return;
+					})
+					.catch((err) => {
+						console.log(err);
 						this.setState({
 							isLoading: false,
-							questions,
-							user: user,
-							userProfile,
 						});
+						return;
+					})
+			}
         });
 	}
 

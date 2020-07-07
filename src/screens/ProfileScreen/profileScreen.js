@@ -49,7 +49,8 @@ class ProfileScreen extends React.Component {
                 isLoading: false,
             });
         } catch (err) {
-            alert("Oops! We couldn't retrieve your profile details. Please try again later!")
+            alert("Oops! Something went wrong and we had to log you out!")
+            this.onLogOut();
         }
     }
 
