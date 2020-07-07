@@ -72,7 +72,6 @@ class ChangeName extends Component {
         const {user, username, verified, token} = this.state;
 
         if (!verified) {
-            this.props.stopLoading();
             toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.");
             return;
         }
