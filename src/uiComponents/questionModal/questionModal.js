@@ -11,14 +11,18 @@ import './questionModal.css';
 import {getHint, answerQuestion, reCaptchaCheck} from '../../utils/userHelperFuncs'
 
 // importing components
-import { toastError, toastSuccess } from '../toasts/toasts.js';
+import { toastError } from '../toasts/toasts.js';
 
 // create a variable to store the component instance
 let recaptchaInstance;
  
 // manually trigger reCAPTCHA execution
 const executeCaptcha = function () {
-  recaptchaInstance.execute();
+    try {
+        recaptchaInstance.execute();
+    } catch (err) {
+        console.log(err.message);
+    }
 };
 
 const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed, onAnswerCorrect}) => {
@@ -33,7 +37,6 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
         if (token) {
             setToken(token);
             setVerified(true);
-            console.log('Token: ', token);
         }
         else {
             toastError("ReCaptcha verification failed! Please reload page and attempt again!");
@@ -41,10 +44,8 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
     }
 
     const expiredCallback = () => {
-        console.log('################## Token expired #################')
         setToken('');
         setVerified(false);
-        toastSuccess("You have had that question open for years now! Are you going to answer?");
         recaptchaInstance.execute();
     }
 
@@ -71,7 +72,6 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
         reCaptchaCheck(token)
             .then(() => answerQuestion(qid, answer))
             .then((check) => {
-                console.log("Answer check: ", check);
                 if (check) {
                     onAnswerCorrect();
                     closeModal();
@@ -89,14 +89,11 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
     }
 
     useEffect((hintUsed) => {
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@");
-        console.log(isOpen);
         if (isOpen) {
             setTimeout(() => {
                 executeCaptcha();
-            }, 2000);
+            }, 1000);
         }
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@");
         const getData = async () => {
             try {
                 const hint = await getHint(qid);
@@ -114,7 +111,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             setAnswer('');
         }
     },
-    [hindUsed, qid]);
+    [hindUsed, isOpen, qid]);
 
     const renderHint = () => {
 
@@ -156,7 +153,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 {question['description']}
             </div>
             <div className="modal__link">
-                <a href={question['url']} target="_blank">{question['url']}</a>
+                <a href={question['url']} target="_blank">Question Link</a>
             </div>
             <div className="question_modal__answer_container">
                 <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)} onKeyDown={handleKeyDown}/>

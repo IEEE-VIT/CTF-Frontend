@@ -11,8 +11,6 @@ const ChangeModal = ({ title, type, modalIsOpen, closeModal, onSubmitName }) => 
     e.preventDefault();
     onSubmitName(nameInput.value);
   }
-
-  console.log(modalIsOpen)
  
     return (
         <Modal

@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 
 // importing styles
 import './LogOutModal.css';
  
 const LogOutModal = ({ modalIsOpen, closeModal, onLogOut }) => {
-
-  console.log(modalIsOpen)
  
     return (
         <Modal

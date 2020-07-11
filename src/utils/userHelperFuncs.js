@@ -59,7 +59,6 @@ export const pingServer = () => {
     return new Promise((resolve, reject) => {
         activityLayerApi.get("/")
             .then((resp) => {
-                console.log(resp);
                 resolve();
             })
             .catch((err) => {
@@ -80,7 +79,6 @@ export const getUserProfile = (uid) => {
             } 
         })
             .then((resp) => {
-                console.log(resp.data);
                 if (resp.data.statusCode === 200) {
                     resolve(resp.data.payload.userProfile);
                     return;
@@ -225,7 +223,6 @@ export const answerQuestion = (questionId, answer) => {
                 }
             })
                 .then((resp) => {
-                    console.log(resp.data);
                     if (resp.data.statusCode === 200) {
                         resolve(resp.data.payload.msg === "Answer correct");
                         return;

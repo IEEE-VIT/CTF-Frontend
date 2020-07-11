@@ -84,12 +84,11 @@ class HomeScreen extends React.Component {
 		this.setState({
 			isOpen: true
 		});
-		console.log();
 		this.setState({
 			clickedQuestion: this.state.questions[point['index']]['data'],
 			clickedQuestionId: this.state.questions[point['index']].id,
 		});
-		console.log(this.state.questions[point['index']]['data']);
+		// console.log(this.state.questions[point['index']]['data']);
 	}
 
 	startHomeScreenLoading = () => {
@@ -125,8 +124,7 @@ class HomeScreen extends React.Component {
 
 	render() {
 		const { isLoading, userProfile, page } = this.state;
-
-		console.log(window.screen.width);
+		
 		if(window.screen.width <= 768) {
 			return (
 				<MobileView />
@@ -160,21 +158,25 @@ class HomeScreen extends React.Component {
 					<div className="nav__buttons-container">
 						<div className="nav__button" style={{opacity: page === "map" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
+								isOpen: false,
 								page: 'map',
 							});
 						}}>Map</div>
 						<div className="nav__button" style={{opacity: page === "leaderboard" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
+								isOpen: false,
 								page: 'leaderboard'
 							});
 						}}>Leaderboard</div>
 						<div className="nav__button" style={{opacity: page === "info" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
+								isOpen: false,
 								page: 'info',
 							});
 						}}>Information</div>
 						<div className="nav__button" style={{opacity: page === "profile" ? 1 : 0.64}} onClick={()=>{
 							this.setState({
+								isOpen: false,
 								page: 'profile',
 							});
 						}}>Profile</div>

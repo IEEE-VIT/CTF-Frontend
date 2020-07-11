@@ -85,7 +85,6 @@ class SignUpComponent extends Component {
         if (token) {
             this.setState({token});
             this.setState({verified: true});
-            console.log('Token: ', token);
         }
         else {
             toastError("ReCaptcha verification failed!");
@@ -93,7 +92,6 @@ class SignUpComponent extends Component {
     }
 
     expiredCallback = () => {
-        console.log('################## Token expired #################')
         this.setState({token: "", verified: false});
         toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
     }

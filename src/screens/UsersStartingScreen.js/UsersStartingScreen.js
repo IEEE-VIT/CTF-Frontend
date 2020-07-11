@@ -36,7 +36,6 @@ class LoginSignUpScreen extends Component {
             .then(async (result) => {
                 const user = result.user;
                 if (user === null) {
-                    console.log("User Was NULL @@@@@@@@@@@");
                     this.setState({
                         isLoading: false,
                     })
