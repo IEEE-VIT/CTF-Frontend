@@ -65,7 +65,6 @@ class LoginComponent extends Component {
             return;
         }
 
-        console.log("goooooooood");
         firebase.auth()
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(async () => {

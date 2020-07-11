@@ -32,7 +32,8 @@ class LoginComponent extends Component {
         const {email} = this.state;
         this.props.startLoading();
 
-        if (email === '') {
+        if (email.trim() === '') {
+            this.props.stopLoading();
             return toastError("Please provide an email!");
         }
 
@@ -42,7 +43,6 @@ class LoginComponent extends Component {
                 return toastSuccess("Hey! a password reset email is on it's way. Check your email");
             })
             .catch((err) => {
-                console.log(err);
                 this.props.stopLoading();
                 if (err.code === "auth/user-not-found") {
                     return toastError("Sorry that email Id is not registered with us. Try signing up!");

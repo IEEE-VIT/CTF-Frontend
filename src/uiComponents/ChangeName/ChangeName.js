@@ -4,9 +4,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Recaptcha from 'react-recaptcha';
 
-// importing firebase
-import firebase from '../../configs/firebase';
-
 // import utils
 import { updateUserObject, reCaptchaCheck } from '../../utils/userHelperFuncs';
 
@@ -49,7 +46,6 @@ class ChangeName extends Component {
         if (token) {
             this.setState({token});
             this.setState({verified: true});
-            console.log('Token: ', token);
         }
         else {
             toastError("ReCaptcha verification failed!");
@@ -57,7 +53,6 @@ class ChangeName extends Component {
     }
 
     expiredCallback = () => {
-        console.log('################## Token expired #################')
         this.setState({token: "", verified: false});
         toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
     }

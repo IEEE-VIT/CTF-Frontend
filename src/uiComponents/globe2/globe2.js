@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 
 import Globe from 'react-globe.gl';
-import markers from '../globe/markers.ts';
-import starryBG from '../../assets/starryBG.jpg';
 
   export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
 
-    let a = [], questionLocations=[], questionArcs=[];
+    let questionLocations=[], questionArcs=[];
 
     useEffect(() => {
       let i = 0;

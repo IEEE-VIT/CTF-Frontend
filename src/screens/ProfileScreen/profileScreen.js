@@ -43,7 +43,6 @@ class ProfileScreen extends React.Component {
         const uid = firebase.auth().currentUser.uid;
         try {
             const userProfile = await getUserProfile(uid);
-            console.log(userProfile);
             this.setState({
                 userProfile,
                 isLoading: false,
