@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // importing firebase
-import firebase from '../../configs/firebase';
+import firebase, {firebaseAuth} from '../../configs/firebase';
 
 // import utils
 import { checkUserEmailAndPassword } from '../../utils/userHelperFuncs';
@@ -65,10 +65,10 @@ class LoginComponent extends Component {
             return;
         }
 
-        firebase.auth()
+        firebaseAuth
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(async () => {
-                await firebase.auth().signInWithEmailAndPassword(email, password)
+                await firebaseAuth.signInWithEmailAndPassword(email, password)
                 window.location.href = "/play";
                 return;
             })

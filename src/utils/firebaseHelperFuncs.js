@@ -1,16 +1,16 @@
-import firebase from '../configs/firebase';
+import firebase, {firebaseAuth} from '../configs/firebase';
 
 export const googleOAuth = () => {
     return new Promise((resolve, reject) => {
         var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider); 
+        firebaseAuth.signInWithRedirect(provider); 
         resolve();            
     })
 }
 
 export const updateName = (name) => {
     return new Promise((resolve, reject) => {
-        const user = firebase.auth().currentUser;
+        const user = firebaseAuth.currentUser;
         user.updateProfile({
             displayName: name
         })

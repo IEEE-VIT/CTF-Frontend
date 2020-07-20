@@ -15,7 +15,7 @@ import SignUpComponent from '../../uiComponents/SignUpComponent/SignUpComponent.
 import ForgotPassword from '../../uiComponents/ForgotPassword/forgotPassword.js';
 
 // importing firebase
-import firebase from "../../configs/firebase";
+import {firebaseAuth} from "../../configs/firebase";
 
 // importing components
 import { toastError } from '../../uiComponents/toasts/toasts.js';
@@ -32,7 +32,7 @@ class LoginSignUpScreen extends Component {
 
 
     componentDidMount(){
-        firebase.auth().getRedirectResult()
+        firebaseAuth.getRedirectResult()
             .then(async (result) => {
                 const user = result.user;
                 if (user === null) {
@@ -60,7 +60,7 @@ class LoginSignUpScreen extends Component {
                 toastError(err.message);
             });
 
-        const user = firebase.auth().currentUser;
+        const user = firebaseAuth.currentUser;
         if (user && user.displayName && this.state.isLoading) {
             window.location.href ="/play"
             return;

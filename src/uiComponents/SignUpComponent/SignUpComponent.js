@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Recaptcha from 'react-recaptcha';
 
 // importing firebase
-import firebase from '../../configs/firebase';
+import firebase, {firebaseAuth} from '../../configs/firebase';
 
 // import utils
 import { checkUserEmailAndPassword, checkName, createUser, reCaptchaCheck } from '../../utils/userHelperFuncs';
@@ -133,17 +133,17 @@ class SignUpComponent extends Component {
         }
 
         reCaptchaCheck(token)
-            .then(() => firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL))
-            .then(() => firebase.auth().createUserWithEmailAndPassword(email, password))
+            .then(() => firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL))
+            .then(() => firebaseAuth.createUserWithEmailAndPassword(email, password))
             .then(async () => {
-                const {email, uid} = firebase.auth().currentUser;
+                const {email, uid} = firebaseAuth.currentUser;
                 createUser(email, name, uid)
                     .then(async () => {
                         await updateName(name);
                         window.location.href = "/play"
                     })
                     .catch((err) => {
-                        const user = firebase.auth().currentUser;
+                        const user = firebaseAuth.currentUser;
                         user.delete();
                         this.props.stopLoading();
                         toastError(err.message);

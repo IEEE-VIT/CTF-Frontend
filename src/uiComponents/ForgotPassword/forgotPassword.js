@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // importing firebase
-import firebase from '../../configs/firebase';
+import {firebaseAuth} from '../../configs/firebase';
 
 // importing components
 import { toastError, toastSuccess } from '../toasts/toasts.js';
@@ -37,7 +37,7 @@ class LoginComponent extends Component {
             return toastError("Please provide an email!");
         }
 
-        firebase.auth().sendPasswordResetEmail(email)
+        firebaseAuth.sendPasswordResetEmail(email)
             .then((resp) => {
                 this.props.stopLoading();
                 return toastSuccess("Hey! a password reset email is on it's way. Check your email");

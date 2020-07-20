@@ -14,7 +14,7 @@ import CorrectAnswer from '../../uiComponents/CorrectAnswer/CorrectAnswer.js'
 import ctfLogo from '../../assets/CTF.svg';
 
 // importing firebase
-import firebase from '../../configs/firebase';
+import {firebaseAuth} from '../../configs/firebase';
 
 // importing utils
 import {getQuestions, getUserProfile} from '../../utils/userHelperFuncs';
@@ -37,7 +37,7 @@ class HomeScreen extends React.Component {
 	}
 
 	componentDidMount(){
-        firebase.auth().onAuthStateChanged(async (user) => {
+        firebaseAuth.onAuthStateChanged(async (user) => {
             if (!user) {
 				window.location.href ="/"
 				return;
@@ -53,7 +53,7 @@ class HomeScreen extends React.Component {
 				});
 			} catch (err) {
 				alert("Oops their was an error and re had to sign you out! Please login again");
-				firebase.auth().signOut()
+				firebaseAuth.signOut()
 					.then((resp) => {
 						console.log(resp);
 						window.location.href ="/"

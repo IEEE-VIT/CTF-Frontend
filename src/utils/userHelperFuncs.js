@@ -1,5 +1,5 @@
 import validator from 'validator';
-import * as firebase from 'firebase';
+import {firebaseAuth} from '../configs/firebase';
 
 // import api
 import activityLayerApi from '../apis/activityLayerApi.js';
@@ -137,7 +137,7 @@ export const getLeaderBoard = () => {
         try {
             activityLayerApi.post('/user/leaderboard', {}, {
                 headers: {
-                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                    Authorization: 'Bearer ' + firebaseAuth.currentUser.uid,
                 }
             })
                 .then((resp) => {
@@ -162,7 +162,7 @@ export const getQuestions = () => {
         try {
             activityLayerApi.post('/user/getAllQuestions', {}, {
                 headers: {
-                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                    Authorization: 'Bearer ' + firebaseAuth.currentUser.uid,
                 }
             })
                 .then((resp) => {
@@ -190,7 +190,7 @@ export const getHint = (questionID) => {
                 questionID,
             }, {
                 headers: {
-                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                    Authorization: 'Bearer ' + firebaseAuth.currentUser.uid,
                 }
             })
                 .then((resp) => {
@@ -219,7 +219,7 @@ export const answerQuestion = (questionId, answer) => {
                 flag: answer,
             }, {
                 headers: {
-                    Authorization: 'Bearer ' + firebase.auth().currentUser.uid,
+                    Authorization: 'Bearer ' + firebaseAuth.currentUser.uid,
                 }
             })
                 .then((resp) => {

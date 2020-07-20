@@ -16,7 +16,7 @@ import flagsIcon from '../../assets/flags.png';
 import editIcon from '../../assets/edit.png';
 
 //import firebase
-import firebase from '../../configs/firebase';
+import firebase, {firebaseAuth} from '../../configs/firebase';
 
 // importing utils
 import { getUserProfile } from '../../utils/userHelperFuncs';
@@ -30,8 +30,8 @@ class ProfileScreen extends React.Component {
         super(props)
 
         this.state = {
-            name: firebase.auth().currentUser.displayName,
-            email: firebase.auth().currentUser.email,
+            name: firebaseAuth.currentUser.displayName,
+            email: firebaseAuth.currentUser.email,
             userProfile: null,
             isLoading: true,
             isChangeModalOpen: false,

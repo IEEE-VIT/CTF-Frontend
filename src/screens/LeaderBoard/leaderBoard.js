@@ -1,6 +1,6 @@
 import React from 'react';
 import LoadingScreen from 'react-loading-screen';
-import * as firebase from 'firebase';
+import {firebaseAuth} from '../../configs/firebase';
 
 import './leaderBoard.css';
 
@@ -19,7 +19,7 @@ class LeaderBoard extends React.Component {
     }
 
     componentDidMount() {
-        firebase.auth().onAuthStateChanged((user) => {
+        firebaseAuth.onAuthStateChanged((user) => {
             if (!user) {
                 window.location.href = '/'
             }
