@@ -48,7 +48,6 @@ class LoginSignUpScreen extends Component {
                     if (wasUserRegistered) {
                         window.location.href="/play"
                     }
-                    alert("Looks like something went Wrong, Please reach out to us!")
                 }
                 return;
             })

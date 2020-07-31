@@ -19,11 +19,9 @@ const InfoScreen=()=> {
                     <dl>Instructions to follow</dl>
                     <dt>
                     <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                        <li>For every correct answer without using hints you will be rewarded points according to the number of people who have solved the questions</li>
+                        <li>For every correct answer after using hints you will be awarded points according to how many people have already solved the question minus hint penalty</li>
+                        <li>Questions can be asnwered in any order</li>
                     </ul>
                     </dt>
                 </div>
