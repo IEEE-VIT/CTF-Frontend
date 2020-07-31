@@ -4,19 +4,24 @@
 
 ![GitHub top language](https://img.shields.io/github/languages/top/Devil39/ctf)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Devil39/ctf)
-![GitHub](https://img.shields.io/github/license/Devil/ctf)
 [![GitHub stars](https://img.shields.io/github/stars/Devil39/ctf)](https://github.com/Devil39/ctf/stargazers)
-[![Github All Contributors](https://img.shields.io/github/all-contributors/Devil39/ctf)](https://github.com/Devil39/ctf/graphs/contributors)
+![GitHub](https://img.shields.io/github/license/Devil/ctf)
 
 </div>
+
+<br/>
 
 ## Introduction
 <p>
 Capture The Flag or CTF is a information security competition which challenges its participants to solve a variety of tasks which may range from decryptions to hacking a server to win this contest. Hence making it a Cyber Security event. IEEE-VIT present you CTF-Conquer The World. This online CTF presents an innovate clean design build with Reactjs library and absolutely mouth dropping questions.
 </p>
 
+<br/>
+
 ## Link to Hosted Event
 Yet to be hosted
+
+<br/>
 
 ## For Developers
 Please make sure you have npm and nodejs installed before following the below steps
@@ -43,9 +48,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * `npm start` - runs the app in development mode
 * `npm run build` - builds the app for production 
 
+<br/>
+
 ## Contributors
 * [Devil39](https://github.com/Devil39)
 * [sarthakpranesh](https://github.com/sarthakpranesh)
+
+<br/>
 
 <div align="center">
 

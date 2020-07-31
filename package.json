@@ -1,6 +1,6 @@
 {
   "name": "ctf",
-	"homepage": "https://ieee-ctf.web.app/ctf/build/",
+	"homepage": "",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
