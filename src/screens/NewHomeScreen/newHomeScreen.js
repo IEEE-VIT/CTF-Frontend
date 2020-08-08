@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import 'firebase';
 
 // importing StyleSheets
-import './newLandingScreen.css';
+import './newHomeScreen.css';
 import '../HomeScreen/homeScreen.css';
 import '../../Styles.css';
 
@@ -12,7 +12,7 @@ import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIco
 //Importing assets
 import ctfLogo from '../../assets/CTF.svg';
 
-class NewLandingScreen extends Component {
+class NewHomeScreen extends Component {
 
 	constructor(props) {
 		super(props);
@@ -33,39 +33,35 @@ class NewLandingScreen extends Component {
 									this.setState({
 										page: 'map',
 									});
-								}}>Info</div>
+								}}>Map</div>
 								<div className="nav__button" style={{opacity: page === "leaderboard" ? 1 : 0.64}} onClick={()=>{
 									this.setState({
 										page: 'leaderboard'
 									});
-								}}>History</div>
+								}}>Leaderboard</div>
 								<div className="nav__button" style={{opacity: page === "info" ? 1 : 0.64}} onClick={()=>{
 									this.setState({
 										page: 'info',
 									});
-								}}>Contact</div>
+								}}>Info</div>
 								<div className="nav__button" style={{opacity: page === "profile" ? 1 : 0.64}} onClick={()=>{
 									this.setState({
 										page: 'profile',
 									});
 								}}>Profile</div>
 							</div>
-							<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Play</div>
+							<div className="nav__score">Your score: 0</div>
 						</nav>
 						<SocialMediaIcons />
 						<LandingGlobe />
 					</div>
 					<div className = 'landing__logo-play'>
-						<img className="ctfLogo" src={require('../../assets/ctfLogo.png')} alt="CTF Logo" height={260} />
-						{
-							/*
-								<div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Play</div>
-							*/
-						}
+						<div className = 'newHomeScreen__center_text'>We will be live soon!</div>
+						<div className = 'newHomeScreen__center_text'>Stay tuned!</div>
 					</div>
 				</React.Fragment>
 			);
 	}
 }
 
-export default NewLandingScreen;
+export default NewHomeScreen;
