@@ -7,6 +7,7 @@
 	background-color: transparent;
 	font-family: Nova Square;
 	overflow-x: hidden;
+	overflow-y: visible;
 	/*height: 100vh;
 	width: 100vw;*/
 	
@@ -17,7 +18,6 @@
 }
 
 .landing__logo-play {
-	position: absolute;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -27,7 +27,14 @@
 }
 
 .ctfLogo {
-	height: 21vh;
+	height: 27vh;
+	align-self: center;
+	position: absolute;
+	z-index: 100;
+}
+
+.ctfLogo>img {
+	height: 24vh;
 }
 
 .newLandingScreen__loginBtn {
@@ -46,4 +53,16 @@
 .newLandingScreen__loginBtn:hover {
     background-color: rgb(255, 255, 255, 0.1);
     color: white;
+}
+
+@media (max-width:600px){
+	.ctfLogo>* {
+		height: 24vh;
+		width: 80vw;
+		z-index: 100;
+	}
+
+	.ctfLogo>img {
+		height: 24vh;
+	}
 }
