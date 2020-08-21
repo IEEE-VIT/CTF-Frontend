@@ -55,6 +55,14 @@
     color: white;
 }
 
+.newLandingScreen__about {
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: justify;
+}
+
 @media (max-width:600px){
 	.ctfLogo>* {
 		height: 24vh;
