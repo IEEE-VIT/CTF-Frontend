@@ -61,7 +61,7 @@ export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
     <div>
       <Globe
         globeImageUrl={'https://raw.githubusercontent.com/mayankshah1607/Cle-Air/master/earth-planet-night.jpg'}
-        // backgroundImageUrl={starryBG}
+        backgroundImageUrl={require('../../assets/night-sky.png')}
         showAtmosphere={true}
         animateIn={true}
         arcsData={questionArcs}
