@@ -20,6 +20,7 @@ let recaptchaInstance;
 const executeCaptcha = function () {
     try {
         recaptchaInstance.execute();
+				console.log("Executing recaptcha instance");
     } catch (err) {
         console.log(err.message);
     }
@@ -157,7 +158,11 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             </div>
             <div className="question_modal__answer_container">
                 <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)} onKeyDown={handleKeyDown}/>
-                <div className="question_modal__answer__button" onClick={() => checkAnswer()}><img src={arrow} className="img_answer" alt="" /></div>
+                <div className="question_modal__answer__button" onClick={() => {
+									checkAnswer();
+								}}>
+									<img src={arrow} className="img_answer" alt="" />
+								</div>
             </div>
             {
                 checking === true
@@ -166,17 +171,23 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 :
                 renderHint()
             }
-            <Recaptcha
-                ref={e => recaptchaInstance = e}
-                sitekey={process.env.REACT_APP_SITEKEY}
-                render="explicit"
-                size="invisible"
-                verifyCallback={verifyCallback}
-                expiredCallback={expiredCallback}
-                onloadCallback={(res)=>{
-                    console.log("Loaded captcha")
-                }} 
-            />
+						{
+						setChecking
+								?
+									<Recaptcha
+											ref={e => recaptchaInstance = e}
+											sitekey={process.env.REACT_APP_SITEKEY}
+											render="explicit"
+											size="invisible"
+											verifyCallback={verifyCallback}
+											expiredCallback={expiredCallback}
+											onloadCallback={(res)=>{
+													console.log("Loaded captcha")
+											}} 
+									/>
+								:
+								<div></div>
+						}
         </Modal>
     );
 }
