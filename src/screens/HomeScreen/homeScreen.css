@@ -58,5 +58,5 @@ body {
     width: 210px;
     color: white;
     font-size: 18px;
-    cursor: cell;
+    padding-right: 10px;
 }

@@ -10,6 +10,7 @@ import QuestionModal from '../../uiComponents/questionModal/questionModal.js';
 import InfoScreen from '../InfoScreen/infoScreen.js';
 import ProfileScreen from '../ProfileScreen/profileScreen.js';
 import CorrectAnswer from '../../uiComponents/CorrectAnswer/CorrectAnswer.js'
+import CategoryController from '../../uiComponents/CategoryController/CategoryController.js'
 
 import ctfLogo from '../../assets/CTF.svg';
 
@@ -33,7 +34,9 @@ class HomeScreen extends React.Component {
 			user: '',
 			clickedQuestion: '',
 			clickedQuestionId: '',
+			category: 'all'
 		};
+		this.allQuestion = [];
 	}
 
 	componentDidMount(){
@@ -45,6 +48,7 @@ class HomeScreen extends React.Component {
 			try {
 				const userProfile = await getUserProfile(user.uid);
 				const questions = await getQuestions();
+				this.allQuestion = questions;
 				this.setState({
 					isLoading: false,
 					questions,
@@ -68,6 +72,16 @@ class HomeScreen extends React.Component {
 					})
 			}
         });
+	}
+
+	selectCategory = (event) => {
+		if (event.target.value === "all") {
+			return this.setState({category: event.target.value, questions: this.allQuestion})
+		}
+		const filteredQuestions = this.allQuestion.filter((ques) => {
+			return ques.data.name.toLowerCase() === event.target.value;
+		});
+		this.setState({category: event.target.value, questions: filteredQuestions})
 	}
 
 	handleAnswerSubmit=()=>{
@@ -184,6 +198,7 @@ class HomeScreen extends React.Component {
 					<div className="nav__score">Your score: {userProfile.points}</div>
 				</nav>
 				<Globe2 userProfile={this.state.userProfile} questions={this.state.questions} showQuestionModal={this.showQuestionModal}/>
+				<CategoryController  selectCategory={this.selectCategory} value={this.state.category} />
 				{
 					this.state.page==='leaderboard'
 					?
