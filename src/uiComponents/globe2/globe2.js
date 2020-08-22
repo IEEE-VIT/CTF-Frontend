@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import Globe from 'react-globe.gl';
 
-const questionColorsMap = { crypto: "blue", jails: "red", mics: "yellow", binary: "grey"}
+const questionColorsMap = { crypto: "blue", jails: "red", misc: "yellow", binary: "grey"}
 
 export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
 
@@ -46,10 +46,10 @@ export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
             arcStartLat: questions[i]['data']['latitude'],
             arcStartLng: questions[i]['data']['longitude'],
             arcEndLat: questions[j]['data']['latitude'],
-            arcEndLng: questions[j]['data']['latitude'],
+            arcEndLng: questions[j]['data']['longitude'],
             arcColor: questionLocations[questionLocations.length-1].color,
             arcDashAnimateTime:  (Math.random() + 1)*2000,
-            arcAltitude: Math.random()/2,
+            arcAltitude: Math.random()/1.4,
           });
         }
       }
