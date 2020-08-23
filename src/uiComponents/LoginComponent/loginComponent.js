@@ -64,13 +64,17 @@ class LoginComponent extends Component {
             toastError("Hey make sure your Email is correct and password has only Alphanumeric characters.");
             return;
         }
-
         firebaseAuth
             .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(async () => {
-                await firebaseAuth.signInWithEmailAndPassword(email, password)
-                window.location.href = "/play";
-                return;
+            .then(() => firebaseAuth.signInWithEmailAndPassword(email, password))
+            .then(() => {
+                const isVerified = firebaseAuth.currentUser.emailVerified;
+                if (isVerified === false) {
+                    firebaseAuth.currentUser.sendEmailVerification();
+                    toastError("Looks like you didn't verify your email. We sent another verification link. Please verify first!!!")
+                    return this.props.stopLoading();
+                }
+                return window.location.href = "/play";
             })
             .catch((err) => {
                 console.log(err);

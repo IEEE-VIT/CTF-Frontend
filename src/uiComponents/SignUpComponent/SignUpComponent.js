@@ -14,7 +14,7 @@ import { checkUserEmailAndPassword, checkName, createUser, reCaptchaCheck } from
 import { updateName, googleOAuth } from '../../utils/firebaseHelperFuncs';
 
 // importing components
-import { toastError } from '../toasts/toasts.js';
+import { toastError, toastSuccess } from '../toasts/toasts.js';
 
 // Importing styles
 import '../../Styles.css';
@@ -132,23 +132,27 @@ class SignUpComponent extends Component {
             return;
         }
 
+        const toasts = toastSuccess;
         reCaptchaCheck(token)
             .then(() => firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL))
             .then(() => firebaseAuth.createUserWithEmailAndPassword(email, password))
+            .then(() => firebaseAuth.currentUser.sendEmailVerification())
             .then(async () => {
                 const {email, uid} = firebaseAuth.currentUser;
                 createUser(email, name, uid)
                     .then(async () => {
                         await updateName(name);
-                        window.location.href = "/play"
                     })
                     .catch((err) => {
                         const user = firebaseAuth.currentUser;
                         user.delete();
                         this.props.stopLoading();
                         toastError(err.message);
-                    })
-                
+                    }) 
+            })
+            .then(() => {
+                this.props.stopLoading();
+                toasts("User Registered! Please verify your email and then Login.");
             })
             .catch((err) => {
                 console.log(err);
