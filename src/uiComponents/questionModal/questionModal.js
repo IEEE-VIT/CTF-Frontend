@@ -26,6 +26,7 @@ const executeCaptcha = function () {
 };
 
 const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, hindUsed, onAnswerCorrect}) => {
+    let [captchaRefreshCount, setCaptchaRefreshCount] = useState(0);
     const [confirm, setConfirm] = useState(false);
     const [hint, setHint] = useState('')
     const [answer, setAnswer] = useState('');
@@ -39,14 +40,23 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             setVerified(true);
         }
         else {
-            toastError("ReCaptcha verification failed! Please reload page and attempt again!");
+            // toastError("ReCaptcha verification failed! Please reload page and attempt again!");
+            closeModal();
         }
     }
 
     const expiredCallback = () => {
+        console.log(++captchaRefreshCount);
+        setCaptchaRefreshCount(++captchaRefreshCount);
         setToken('');
         setVerified(false);
-        recaptchaInstance.execute();
+        try {
+            setTimeout(() => recaptchaInstance.execute(), 200);
+        } catch (err) {
+            // console.log(err.message);
+            console.log("This is expired reCaptcha timing out")
+            closeModal();
+        }
     }
 
     const getHintFromAPI = async () => {
@@ -157,7 +167,9 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             </div>
             <div className="question_modal__answer_container">
                 <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)} onKeyDown={handleKeyDown}/>
-                <div className="question_modal__answer__button" onClick={() => checkAnswer()}><img src={arrow} className="img_answer" alt="" /></div>
+                <div className="question_modal__answer__button" onClick={() => checkAnswer()}>
+					<img src={arrow} className="img_answer" alt="" />
+				</div>
             </div>
             {
                 checking === true
@@ -174,7 +186,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 verifyCallback={verifyCallback}
                 expiredCallback={expiredCallback}
                 onloadCallback={(res)=>{
-                    console.log("Loaded captcha")
+                        console.log("Loaded captcha")
                 }} 
             />
         </Modal>

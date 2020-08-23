@@ -1,0 +1,46 @@
+.question-category-container {
+    position: fixed;
+    top: 40%;
+    align-self: center;
+    right: 2%;
+    z-index: 10;
+    
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    width: fit-content;
+}
+
+.question-category-textFont {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+}
+
+.question-category-header-label {
+    font-weight: bold !important;
+    font-size: 22px !important;
+}
+
+.question-category-holder {
+    margin-top: 20px !important;
+}
+
+.MuiFormControlLabel-root {
+    opacity: 0.6;
+    margin-right: 10px;
+}
+
+.MuiFormControlLabel-root:hover {
+    opacity: 1;
+    /* transform: scale(1.2) translate(-6.4%, 3%); */
+}
+
+.MuiTypography-body1 {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 18px !important;
+}
