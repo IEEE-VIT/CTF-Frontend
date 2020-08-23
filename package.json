@@ -31,7 +31,8 @@
     "three-glow-mesh": "^0.1.1",
     "three.interaction": "^0.2.2",
     "typescript": "^3.7.5",
-    "validator": "^13.0.0"
+    "validator": "^13.0.0",
+    "vercel": "^19.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
