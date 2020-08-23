@@ -114,7 +114,9 @@ class NewLandingScreen extends Component {
 									?
 										<div className="newLandingScreen__about">
 											<h3 style={{"color": "white"}}>About</h3>
-											<p style={{"color": "white"}, {width:"40%"}}>Capture the Flag (CTF) is a special kind of information security competitions. There are a few types of CTFs, this one being a Jeopardy-style CTF. It shall include questions from a variety of categories like Web, Crypto, Forensic, Binary, etc. </p>
+											<p style={{"color": "white"}, {width:"40%"}}>
+												IEEE-VIT presents CTF-Conquer the World. The questions will be spread across the globe, players will solve these questions and collect flags from each country. The first player to capture all the flags gets a chance to win exciting prices. Capture the Flag (CTF) is a special kind of information security competitions. There are a few types of CTFs, this one being a Jeopardy-style CTF. It shall include questions from a variety of categories like Web, Crypto, Forensic, Binary, etc. 
+											</p>
 										</div>
 									:
 									page === 'How to Play'
