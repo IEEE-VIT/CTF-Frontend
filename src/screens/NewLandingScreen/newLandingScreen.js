@@ -46,27 +46,20 @@ class NewLandingScreen extends Component {
 									<Nav.Link 
 										onClick={() => {
 										this.setState({
-											page: 'map'
+											page: 'about'
 										});
 									}}
-									>Info</Nav.Link>
+									>About</Nav.Link>
 									<Nav.Link
 										onClick={() => {
 										this.setState({
-											page: 'history'
+											page: 'How to Play'
 										});
 									}}
-									>History</Nav.Link>
-									<Nav.Link
-										onClick={() => {
-										this.setState({
-											page: 'contact'
-										});
-									}}
-									>Contact</Nav.Link>
+									>How to Play</Nav.Link>
 									<Nav.Link
 										onClick={() => window.location.href = '/get_started'}
-									>Play</Nav.Link>
+									>Register</Nav.Link>
 								</Nav>
 							</Navbar.Collapse>
 						</Navbar>
@@ -105,11 +98,28 @@ class NewLandingScreen extends Component {
 					<div className = 'landing__logo-play'>
 							<div className = 'ctfLogo'>
 								{
-									this.state.page === 'home'
-										?
+									page === 'home'
+									?
+										<div>
 											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" />
-										:
-										<p style={{"color": "white"}}>Some other page</p>
+											{/* <div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div> */}
+										</div>
+									:	
+									page === 'about'
+									?
+										<div className="newLandingScreen__about">
+											<h3 style={{"color": "white"}}>About</h3>
+											<p style={{"color": "white"}, {width:"40%"}}>Capture the Flag (CTF) is a special kind of information security competitions. There are a few types of CTFs, this one being a Jeopardy-style CTF. It shall include questions from a variety of categories like Web, Crypto, Forensic, Binary, etc. </p>
+										</div>
+									:
+									page === 'How to Play'
+									?
+										<div>
+											<h3 style={{"color": "white"}}>How to Play</h3>
+											<p></p>
+										</div>
+									:
+										<p style={{"color": "white"}}>Contact</p>
 								}
 
 							</div>
