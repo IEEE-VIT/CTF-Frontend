@@ -26,6 +26,7 @@
 
 @media (max-width:600px){
 	.newHomeScreen__center_text {
-		font-size: 36px;
+		font-size: 28px;
+		align-items: center;
 	}
 }

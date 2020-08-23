@@ -1,20 +1,8 @@
 .newLandingScreen__main-container {
-	/*display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border: 2px solid red;*/
 	background-color: transparent;
 	font-family: Nova Square;
 	overflow-x: hidden;
 	overflow-y: visible;
-	/*height: 100vh;
-	width: 100vw;*/
-	
-	/*display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;*/
 }
 
 .landing__logo-play {
@@ -33,8 +21,8 @@
 	z-index: 100;
 }
 
-.ctfLogo>img {
-	height: 24vh;
+.ctfLogoImageLandingPage {
+	width: 50vh;
 }
 
 .newLandingScreen__loginBtn {
@@ -61,6 +49,7 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: justify;
+	width: 50vw;
 }
 .newLandingScreen__loginBtn {
 	width: 11vw;
@@ -80,14 +69,19 @@
 }
 
 @media (max-width:600px){
-	.ctfLogo>* {
-		height: 24vh;
+	.ctfLogo {
+		height: auto;
 		width: 80vw;
 		z-index: 100;
 	}
 
-	.ctfLogo>img {
-		height: 24vh;
-		margin-top: -100px;
+	.newLandingScreen__about {
+		margin-top: -80px;
+		width: 80vw;
+	}
+
+	.ctfLogoImageLandingPage {
+		width: 90vw;
+		margin-top: -30px;
 	}
 }
