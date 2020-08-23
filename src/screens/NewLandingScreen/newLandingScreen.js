@@ -50,6 +50,8 @@ class NewLandingScreen extends Component {
 										});
 									}}
 									>About</Nav.Link>
+									{
+										/*
 									<Nav.Link
 										onClick={() => {
 										this.setState({
@@ -57,6 +59,8 @@ class NewLandingScreen extends Component {
 										});
 									}}
 									>How to Play</Nav.Link>
+										*/
+									}
 									<Nav.Link
 										onClick={() => window.location.href = '/get_started'}
 									>Register</Nav.Link>
@@ -100,8 +104,9 @@ class NewLandingScreen extends Component {
 								{
 									page === 'home'
 									?
-										<div>
-											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" />
+										<div className = "img_container">
+											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" style={{"marginTop": "-30px"}}/>
+											<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div>
 											{/* <div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div> */}
 										</div>
 									:	

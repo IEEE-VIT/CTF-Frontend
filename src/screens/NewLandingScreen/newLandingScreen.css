@@ -62,6 +62,22 @@
 	align-items: center;
 	text-align: justify;
 }
+.newLandingScreen__loginBtn {
+	width: 11vw;
+	align-self: center;
+	margin: 10px 0px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items:  center;
+}
+
+.img_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items:  center;
+}
 
 @media (max-width:600px){
 	.ctfLogo>* {
@@ -72,5 +88,6 @@
 
 	.ctfLogo>img {
 		height: 24vh;
+		margin-top: -100px;
 	}
 }
