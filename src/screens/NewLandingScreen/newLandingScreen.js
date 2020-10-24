@@ -13,6 +13,12 @@ import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIco
 
 //Importing assets
 import ctfLogo from '../../assets/CTF.svg';
+import jetbrains from '../../assets/jetbrains.png';
+import codeasylums from '../../assets/codeasylums.png';
+import google from '../../assets/google.png';
+import microsoft from '../../assets/microsoft.png';
+import skillenza from '../../assets/skillena.png';
+import pdf from '../../assets/ctf_brochure_final.pdf';
 
 class NewLandingScreen extends Component {
 
@@ -50,6 +56,13 @@ class NewLandingScreen extends Component {
 										});
 									}}
 									>About</Nav.Link>
+									<Nav.Link 
+										onClick={() => {
+										this.setState({
+											page: 'sponsor'
+										});
+									}}
+									>Sponsor</Nav.Link>
 									{
 										/*
 									<Nav.Link
@@ -105,7 +118,7 @@ class NewLandingScreen extends Component {
 									page === 'home'
 									?
 										<div className = "img_container">
-											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" style={{"marginTop": "-30px"}}/>
+											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" style={{"marginTop": "-30px"}} className="ctf-logo-img"/>
 											<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div>
 											{/* <div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div> */}
 										</div>
@@ -114,7 +127,7 @@ class NewLandingScreen extends Component {
 									?
 										<div className="newLandingScreen__about">
 											<h3 style={{"color": "white"}}>About</h3>
-											<p style={{"color": "white"}, {width:"40%"}}>
+											<p style={{"color": "white"}} className="about-container">
 												IEEE-VIT presents CTF-Conquer the World. The questions will be spread across the globe, players will solve these questions and collect flags from each country. The first player to capture all the flags gets a chance to win exciting prices. Capture the Flag (CTF) is a special kind of information security competitions. There are a few types of CTFs, this one being a Jeopardy-style CTF. It shall include questions from a variety of categories like Web, Crypto, Forensic, Binary, etc. 
 											</p>
 										</div>
@@ -124,6 +137,32 @@ class NewLandingScreen extends Component {
 										<div>
 											<h3 style={{"color": "white"}}>How to Play</h3>
 											<p></p>
+										</div>
+									:
+									page === 'sponsor'
+									?
+										<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "flexDirection": "column"}}>
+											<h3 style={{"color": "white", "textAlign": "center"}}>Past Sponsors</h3>
+											<div className="newLandingScreen__loginBtn" onClick={() => window.open(pdf)}>Download Brochure</div>
+											<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "marginTop": "15px"}}>
+												<div style={{"width": "60vw", "display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
+													<div className='sponsor-logo_container'>
+														<img src={google} className = 'sponsor-logo'/>
+													</div>
+													<div className='sponsor-logo_container'>
+														<img src={jetbrains} className = 'sponsor-logo'/>
+													</div>
+													<div className='sponsor-logo_container'>
+														<img src={codeasylums} className = 'sponsor-logo'/>
+													</div>
+													<div className='sponsor-logo_container'>
+														<img src={microsoft} className = 'sponsor-logo'/>
+													</div>
+													<div className='sponsor-logo_container'>
+														<img src={skillenza} className = 'sponsor-logo'/>
+													</div>
+												</div>
+											</div>
 										</div>
 									:
 										<p style={{"color": "white"}}>Contact</p>

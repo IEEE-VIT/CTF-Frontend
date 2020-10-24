@@ -27,7 +27,8 @@
 }
 
 .ctfLogo {
-	height: 27vh;
+	/*height: 27vh;*/
+	height: auto;
 	align-self: center;
 	position: absolute;
 	z-index: 100;
@@ -48,6 +49,33 @@
 	transition-duration: 0.5s;
 	margin-right: 50px;
 	cursor: pointer;
+
+	width: auto;
+}
+
+	.sponsor-logo_main-container {
+	flex-wrap: wrap;
+	}
+
+.sponsor-logo_container {
+	background-color: white;
+	height: 185px;
+	min-width: 185px;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 15px;
+}
+
+	.about-container {
+		width: 40vw;
+	}
+
+.sponsor-logo {
+	height: auto;
+	width: 120px;
 }
 
 .newLandingScreen__loginBtn:hover {
@@ -90,4 +118,19 @@
 		height: 24vh;
 		margin-top: -100px;
 	}
+
+	.ctf-logo-img, .about-container {
+		width: 90vw;
+	}
+
+	.about-container {
+		width: 90vw;
+	}
+
+	.sponsor-logo_main-container {
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+
+
 }
