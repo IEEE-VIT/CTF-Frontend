@@ -256,6 +256,8 @@ class SignUpComponent extends Component {
                         <span>Already have an account? </span> 
                         <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
                     </div>
+										{
+											/*
                     <div className="orText">
                         <h4>OR</h4>
                     </div>
@@ -265,6 +267,8 @@ class SignUpComponent extends Component {
                     }}>
                         <img src={require("../../assets/cg.png")} alt="Continue With Google" />
                     </div>
+											*/
+										}
                 </div>
             </div>
         );
