@@ -7,6 +7,22 @@
 	position: absolute;
 }
 
+.newHomeScreen__center_button {
+	color: white;
+	z-index: 100;
+	align-self: center;
+	position: absolute;
+}
+
+.landing__logo-play {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
 .newHomePage__nav {
 	position: fixed;
 	height: 8vh;

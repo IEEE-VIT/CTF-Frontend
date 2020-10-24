@@ -41,6 +41,25 @@ class NewHomeScreen extends Component {
                 return;
             })
     }
+	
+    onLogOut = () => {
+        this.setState({
+            isLoading: true,
+        });
+        firebase.auth().signOut()
+            .then((resp) => {
+                console.log(resp);
+                window.location.href ="/"
+                return;
+            })
+            .catch((err) => {
+                console.log(err);
+                this.setState({
+                    isLoading: false,
+                });
+                return;
+            })
+    }
 
 	render() {
 		const {page} = this.state;
@@ -55,6 +74,7 @@ class NewHomeScreen extends Component {
 					<div className = 'landing__logo-play'>
 						<div className = 'newHomeScreen__center_text'>We will be live soon!</div>
 						<div className = 'newHomeScreen__center_text' style={{"paddingTop": "60px"}}>Stay tuned!</div>
+            <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
 						<LandingGlobe />
 					</div>
 				</React.Fragment>
