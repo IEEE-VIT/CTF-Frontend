@@ -80,36 +80,6 @@ class NewLandingScreen extends Component {
 								</Nav>
 							</Navbar.Collapse>
 						</Navbar>
-						{
-							/*
-								<nav className="nav">
-									<div className="nav__ctf"><img src={ctfLogo} alt=""/></div>
-									<div className="nav__buttons-container">
-										<div className="nav__button" style={{opacity: page === "map" ? 1 : 0.64}} onClick={()=>{
-											this.setState({
-												page: 'map',
-											});
-										}}>Info</div>
-										<div className="nav__button" style={{opacity: page === "leaderboard" ? 1 : 0.64}} onClick={()=>{
-											this.setState({
-												page: 'leaderboard'
-											});
-										}}>History</div>
-										<div className="nav__button" style={{opacity: page === "info" ? 1 : 0.64}} onClick={()=>{
-											this.setState({
-												page: 'info',
-											});
-										}}>Contact</div>
-										<div className="nav__button" style={{opacity: page === "profile" ? 1 : 0.64}} onClick={()=>{
-											this.setState({
-												page: 'profile',
-											});
-										}}>Profile</div>
-									</div>
-									<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Play</div>
-								</nav>
-							*/
-						}
 						<SocialMediaIcons />
 					</div>
 					<div className = 'landing__logo-play'>
@@ -120,7 +90,6 @@ class NewLandingScreen extends Component {
 										<div className = "img_container">
 											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" style={{"marginTop": "-30px"}} className="ctf-logo-img"/>
 											<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div>
-											{/* <div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div> */}
 										</div>
 									:	
 									page === 'about'
@@ -170,12 +139,6 @@ class NewLandingScreen extends Component {
 
 							</div>
 							<LandingGlobe />
-						{
-							/*
-								<div className="button loginBtn" onClick={() => window.location.href = '/get_started'}>Play</div>
-								<p style={{"fontSize": "500px", "color": "white", "zIndex": "100000", "width": "100vw", "height": "100vh"}}>CTF CTF CTF</p>
-							*/
-						}
 						</div>
 					</div>
 				</React.Fragment>
