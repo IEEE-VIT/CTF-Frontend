@@ -69,13 +69,13 @@ class NewHomeScreen extends Component {
 						<nav className="newHomePage__nav">
 							<div className="newHomePage__nav__ctf"><img src={ctfLogo} alt=""/></div>
 						</nav>
+                        {/* <LandingGlobe /> */}
+                        <div className = 'landing__logo-play'>
+                            <div className = 'newHomeScreen__center_text'>We will be live soon!</div>
+                            <div className = 'newHomeScreen__center_text'>Stay tuned!</div>
+                            <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
+                        </div>
 						<SocialMediaIcons />
-					</div>
-					<div className = 'landing__logo-play'>
-						<div className = 'newHomeScreen__center_text'>We will be live soon!</div>
-						<div className = 'newHomeScreen__center_text' style={{"paddingTop": "60px"}}>Stay tuned!</div>
-            <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
-						<LandingGlobe />
 					</div>
 				</React.Fragment>
 			);
