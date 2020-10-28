@@ -13,11 +13,9 @@ import SocialMediaIcons from '../../uiComponents/socialMediaIcons/socialMediaIco
 
 //Importing assets
 import ctfLogo from '../../assets/CTF.svg';
-import jetbrains from '../../assets/jetbrains.png';
-import codeasylums from '../../assets/codeasylums.png';
-import google from '../../assets/google.png';
-import microsoft from '../../assets/microsoft.png';
-import skillenza from '../../assets/skillena.png';
+import reaperSecurity from '../../assets/repare-security.jpeg';
+import urbanThinking from '../../assets/urban-thinking.jpeg';
+import towardsCyberSecurity from '../../assets/towards-cybersecurity.jpeg';
 import pdf from '../../assets/ctf_brochure_final.pdf';
 
 class NewLandingScreen extends Component {
@@ -111,24 +109,18 @@ class NewLandingScreen extends Component {
 									page === 'sponsor'
 									?
 										<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "flexDirection": "column"}}>
-											<h3 style={{"color": "white", "textAlign": "center"}}>Past Sponsors</h3>
+											<h3 style={{"color": "white", "textAlign": "center"}}>Collaborators</h3>
 											<div className="newLandingScreen__loginBtn" onClick={() => window.open(pdf)}>Download Brochure</div>
 											<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "marginTop": "15px"}}>
 												<div style={{"width": "60vw", "display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
 													<div className='sponsor-logo_container'>
-														<img src={google} className = 'sponsor-logo'/>
+														<img src={urbanThinking} className = 'sponsor-logo' alt="urban-thinking"/>
 													</div>
 													<div className='sponsor-logo_container'>
-														<img src={jetbrains} className = 'sponsor-logo'/>
+														<img src={reaperSecurity} className = 'sponsor-logo' alt="reaper-security"/>
 													</div>
 													<div className='sponsor-logo_container'>
-														<img src={codeasylums} className = 'sponsor-logo'/>
-													</div>
-													<div className='sponsor-logo_container'>
-														<img src={microsoft} className = 'sponsor-logo'/>
-													</div>
-													<div className='sponsor-logo_container'>
-														<img src={skillenza} className = 'sponsor-logo'/>
+														<img src={towardsCyberSecurity} className = 'sponsor-logo' alt="towards-cybersecurity"/>
 													</div>
 												</div>
 											</div>

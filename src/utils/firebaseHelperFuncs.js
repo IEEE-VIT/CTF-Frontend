@@ -4,7 +4,7 @@ export const googleOAuth = () => {
     return new Promise((resolve, reject) => {
         var provider = new firebase.auth.GoogleAuthProvider();
         firebaseAuth.signInWithRedirect(provider); 
-        resolve();            
+        resolve();
     })
 }
 
