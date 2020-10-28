@@ -1,8 +1,10 @@
 .newLandingScreen__main-container {
 	background-color: transparent;
 	font-family: Nova Square;
+	/*
 	overflow-x: hidden;
 	overflow-y: visible;
+	*/
 }
 
 .landing__logo-play {
@@ -16,7 +18,7 @@
 
 .ctfLogo {
 	/*height: 27vh;*/
-	height: auto;
+	/*height: auto;*/
 	align-self: center;
 	position: absolute;
 	z-index: 100;
@@ -39,11 +41,13 @@
 	cursor: pointer;
 
 	width: auto;
+	text-align: center;
 }
 
 	.sponsor-logo_main-container {
 	flex-wrap: wrap;
 	}
+
 
 .sponsor-logo_container {
 	background-color: white;
@@ -57,9 +61,9 @@
 	margin: 10px 15px;
 }
 
-	.about-container {
-		width: 40vw;
-	}
+.about-container {
+	width: 40vw;
+}
 
 .sponsor-logo {
 	height: auto;
@@ -79,6 +83,7 @@
 	text-align: justify;
 	width: 50vw;
 }
+
 .newLandingScreen__loginBtn {
 	width: 11vw;
 	align-self: center;
@@ -96,7 +101,7 @@
 	align-items:  center;
 }
 
-@media (max-width:600px){
+@media (max-width:720px){
 	.ctfLogo {
 		height: auto;
 		width: 80vw;
@@ -121,10 +126,17 @@
 		width: 90vw;
 	}
 
-	.sponsor-logo_main-container {
-		flex-direction: column;
-		flex-wrap: wrap;
+	.sponsor-logo_container {
+		height: 75px;
+		min-width: 75px;
 	}
 
-
+	.sponsor-logo {
+		height: auto;
+		width: 45px;
+	}
+	.sponsor-logo_main-container {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
 }
