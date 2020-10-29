@@ -17,6 +17,8 @@ import reaperSecurity from '../../assets/repare-security.jpeg';
 import urbanThinking from '../../assets/urban-thinking.jpeg';
 import towardsCyberSecurity from '../../assets/towards-cybersecurity.jpeg';
 import sashido from '../../assets/IMG_3732.PNG';
+import xcybersecurity from '../../assets/xcybersecurity.jpeg';
+import owaspindore from '../../assets/owaspindore.jpeg';
 import pdf from '../../assets/ctf_brochure_final.pdf';
 
 class NewLandingScreen extends Component {
@@ -61,7 +63,7 @@ class NewLandingScreen extends Component {
 											page: 'sponsor'
 										});
 									}}
-									>Sponsor</Nav.Link>
+									>Collaborators</Nav.Link>
 									{
 										/*
 									<Nav.Link
@@ -88,7 +90,8 @@ class NewLandingScreen extends Component {
 									?
 										<div className = "img_container">
 											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" style={{"marginTop": "-30px"}} className="ctf-logo-img"/>
-											<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Register</div>
+											<div style={{"color": "white", "marginBottom": "24px"}}>31st October - 1st November</div>
+											<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Continue</div>
 										</div>
 									:	
 									page === 'about'
@@ -96,7 +99,7 @@ class NewLandingScreen extends Component {
 										<div className="newLandingScreen__about">
 											<h3 style={{"color": "white"}}>About</h3>
 											<p style={{"color": "white"}} className="about-container">
-												IEEE-VIT presents CTF-Conquer the World. The questions will be spread across the globe, players will solve these questions and collect flags from each country. The first player to capture all the flags gets a chance to win exciting prices. Capture the Flag (CTF) is a special kind of information security competitions. There are a few types of CTFs, this one being a Jeopardy-style CTF. It shall include questions from a variety of categories like Web, Crypto, Forensic, Binary, etc. 
+												IEEE-VIT presents CTF-Conquer the World. The questions will be spread across the globe, players will solve these questions and collect flags from each country. The first player to capture all the flags gets a chance to win exciting prizes. Capture the Flag (CTF) is a special kind of information security competitions. There are a few types of CTFs, this one being a Jeopardy-style CTF. It shall include questions from a variety of categories like Web, Crypto, Forensic, Binary, etc. 
 											</p>
 										</div>
 									:
@@ -114,18 +117,36 @@ class NewLandingScreen extends Component {
 											<div className="newLandingScreen__loginBtn" onClick={() => window.open(pdf)}>Download Brochure</div>
 											<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "marginTop": "15px"}}>
 												<div style={{"width": "60vw", "display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
-													<div className='sponsor-logo_container'>
-														<img src={sashido} className = 'sponsor-logo' alt="urban-thinking"/>
-													</div>
-													<div className='sponsor-logo_container'>
-														<img src={urbanThinking} className = 'sponsor-logo' alt="urban-thinking"/>
-													</div>
-													<div className='sponsor-logo_container'>
-														<img src={reaperSecurity} className = 'sponsor-logo' alt="reaper-security"/>
-													</div>
-													<div className='sponsor-logo_container'>
-														<img src={towardsCyberSecurity} className = 'sponsor-logo' alt="towards-cybersecurity"/>
-													</div>
+													<a href="https://www.sashido.io/" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={sashido} className = 'sponsor-logo' alt="urban-thinking"/>
+														</div>
+													</a>
+													<a href="https://instagram.com/urbanethinking?igshid=1daf06hdojsnt" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={urbanThinking} className = 'sponsor-logo' alt="urban-thinking"/>
+														</div>
+													</a>
+													<a href="https://www.instagram.com/reaper.security/?hl=en" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={reaperSecurity} className = 'sponsor-logo' alt="reaper-security"/>
+														</div>
+													</a>
+													<a href="https://instagram.com/towards_cybersecurity?igshid=rhusct1kjwm" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={towardsCyberSecurity} className = 'sponsor-logo' alt="towards-cybersecurity"/>
+														</div>
+													</a>
+													<a href="https://instagram.com/xcybersecurity?igshid=1dhkznv0juarm" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={xcybersecurity} className = 'sponsor-logo' alt="xcybersecurity"/>
+														</div>
+													</a>
+													<a href="https://instagram.com/owaspindore?igshid=1oxo5wawb6awe" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={owaspindore} className = 'sponsor-logo' alt="owaspindore"/>
+														</div>
+													</a>
 												</div>
 											</div>
 										</div>

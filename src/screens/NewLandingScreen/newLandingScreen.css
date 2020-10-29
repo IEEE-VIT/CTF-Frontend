@@ -101,6 +101,11 @@
 	align-items:  center;
 }
 
+.ctf-logo-img {
+	width: 30vw;
+	margin-bottom: 24px;
+}
+
 @media (max-width:720px){
 	.ctfLogo {
 		height: auto;

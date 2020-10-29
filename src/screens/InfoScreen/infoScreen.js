@@ -11,10 +11,14 @@ const InfoScreen=()=> {
                 <div className="info__ctf-logo">
                     <img src={ctfLogo} alt="" />
                 </div>
-                <div className="info__ctf-info">Capture The Flag a.k.a CTF is a cybersecurity competition conducted by IEEE VIT, designed to challenge you to solve computer security problems and/or capture and defend computer systems. CTF ‘20 is sponsored by Amazon.</div>
+                <div className="info__ctf-info">Capture The Flag a.k.a CTF is a cybersecurity competition conducted by IEEE VIT, designed to challenge you to solve computer security problems and/or capture and defend computer systems.</div>
+									{
+										/*
                 <div className="info__sponsor-logo">
                     <img src={amazonLogo} alt="" />
                 </div>
+										*/
+									}
                 <div className="info__rules-container">
                     <dl>Instructions to follow</dl>
                     <dt>

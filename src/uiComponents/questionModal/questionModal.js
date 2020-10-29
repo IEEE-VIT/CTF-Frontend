@@ -79,8 +79,9 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
             toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.");
         }
         setChecking(true);
-        reCaptchaCheck(token)
-            .then(() => answerQuestion(qid, answer))
+        //reCaptchaCheck(token)
+				answerQuestion(qid, answer, token)
+            //.then(() => answerQuestion(qid, answer))
             .then((check) => {
                 if (check) {
                     onAnswerCorrect();

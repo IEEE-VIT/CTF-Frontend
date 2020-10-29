@@ -22,7 +22,13 @@ const AppRouter=()=> {
           {/* 
 						<Route path='/landing' component={LandingScreen} exact={true}  />
 						<Route path='/globe2' component={Globe2} exact={true} />
+
+
+          <Route path='/' component={NewLandingScreen} exact={true}  />
+					<Route path="/get_started" component={UsersStartingScreen} exact={true} />
+					<Route path='/play' component={NewHomeScreen} exact={true}  />
 					*/}
+
           <Route path='/' component={NewLandingScreen} exact={true}  />
 					<Route path="/get_started" component={UsersStartingScreen} exact={true} />
 					<Route path='/play' component={NewHomeScreen} exact={true}  />

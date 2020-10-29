@@ -39,236 +39,255 @@ class SignUpComponent extends Component {
             confirmPassword: '',
             showPassword: false,
             token: '',
-			verified: false,
+						verified: false,
+						activateButton: false,
         }
 		this.verifyCallback = this.verifyCallback.bind(this);
     }
 
     componentDidMount () {
+        this.props.startLoading();
         setTimeout(() => {
             executeCaptcha();
-        }, 2000);
-    }
+				}, 2000);
+        setTimeout(() => {
+						this.setState({
+							activateButton: true
+						});
+				}, 4000);
+			this.props.stopLoading();
+		}
 
-    toggleShowPassword = () => {
-        const {showPassword} = this.state;
-        this.setState({
-            showPassword: !showPassword,
-        });
-    }
+	toggleShowPassword = () => {
+		const {showPassword} = this.state;
+		this.setState({
+			showPassword: !showPassword,
+		});
+	}
 
-    setName = (name) => {
-        this.setState({
-            name: name.target.value,
-        })
-    }
+	setName = (name) => {
+		this.setState({
+			name: name.target.value,
+		})
+	}
 
-    setEmail = (email) => {
-        this.setState({
-            email: email.target.value
-        })
-    }
+	setEmail = (email) => {
+		this.setState({
+			email: email.target.value
+		})
+	}
 
-    setPassword = (password) => {
-        this.setState({
-            password: password.target.value
-        })
-    }
+	setPassword = (password) => {
+		this.setState({
+			password: password.target.value
+		})
+	}
 
-    setConfirmPassword = (confirmPassword) => {
-        this.setState({
-            confirmPassword: confirmPassword.target.value
-        })
-    }
+	setConfirmPassword = (confirmPassword) => {
+		this.setState({
+			confirmPassword: confirmPassword.target.value
+		})
+	}
 
-    verifyCallback = (token) => {
-        if (token) {
-            this.setState({token});
-            this.setState({verified: true});
-        }
-        else {
-            toastError("ReCaptcha verification failed!");
-        }
-    }
+	verifyCallback = (token) => {
+		if (token) {
+			console.log("verify Call back, token: "+token);
+			this.props.updateToken(token);
+			this.setState({token});
+			this.setState({verified: true});
+		}
+		else {
+			toastError("ReCaptcha verification failed!");
+		}
+	}
 
-    expiredCallback = () => {
-        this.setState({token: "", verified: false});
-        toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
-    }
+	expiredCallback = () => {
+		this.setState({token: "", verified: false});
+		toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
+	}
 
-    onSignUpSubmit = async () => {
-        this.props.startLoading();
-        const { name, email, password, confirmPassword, token, verified } = this.state;
+	onSignUpSubmit = async () => {
+		this.props.startLoading();
+		const { name, email, password, confirmPassword, token, verified } = this.state;
 
-        if (!verified) {
-            this.props.stopLoading();
-            toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.");
-            return;
-        }
+		if (!verified) {
+			this.props.stopLoading();
+			toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.");
+			return;
+		}
 
 
-        if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
-            this.props.stopLoading();
-            toastError("Looks like you forgot to fill some fields.");
-            return;
-        }
+		if ([name.trim(), email.trim(), password.trim(), confirmPassword.trim()].includes("")) {
+			this.props.stopLoading();
+			toastError("Looks like you forgot to fill some fields.");
+			return;
+		}
 
-        if (!checkName(name)) {
-            console.log(name);
-            this.props.stopLoading();
-            toastError("Hey make sure your name has only Alphanumeric characters and contains 6 to 40 characters.");
-            return;
-        }
+		if (!checkName(name)) {
+			console.log(name);
+			this.props.stopLoading();
+			toastError("Hey make sure your name has only Alphanumeric characters and contains 6 to 40 characters.");
+			return;
+		}
 
-        if (!checkUserEmailAndPassword(email, password)) {
-            this.props.stopLoading();
-            toastError("Hey make sure your Email is correct and password has only Alphanumeric characters.");
-            return;
-        }
+		if (!checkUserEmailAndPassword(email, password)) {
+			this.props.stopLoading();
+			toastError("Hey make sure your Email is correct and password has only Alphanumeric characters.");
+			return;
+		}
 
-        if (confirmPassword !== password) {
-            this.props.stopLoading();
-            toastError("Hey your password and confirm password don't match.");
-            return;
-        }
+		if (confirmPassword !== password) {
+			this.props.stopLoading();
+			toastError("Hey your password and confirm password don't match.");
+			return;
+		}
 
-        const toasts = toastSuccess;
-        reCaptchaCheck(token)
-            .then(() => firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL))
-            .then(() => firebaseAuth.createUserWithEmailAndPassword(email, password))
-            .then(() => firebaseAuth.currentUser.sendEmailVerification())
-            .then(async () => {
-                const {email, uid} = firebaseAuth.currentUser;
-                createUser(email, name, uid)
-                    .then(async () => {
-                        await updateName(name);
-                    })
-                    .catch((err) => {
-                        const user = firebaseAuth.currentUser;
-                        user.delete();
-                        this.props.stopLoading();
-                        toastError(err.message);
-                    }) 
-            })
-            .then(() => {
-                this.props.stopLoading();
-                toasts("User Registered! Please verify your email and then Login.");
-            })
-            .catch((err) => {
-                console.log(err);
-                this.props.stopLoading();
-                toastError(err.message);
-            })
-    }
+		const toasts = toastSuccess;
+		//reCaptchaCheck(token)
+		firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+		//.then(() => firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL))
+			.then(() => firebaseAuth.createUserWithEmailAndPassword(email, password))
+			.then(() => firebaseAuth.currentUser.sendEmailVerification())
+			.then(async () => {
+				const {email, uid} = firebaseAuth.currentUser;
+				createUser(email, name, uid, token)
+					.then(async () => {
+						await updateName(name);
+					})
+					.catch((err) => {
+						const user = firebaseAuth.currentUser;
+						user.delete();
+						this.props.stopLoading();
+						toastError(err.message);
+					}) 
+			})
+			.then(() => {
+				this.props.stopLoading();
+				toasts("User Registered! Please verify your email and then Login.");
+			})
+			.catch((err) => {
+				console.log(err);
+				this.props.stopLoading();
+				toastError(err.message);
+			})
+	}
 
-    render() {
-        const { name, email, password, confirmPassword, showPassword } = this.state;
+	render() {
+		const { name, email, password, confirmPassword, showPassword } = this.state;
 
-        return (
-            <div className="signUpContainer">
-                <ToastContainer
-                    draggable
-                    position="bottom-right"
-                />
-                <div className="g-recaptcha" id="g-recaptcha"></div>
-                <span className="textMedium">Sign Up</span>
-                <div className="signUpInputContainer">
-                    <TextField
-                        id='outlined-basic'
-                        fullWidth={true}
-                        label="Your name"
-                        variant="outlined"
-                        margin='normal'
-                        color="primary"
-                        InputLabelProps="textLight"
-                        value={name}
-                        onChange={(name) => this.setName(name)}
-                        required
-                        type='text'
-                        autoFocus
-                    />
-                    <TextField
-                        id='outlined-basic'
-                        fullWidth={true}
-                        label="Email"
-                        variant="outlined"
-                        margin='normal'
-                        color="primary"
-                        InputLabelProps="textLight"
-                        value={email}
-                        onChange={(email) => this.setEmail(email)}
-                        required
-                        type='email'
-                    />
-                    <TextField
-                        id='outlined-basic'
-                        fullWidth={true}
-                        label="Password"
-                        variant="outlined"
-                        margin='none'
-                        color="primary"
-                        InputLabelProps="textLight"
-                        value={password}
-                        onChange={(password) => this.setPassword(password)}
-                        required
-                        type={showPassword ? 'text' : 'password'}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                  <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={() => this.toggleShowPassword()}
-                                  >
-                                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                                  </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    <TextField
-                        id='outlined-basic'
-                        fullWidth={true}
-                        label="Confirm Password"
-                        variant="outlined"
-                        margin='none'
-                        color="primary"
-                        InputLabelProps="textLight"
-                        value={confirmPassword}
-                        onChange={(confirmPassword) => this.setConfirmPassword(confirmPassword)}
-                        required
-                        type='password'
-                    />
-                    <div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
-                </div>
-                <div className="subContainer">
-                    <Recaptcha
-                        ref={e => recaptchaInstance = e}
-                        sitekey={process.env.REACT_APP_SITEKEY}
-                        render="explicit"
-                        size="invisible"
-                        verifyCallback={this.verifyCallback}
-                        expiredCallback={this.expiredCallback}
-                        onloadCallback={(res)=>{
-                            console.log("Loaded captcha")
-                        }} 
-                    />
-                    <div className="signUpSection">
-                        <span>Already have an account? </span> 
-                        <div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
-                    </div>
-                    <div className="orText">
-                        <h4>OR</h4>
-                    </div>
-                    <div className="googleContainer" onClick={() => {
-                        this.props.startLoading();
-                        googleOAuth();
-                    }}>
-                        <img src={require("../../assets/cg.png")} alt="Continue With Google" />
-                    </div>
-                </div>
-            </div>
-        );
-    }
+		return (
+			<div className="signUpContainer">
+				<ToastContainer
+					draggable
+					position="bottom-right"
+				/>
+				<div className="g-recaptcha" id="g-recaptcha"></div>
+				<span className="textMedium">Sign Up</span>
+				<div className="signUpInputContainer">
+					<TextField
+						id='outlined-basic'
+						fullWidth={true}
+						label="Your name"
+						variant="outlined"
+						margin='normal'
+						color="primary"
+						InputLabelProps="textLight"
+						value={name}
+						onChange={(name) => this.setName(name)}
+						required
+						type='text'
+						autoFocus
+					/>
+					<TextField
+						id='outlined-basic'
+						fullWidth={true}
+						label="Email"
+						variant="outlined"
+						margin='normal'
+						color="primary"
+						InputLabelProps="textLight"
+						value={email}
+						onChange={(email) => this.setEmail(email)}
+						required
+						type='email'
+					/>
+					<TextField
+						id='outlined-basic'
+						fullWidth={true}
+						label="Password"
+						variant="outlined"
+						margin='none'
+						color="primary"
+						InputLabelProps="textLight"
+						value={password}
+						onChange={(password) => this.setPassword(password)}
+						required
+						type={showPassword ? 'text' : 'password'}
+						InputProps={{
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton
+										aria-label="toggle password visibility"
+										onClick={() => this.toggleShowPassword()}
+									>
+										{showPassword ? <Visibility /> : <VisibilityOff />}
+									</IconButton>
+								</InputAdornment>
+							),
+						}}
+					/>
+					<TextField
+						id='outlined-basic'
+						fullWidth={true}
+						label="Confirm Password"
+						variant="outlined"
+						margin='none'
+						color="primary"
+						InputLabelProps="textLight"
+						value={confirmPassword}
+						onChange={(confirmPassword) => this.setConfirmPassword(confirmPassword)}
+						required
+						type='password'
+					/>
+					<div className="button loginBtn" onClick={() => this.onSignUpSubmit()}>Sign Up</div>
+				</div>
+				<div className="subContainer">
+					<Recaptcha
+						ref={e => recaptchaInstance = e}
+						sitekey={process.env.REACT_APP_SITEKEY}
+						render="explicit"
+						size="invisible"
+						verifyCallback={this.verifyCallback}
+						expiredCallback={this.expiredCallback}
+						onloadCallback={(_)=>{
+							console.log("Loaded captcha");
+						}} 
+					/>
+					<div className="signUpSection">
+						<span>Already have an account? </span> 
+						<div className="signUpBtn" onClick={() => this.props.switchScreen()}>Login</div>
+					</div>
+					<div className="orText">
+						<h4>OR</h4>
+					</div>
+					<div className="googleContainer" onClick={() => {
+						if(this.state.activateButton) {
+							this.props.startLoading();
+							googleOAuth();
+						}
+					}}>
+						{
+							this.state.activateButton
+								?
+									<img src={require("../../assets/cg.png")} alt="Continue With Google" />
+								:
+									<div>Loading...</div>
+						}
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default SignUpComponent;

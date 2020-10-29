@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import LoadingScreen from 'react-loading-screen';
+import cookie from 'react-cookies';
 
 // importing styles
 // import './loginSignUpScreen.css';
@@ -20,127 +21,181 @@ import {firebaseAuth} from "../../configs/firebase";
 // importing components
 import { toastError } from '../../uiComponents/toasts/toasts.js';
 
+//// create a variable to store the component instance
+//let recaptchaInstance;
+// 
+//// manually trigger reCAPTCHA execution
+//const executeCaptcha = function () {
+//	return new Promise((resolve, _) => {
+//  	recaptchaInstance.execute();
+//		resolve();
+//	});
+//};
+
 class LoginSignUpScreen extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isLoading: true,
-            screen: "login",
+            screen: "signUp",
+            token: '',
+						verified: false,
         }
     }
 
+    //verifyCallback = (token) => {
+    //    if (token) {
+    //        this.setState({token});
+    //        this.setState({verified: true});
+    //    }
+    //    else {
+    //        toastError("ReCaptcha verification failed!");
+    //    }
+    //}
 
-    componentDidMount(){
-        firebaseAuth.getRedirectResult()
-            .then(async (result) => {
-                const user = result.user;
-                if (user === null) {
-                    this.setState({
-                        isLoading: false,
-                    })
-                    return;
-                }
-                const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid);
-                if (isRegSuccess) {
-                    window.location.href="/play"
-                } else {
-                    if (wasUserRegistered) {
-                        window.location.href="/play"
-                    }
-                }
-                return;
-            })
-            .catch((err) => {
-                console.log("Redirect Error: ", err);
-                this.setState({
-                    isLoading: false,
-                })
-                toastError(err.message);
-            });
+    //expiredCallback = () => {
+    //    this.setState({token: "", verified: false});
+    //    toastError("Hey! Your reCaptcha expired, please reload this page before signing up. We are sorry for the inconvenience caused.")
+    //}
 
-        const user = firebaseAuth.currentUser;
-        if (user && user.displayName && this.state.isLoading) {
-            window.location.href ="/play"
-            return;
-        }
-    }
+		updateToken= (token) => {
+			console.log("UpdateToken func mai, "+ token);
+			this.setState({
+				token: token
+			});
+			cookie.save('token', token, { path: '/get_started' });
+		}
 
-    startLoading = () => {
-        this.setState({
-            isLoading: true,
-        })
-    }
+    componentWillMount() {
+				 console.log(this.state.token);
+				 firebaseAuth.getRedirectResult()
+					 .then(async (result) => {
+						 const user = result.user;
+						 if (user === null) {
+							 this.setState({
+								 isLoading: false,
+							 })
+							 return;
+						 }
+						 let token = cookie.load('token');
+						 const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid, token);
+						 cookie.remove('token', { path: '/get_started' });
+						 if (isRegSuccess) {
+							 window.location.href="/play"
+						 } else {
+							 if (wasUserRegistered) {
+								 window.location.href="/play"
+							 }
+						 }
+						 return;
+					 })
+				.catch((err) => {
+					console.log("Redirect Error: ", err);
+					this.setState({
+						isLoading: false,
+					})
+					toastError(err.message);
+				});
 
-    stopLoading = () => {
-        this.setState({
-            isLoading: false,
-        })
-    }
+			const user = firebaseAuth.currentUser;
+			if (user && user.displayName && this.state.isLoading) {
+				window.location.href ="/play"
+				return;
+			}
+		}
 
-    switchScreen = () => {
-        const { screen } = this.state;
-        if (screen === "login") {
-            this.setState({
-                screen: "signUp"
-            });
-            return;
-        }
-        this.setState({
-            screen: "login"
-        });
-    }
+	startLoading = () => {
+		this.setState({
+			isLoading: true,
+		})
+	}
 
-    showForgotPassword = () => {
-        this.setState({
-            screen: "forgot",
-        });
-    }
+	stopLoading = () => {
+		this.setState({
+			isLoading: false,
+		})
+	}
 
-    hideForgotPassword = () => {
-        this.setState({
-            screen: "login",
-        });
-    }
+	switchScreen = () => {
+		const { screen } = this.state;
+		if (screen === "login") {
+			this.setState({
+				screen: "signUp"
+			});
+			return;
+		}
+		this.setState({
+			screen: "login"
+		});
+	}
 
-    renderScreen = () => {
-        const { screen } = this.state;
+	showForgotPassword = () => {
+		this.setState({
+			screen: "forgot",
+		});
+	}
 
-        if (screen === "login") {
-            return <LoginComponent showForgotPassword={this.showForgotPassword} startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>;
-        }
+	hideForgotPassword = () => {
+		this.setState({
+			screen: "login",
+		});
+	}
 
-        if (screen === "signUp") {
-            return <SignUpComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>;
-        }
+	renderScreen = () => {
+		const { screen } = this.state;
 
-        if (screen === "forgot") {
-            return <ForgotPassword hideForgotPassword={this.hideForgotPassword} startLoading={this.startLoading} stopLoading={this.stopLoading} />
-        }
+		if (screen === "login") {
+			return (
+				<React.Fragment>
+					<LoginComponent showForgotPassword={this.showForgotPassword} startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>
+				</React.Fragment>
+			);
+		}
 
-        return <LoginComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen}/>;
-    }
+		if (screen === "signUp") {
+			return (
+				<React.Fragment>
+					<SignUpComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen} updateToken={this.updateToken}/>
+				</React.Fragment>
+			);
+		}
 
-    render() {
-        const { isLoading } = this.state;
+		if (screen === "forgot") {
+			return (
+				<React.Fragment>
+					<ForgotPassword hideForgotPassword={this.hideForgotPassword} startLoading={this.startLoading} stopLoading={this.stopLoading} />
+				</React.Fragment>
+			);
+		}
 
-        if (isLoading) {
-            return (
-                <LoadingScreen
-                    loading={isLoading}
-                    bgColor='black'
-                    spinnerColor='blue'
-                    logoSrc={require('../../assets/ctfLogo.png')}
-                /> 
-            );
-        }
+		return (
+			<React.Fragment>
+				<SignUpComponent startLoading={this.startLoading} stopLoading={this.stopLoading} switchScreen={this.switchScreen} updateToken={this.updateToken}/>
+			</React.Fragment>
+		);
+	}
 
-        return (
-            <div className="mainContainer">
-                { this.renderScreen() }
-            </div>
-        );
-    }
+	render() {
+		const { isLoading } = this.state;
+
+		if (isLoading) {
+			return (
+				<LoadingScreen
+					loading={isLoading}
+					bgColor='black'
+					spinnerColor='blue'
+					logoSrc={require('../../assets/ctfLogo.png')}
+				/> 
+			);
+		}
+
+		return (
+			<div className="mainContainer">
+				{ this.renderScreen() }
+			</div>
+		);
+	}
 }
 
 export default LoginSignUpScreen;

@@ -37,8 +37,6 @@ export const reCaptchaCheck = (token) => {
     return new Promise((resolve, reject) => {
         activityLayerApi.post("/user/auth/recaptcha", {
             token,
-        }, {
-
         })
             .then((resp) => {
                 console.log(resp.data.auth);
@@ -92,11 +90,14 @@ export const getUserProfile = (uid) => {
     })
 }
 
-export const createUser = (email, name, uid) => {
+export const createUser = (email, name, uid, token) => {
+		console.log('Mai aya create karne');
+		console.log(token);
     return new Promise((resolve, reject) => {
         activityLayerApi.post("/user/create", {
             email,
             name,
+						token
         }, {
             headers: {
                 Authorization: "Bearer "+uid,
@@ -112,10 +113,11 @@ export const createUser = (email, name, uid) => {
     })
 }
 
-export const updateUserObject = (uid, { username }) => {
+export const updateUserObject = (uid, { username, token }) => {
     return new Promise((resolve, reject) => {
         activityLayerApi.post("/user/updateProfile", {
             userName: username,
+						token
         }, {
             headers:{
                 Authorization: "Bearer " + uid,
@@ -211,12 +213,13 @@ export const getHint = (questionID) => {
     });
 };
 
-export const answerQuestion = (questionId, answer) => {
+export const answerQuestion = (questionId, answer, token) => {
     return new Promise((resolve, reject) => {
         try {
             activityLayerApi.post('/user/checkFlag', {
                 id: questionId,
                 flag: answer,
+								token
             }, {
                 headers: {
                     Authorization: 'Bearer ' + firebaseAuth.currentUser.uid,

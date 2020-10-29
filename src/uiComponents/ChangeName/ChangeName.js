@@ -76,8 +76,9 @@ class ChangeName extends Component {
             return;
         }
 
-        reCaptchaCheck(token)
-            .then(() => updateUserObject(user.uid, {username}))
+        		//reCaptchaCheck(token)
+						updateUserObject(user.uid, {username, token})
+            //.then(() => updateUserObject(user.uid, {username}))
             .then((resp) => {
                 if (resp.statusCode === 200) {
                     return window.location.href = "/play";
