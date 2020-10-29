@@ -116,7 +116,7 @@ class NewLandingScreen extends Component {
 											<h3 style={{"color": "white", "textAlign": "center"}}>Collaborators</h3>
 											<div className="newLandingScreen__loginBtn" onClick={() => window.open(pdf)}>Download Brochure</div>
 											<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "marginTop": "15px"}}>
-												<div style={{"width": "60vw", "display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
+												<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
 													<a href="https://www.sashido.io/" target="__blank">
 														<div className='sponsor-logo_container'>
 															<img src={sashido} className = 'sponsor-logo' alt="urban-thinking"/>
