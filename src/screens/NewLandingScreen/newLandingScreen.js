@@ -16,6 +16,7 @@ import ctfLogo from '../../assets/CTF.svg';
 import reaperSecurity from '../../assets/repare-security.jpeg';
 import urbanThinking from '../../assets/urban-thinking.jpeg';
 import towardsCyberSecurity from '../../assets/towards-cybersecurity.jpeg';
+import sashido from '../../assets/IMG_3732.PNG';
 import pdf from '../../assets/ctf_brochure_final.pdf';
 
 class NewLandingScreen extends Component {
@@ -113,6 +114,9 @@ class NewLandingScreen extends Component {
 											<div className="newLandingScreen__loginBtn" onClick={() => window.open(pdf)}>Download Brochure</div>
 											<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "marginTop": "15px"}}>
 												<div style={{"width": "60vw", "display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
+													<div className='sponsor-logo_container'>
+														<img src={sashido} className = 'sponsor-logo' alt="urban-thinking"/>
+													</div>
 													<div className='sponsor-logo_container'>
 														<img src={urbanThinking} className = 'sponsor-logo' alt="urban-thinking"/>
 													</div>
