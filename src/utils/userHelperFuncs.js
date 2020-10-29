@@ -39,7 +39,6 @@ export const reCaptchaCheck = (token) => {
             token,
         })
             .then((resp) => {
-                console.log(resp.data.auth);
                 if (resp.data.auth !== 1) {
                     throw new Error("Auth was not equal to 1");
                 }
@@ -91,8 +90,6 @@ export const getUserProfile = (uid) => {
 }
 
 export const createUser = (email, name, uid, token) => {
-		console.log('Mai aya create karne');
-		console.log(token);
     return new Promise((resolve, reject) => {
         activityLayerApi.post("/user/create", {
             email,
@@ -124,7 +121,6 @@ export const updateUserObject = (uid, { username, token }) => {
             }
         })
             .then((resp) => {
-                console.log(resp.data);
                 resolve(resp.data);
             })
             .catch((err) => {

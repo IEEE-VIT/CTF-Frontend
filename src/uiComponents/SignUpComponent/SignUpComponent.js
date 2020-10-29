@@ -91,7 +91,6 @@ class SignUpComponent extends Component {
 
 	verifyCallback = (token) => {
 		if (token) {
-			console.log("verify Call back, token: "+token);
 			this.props.updateToken(token);
 			this.setState({token});
 			this.setState({verified: true});
@@ -124,7 +123,6 @@ class SignUpComponent extends Component {
 		}
 
 		if (!checkName(name)) {
-			console.log(name);
 			this.props.stopLoading();
 			toastError("Hey make sure your name has only Alphanumeric characters and contains 6 to 40 characters.");
 			return;

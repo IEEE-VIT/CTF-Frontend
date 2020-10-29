@@ -78,8 +78,8 @@ class Globe extends React.Component{
                     exitAnimationDuration: 3000,
                     exitEasingFunction: ['Cubic', 'Out'],
                     getTooltipContent: (marker)=>{
-                        console.log(marker.city);
-                        console.log(marker.value);
+                        //console.log(marker.city);
+                        //console.log(marker.value);
                         return `${marker.city} (Sales: ${marker.value}.0M)`;
                     },
                     radiusScaleRange: [0.01, 0.05],

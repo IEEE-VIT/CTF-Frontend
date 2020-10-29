@@ -46,7 +46,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
     }
 
     const expiredCallback = () => {
-        console.log(++captchaRefreshCount);
+        //console.log(++captchaRefreshCount);
         setCaptchaRefreshCount(++captchaRefreshCount);
         setToken('');
         setVerified(false);

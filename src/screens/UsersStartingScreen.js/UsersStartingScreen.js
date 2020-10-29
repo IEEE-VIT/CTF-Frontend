@@ -60,7 +60,6 @@ class LoginSignUpScreen extends Component {
     //}
 
 		updateToken= (token) => {
-			console.log("UpdateToken func mai, "+ token);
 			this.setState({
 				token: token
 			});
@@ -68,7 +67,6 @@ class LoginSignUpScreen extends Component {
 		}
 
     componentWillMount() {
-				 console.log(this.state.token);
 				 firebaseAuth.getRedirectResult()
 					 .then(async (result) => {
 						 const user = result.user;
