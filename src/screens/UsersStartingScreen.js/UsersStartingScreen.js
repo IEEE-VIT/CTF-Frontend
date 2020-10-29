@@ -66,7 +66,7 @@ class LoginSignUpScreen extends Component {
 			cookie.save('token', token, { path: '/get_started' });
 		}
 
-    componentWillMount() {
+    componentDidMount() {
 				 firebaseAuth.getRedirectResult()
 					 .then(async (result) => {
 						 const user = result.user;
