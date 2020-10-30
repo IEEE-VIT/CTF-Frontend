@@ -20,9 +20,11 @@ export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
           flag = true;
         }
       }
+			console.log(questions[i]);
 
       questionLocations.push({
         id: questions[i]['id'],
+				title: questions[i]['data']['title'],
         city: 'Los Angeles',
         color: flag ? 'green' : questionColorsMap[questions[i].data.name.toLowerCase()],
         coordinates: [questions[i]['data']['latitude'], questions[i]['data']['longitude']],
@@ -78,7 +80,7 @@ export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
         arcAltitude={loc => loc.arcAltitude}
 
         pointsData={questionLocations}
-        pointLabel={point => point.id}
+        pointLabel={point => point.title}
         pointLat={point => point.coordinates[0]}
         pointLng={point => point.coordinates[1]}
         pointColor={point => point.color}
