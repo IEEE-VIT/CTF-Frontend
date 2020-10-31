@@ -57,20 +57,21 @@ class HomeScreen extends React.Component {
 				});
 			} catch (err) {
 				alert("Oops their was an error and we had to sign you out! Please login again");
-				firebaseAuth.signOut()
-					.then((resp) => {
-						console.log(resp);
-						window.location.href ="/"
-						return;
-					})
-					.catch((err) => {
-						console.log(err);
-						this.setState({
-							isLoading: false,
-						});
-						return;
-					})
+				//firebaseAuth.signOut()
+				//	.then((resp) => {
+				//		console.log(resp);
+				//		window.location.href ="/"
+				//		return;
+				//	})
+				//	.catch((err) => {
+				//		console.log(err);
+				//		this.setState({
+				//			isLoading: false,
+				//		});
+				//		return;
+				//	})
 			}
+					//console.log('Comment');
         });
 	}
 
