@@ -67,6 +67,12 @@ class LoginSignUpScreen extends Component {
 		}
 
     componentDidMount() {
+        firebaseAuth.onAuthStateChanged(async (user) => {
+					if(user!=null) {
+						window.location.href ="/play"
+						return;
+					}
+				});
 				 firebaseAuth.getRedirectResult()
 					 .then(async (result) => {
 						 const user = result.user;
@@ -75,7 +81,7 @@ class LoginSignUpScreen extends Component {
 								 isLoading: false,
 							 })
 							 return;
-						 }
+						 } 
 						 let token = cookie.load('token');
 						 const {isRegSuccess, wasUserRegistered} = await createUser(user.email, user.displayName, user.uid, token);
 						 cookie.remove('token', { path: '/get_started' });
