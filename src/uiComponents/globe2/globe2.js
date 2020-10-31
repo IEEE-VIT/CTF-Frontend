@@ -20,7 +20,6 @@ export const Globe2 = ({userProfile, questions, showQuestionModal}) => {
           flag = true;
         }
       }
-			console.log(questions[i]);
 
       questionLocations.push({
         id: questions[i]['id'],

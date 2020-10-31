@@ -42,7 +42,7 @@ class HomeScreen extends React.Component {
 	componentDidMount(){
         firebaseAuth.onAuthStateChanged(async (user) => {
             if (!user) {
-				window.location.href ="/"
+				window.location.href ="/get_started"
 				return;
 			}
 			try {
@@ -56,7 +56,7 @@ class HomeScreen extends React.Component {
 					userProfile,
 				});
 			} catch (err) {
-				alert("Oops their was an error and re had to sign you out! Please login again");
+				alert("Oops their was an error and we had to sign you out! Please login again");
 				firebaseAuth.signOut()
 					.then((resp) => {
 						console.log(resp);

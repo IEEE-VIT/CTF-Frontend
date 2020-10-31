@@ -164,34 +164,44 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 {question['description']}
             </div>
             <div className="modal__link">
-                <a href={question['url']} target="_blank">Question Link</a>
-            </div>
-            <div className="question_modal__answer_container">
-                <input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)} onKeyDown={handleKeyDown}/>
-                <div className="question_modal__answer__button" onClick={() => checkAnswer()}>
-					<img src={arrow} className="img_answer" alt="" />
-				</div>
-            </div>
-            {
-                checking === true
-                ?
-                (<div className="question_modal__hint" >Checking...</div>)
-                :
-                renderHint()
-            }
-            <Recaptcha
-                ref={e => recaptchaInstance = e}
-                sitekey={process.env.REACT_APP_SITEKEY}
-                render="explicit"
-                size="invisible"
-                verifyCallback={verifyCallback}
-                expiredCallback={expiredCallback}
-                onloadCallback={(res)=>{
-                        console.log("Loaded captcha")
-                }} 
-            />
-        </Modal>
-    );
+								{
+									question['url']!==null && question['url']!==undefined
+									?
+									question['url'].includes('nc') === true
+									?
+									<div>{question['url']}</div>
+									:
+									<a href={question['url']} target="__blank">Question Link</a>
+									:
+									<a href={question['url']} target="__blank">Question Link</a>
+								}
+			</div>
+			<div className="question_modal__answer_container">
+			<input type='text' className="modal__answer__input" placeholder="Answer here" value={answer} onChange={(event) => setAnswer(event.target.value)} onKeyDown={handleKeyDown}/>
+			<div className="question_modal__answer__button" onClick={() => checkAnswer()}>
+			<img src={arrow} className="img_answer" alt="" />
+			</div>
+			</div>
+			{
+				checking === true
+				?
+				(<div className="question_modal__hint" >Checking...</div>)
+				:
+				renderHint()
+			}
+			<Recaptcha
+			ref={e => recaptchaInstance = e}
+			sitekey={process.env.REACT_APP_SITEKEY}
+			render="explicit"
+			size="invisible"
+			verifyCallback={verifyCallback}
+			expiredCallback={expiredCallback}
+			onloadCallback={(res)=>{
+				console.log("Loaded captcha")
+			}} 
+			/>
+			</Modal>
+		);
 }
 
 export default QuestionModal;

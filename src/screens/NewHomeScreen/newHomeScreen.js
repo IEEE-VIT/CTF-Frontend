@@ -71,7 +71,7 @@ class NewHomeScreen extends Component {
 						</nav>
                         {/* <LandingGlobe /> */}
                         <div className = 'landing__logo-play'>
-                            <div className = 'newHomeScreen__center_text'>Going live on 31st October at 01:00 PM till 01:00 PM on 1st November</div>
+                            <div className = 'newHomeScreen__center_text'>Going live on 31st October at 01:30 PM till 01:30 PM on 1st November</div>
                             <div className = 'newHomeScreen__center_text'>Stay tuned!</div>
                             <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
                         </div>
