@@ -67,12 +67,12 @@ class LoginSignUpScreen extends Component {
 		}
 
     componentDidMount() {
-        firebaseAuth.onAuthStateChanged(async (user) => {
-					if(user!=null) {
-						window.location.href ="/play"
-						return;
-					}
-				});
+        //firebaseAuth.onAuthStateChanged(async (user) => {
+				//	if(user!=null) {
+				//		window.location.href ="/play"
+				//		return;
+				//	}
+				//});
 				 firebaseAuth.getRedirectResult()
 					 .then(async (result) => {
 						 const user = result.user;
