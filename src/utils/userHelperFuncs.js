@@ -158,6 +158,7 @@ export const getLeaderBoard = () => {
 export const getQuestions = () => {
     return new Promise((resolve, reject) => {
         try {
+						//Get All Questions
             activityLayerApi.post('/user/getAllQuestions', {}, {
                 headers: {
                     Authorization: 'Bearer ' + firebaseAuth.currentUser.uid,
