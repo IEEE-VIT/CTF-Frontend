@@ -19,6 +19,8 @@ import towardsCyberSecurity from '../../assets/towards-cybersecurity.jpeg';
 import sashido from '../../assets/IMG_3732.PNG';
 import xcybersecurity from '../../assets/xcybersecurity.jpeg';
 import owaspindore from '../../assets/owaspindore.jpeg';
+import codingblocks from '../../assets/codingblocks.png';
+import cyber3a from '../../assets/cyber3ra.jpg';
 import pdf from '../../assets/ctf_brochure_final.pdf';
 
 class NewLandingScreen extends Component {
@@ -117,6 +119,16 @@ class NewLandingScreen extends Component {
 											<div className="newLandingScreen__loginBtn" onClick={() => window.open(pdf)}>Download Brochure</div>
 											<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center", "marginTop": "15px"}}>
 												<div style={{"display": "flex", "justifyContent": "center", "alignItems": "center"}} className = "sponsor-logo_main-container">
+													<a href="https://cyber3ra.com/" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={cyber3a} className = 'sponsor-logo' alt="urban-thinking"/>
+														</div>
+													</a>
+													<a href="https://codingblocks.com/" target="__blank">
+														<div className='sponsor-logo_container'>
+															<img src={codingblocks} className = 'sponsor-logo' alt="urban-thinking"/>
+														</div>
+													</a>
 													<a href="https://www.sashido.io/" target="__blank">
 														<div className='sponsor-logo_container'>
 															<img src={sashido} className = 'sponsor-logo' alt="urban-thinking"/>

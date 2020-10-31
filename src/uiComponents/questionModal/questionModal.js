@@ -157,7 +157,7 @@ const QuestionModal = ({isOpen, handleAnswerSubmit, closeModal, question, qid, h
                 position="bottom-right"
             />
             <div className="question_modal_title_container">
-                <h3 className="question_modal__title">{question['name']} - 100 points</h3>
+                <h3 className="question_modal__title">{question['title']} - 100 points</h3>
                 <div className="question_modal_close_button" onClick={()=>closeModal()}>X</div>
             </div>
             <div className="modal__question">
