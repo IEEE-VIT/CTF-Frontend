@@ -71,8 +71,9 @@ class NewHomeScreen extends Component {
 						</nav>
                         {/* <LandingGlobe /> */}
                         <div className = 'landing__logo-play'>
-                            <div className = 'newHomeScreen__center_text'>Going live on 31st October at 01:30 PM IST till 01:30 PM on 1st November IST</div>
-                            <div className = 'newHomeScreen__center_text'>Stay tuned!</div>
+													<div className = 'newHomeScreen__center_text'>Thank you for participating, we hope you enjoyed!</div>
+													<div className = 'newHomeScreen__center_text'>Follow us on our social media to stay updated for further updates!</div>
+													<div className = 'newHomeScreen__center_text'>Help us out to make our events better by filling the feedback form <a href="https://forms.gle/LCG5divPoy54EeLc9" target="__blank">here!</a></div>
                             <div className="button loginBtn" onClick={() => this.onLogOut()}>Log Out</div>
                         </div>
 						<SocialMediaIcons />
