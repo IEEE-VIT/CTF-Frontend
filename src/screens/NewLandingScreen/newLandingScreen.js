@@ -92,7 +92,7 @@ class NewLandingScreen extends Component {
 									?
 										<div className = "img_container">
 											<img src={require('../../assets/ctfLogo.png')} alt="CTF Logo" style={{"marginTop": "-30px"}} className="ctf-logo-img"/>
-											<div style={{"color": "white", "marginBottom": "24px"}}>31st October - 1st November</div>
+											<div style={{"color": "white", "marginBottom": "24px"}}>31st October 01:30 PM - 2nd November 01:30 AM</div>
 											<div className="newLandingScreen__loginBtn" onClick={() => window.location.href = '/get_started'}>Continue</div>
 										</div>
 									:	

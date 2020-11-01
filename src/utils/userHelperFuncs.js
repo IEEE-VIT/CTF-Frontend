@@ -51,7 +51,6 @@ export const reCaptchaCheck = (token) => {
     })
 }
 
-
 export const pingServer = () => {
     return new Promise((resolve, reject) => {
         activityLayerApi.get("/")
