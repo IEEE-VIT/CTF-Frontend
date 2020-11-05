@@ -2,10 +2,10 @@
 
 <image src="./src/assets/ctf-black.svg" alt="CTF - Conquer The World" />
 
-![GitHub top language](https://img.shields.io/github/languages/top/Devil39/ctf)
-![GitHub repo size](https://img.shields.io/github/repo-size/Devil39/ctf)
-[![GitHub stars](https://img.shields.io/github/stars/Devil39/ctf)](https://github.com/Devil39/ctf/stargazers)
-![GitHub](https://img.shields.io/github/license/Devil/ctf)
+![GitHub top language](https://img.shields.io/github/languages/top/feniljain/ctf)
+![GitHub repo size](https://img.shields.io/github/repo-size/feniljain/ctf)
+[![GitHub stars](https://img.shields.io/github/stars/feniljain/ctf)](https://github.com/feniljain/ctf/stargazers)
+![GitHub](https://img.shields.io/github/license/feniljain/ctf)
 
 </div>
 
@@ -51,7 +51,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <br/>
 
 ## Contributors
-* [Devil39](https://github.com/Devil39)
+* [feniljain](https://github.com/feniljain)
 * [ZiyanK](https://github.com/ZiyanK)
 * [sarthakpranesh](https://github.com/sarthakpranesh)
 
