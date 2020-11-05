@@ -1,11 +1,6 @@
 <div align = "center">
 
-<image src="./src/assets/ctf-black.svg" alt="CTF - Conquer The World" />
-
-![GitHub top language](https://img.shields.io/github/languages/top/feniljain/ctf)
-![GitHub repo size](https://img.shields.io/github/repo-size/feniljain/ctf)
-[![GitHub stars](https://img.shields.io/github/stars/feniljain/ctf)](https://github.com/feniljain/ctf/stargazers)
-![GitHub](https://img.shields.io/github/license/feniljain/ctf)
+  <image src="./src/assets/ctf-black.svg" alt="CTF - Conquer The World" />
 
 </div>
 
@@ -19,13 +14,13 @@ Capture The Flag or CTF is a information security competition which challenges i
 <br/>
 
 ## Link to Hosted Event
-Yet to be hosted
+ctf.ieeevit.org
 
 <br/>
 
 ## For Developers
 Please make sure you have npm and nodejs installed before following the below steps
-1. `git clone https://github.com/Devil39/ctf.git`
+1. `git clone https://github.com/feniljain/ctf.git`
 2. `cd ctf`
 3. `npm install`
 4. `npm start`
