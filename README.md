@@ -49,10 +49,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <table>
 	<tr>
 		<td align="center">
-			<a href="https://github.com/feniljain"><img src="https://avatars.githubusercontent.com/u/49019259?s=460&u=f2e110995d77663837bfc24a93ed0109f5c4c4c8&v=4" width="100px;" alt=""/><br /><sub><b>Fenil Jain</b></sub></a><br /> <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=feniljain" title="Documentation">📖 <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=feniljain" title="Code"> 💻 </a><a href="#infra-feniljain" title="Infrastructure (Hosting, Build-Tools, etc)"> 🚇 </a>
+			<a href="https://github.com/feniljain"><img src="https://avatars.githubusercontent.com/u/49019259?s=460&u=f2e110995d77663837bfc24a93ed0109f5c4c4c8&v=4" width="100px;" alt=""/><br /><sub><b>Fenil Jain</b></sub></a><br /> <a href="https://github.com/IEEE-VIT/ctf/commits?author=feniljain" title="Documentation">📖 <a href="https://github.com/IEEE-VIT/ctf/commits?author=feniljain" title="Code"> 💻 </a><a href="#infra-feniljain" title="Infrastructure (Hosting, Build-Tools, etc)"> 🚇 </a>
 		</td>
 		<td align="center">
-      <a href="https://github.com/sarthakpranesh"><img src="https://avatars.githubusercontent.com/u/41206172?s=460&u=c045fce43080b803b685a186a4db5c999f24b0de&v=4" width="100px;" alt=""/><br /><sub><b>Sarthak Pranesh</b></sub></a><br /> <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=sarthakpranesh" title="Documentation">📖 <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=sarthakpranesh" title="Code"> 💻 </a><a href="#infra-sarthakpranesh" title="Infrastructure (Hosting, Build-Tools, etc)"> 🚇 </a>
+      <a href="https://github.com/sarthakpranesh"><img src="https://avatars.githubusercontent.com/u/41206172?s=460&u=c045fce43080b803b685a186a4db5c999f24b0de&v=4" width="100px;" alt=""/><br /><sub><b>Sarthak Pranesh</b></sub></a><br /> <a href="https://github.com/IEEE-VIT/ctf/commits?author=sarthakpranesh" title="Documentation">📖 <a href="https://github.com/IEEE-VIT/ctf/commits?author=sarthakpranesh" title="Code"> 💻 </a><a href="#infra-sarthakpranesh" title="Infrastructure (Hosting, Build-Tools, etc)"> 🚇 </a>
 		</td>
 	</tr>
 </table>
