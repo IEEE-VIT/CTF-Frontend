@@ -2,19 +2,17 @@
 
 <br/>
 
-## Introduction
+## About
 <p>
 Capture The Flag or CTF is a information security competition which challenges its participants to solve a variety of tasks which may range from decryptions to hacking a server to win this contest. Hence making it a Cyber Security event. IEEE-VIT present you CTF-Conquer The World. This online CTF presents an innovate clean design build with Reactjs library and absolutely mouth dropping questions.
 </p>
 
-<br/>
 
-## Link to Hosted Event
-ctf.ieeevit.org
+You can check out the website [here](https://ctf.ieeevit.org/).
 
 <br/>
 
-## For Developers
+## Getting Started
 Please make sure you have npm and nodejs installed before following the below steps
 1. `git clone https://github.com/feniljain/ctf.git`
 2. `cd ctf`
