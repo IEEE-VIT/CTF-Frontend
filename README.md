@@ -47,7 +47,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Contributors
 * [feniljain](https://github.com/feniljain)
-* [ZiyanK](https://github.com/ZiyanK)
 * [sarthakpranesh](https://github.com/sarthakpranesh)
 
 <br/>
