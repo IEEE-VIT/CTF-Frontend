@@ -1,8 +1,4 @@
-<div align = "center">
-
-  <image src="./src/assets/ctf-black.svg" alt="CTF - Conquer The World" />
-
-</div>
+<p align="center"><img src="https://github.com/IEEE-VIT/ieee-vit.github.io/blob/master/images/outreach/ctf-2020/ctf-logo.png"/></p>
 
 <br/>
 
@@ -46,13 +42,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <br/>
 
 ## Contributors
-* [feniljain](https://github.com/feniljain)
-* [sarthakpranesh](https://github.com/sarthakpranesh)
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+	<tr>
+		<td align="center">
+			<a href="https://github.com/feniljain"><img src="https://avatars.githubusercontent.com/u/49019259?s=460&u=f2e110995d77663837bfc24a93ed0109f5c4c4c8&v=4" width="100px;" alt=""/><br /><sub><b>Fenil Jain</b></sub></a><br /> <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=feniljain" title="Documentation">📖 <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=feniljain" title="Code"> 💻 </a><a href="#infra-feniljain" title="Infrastructure (Hosting, Build-Tools, etc)"> 🚇 </a>
+		</td>
+		<td align="center">
+      <a href="https://github.com/sarthakpranesh"><img src="https://avatars.githubusercontent.com/u/41206172?s=460&u=c045fce43080b803b685a186a4db5c999f24b0de&v=4" width="100px;" alt=""/><br /><sub><b>Sarthak Pranesh</b></sub></a><br /> <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=sarthakpranesh" title="Documentation">📖 <a href="https://github.com/IEEE-VIT/CTF-Backend/commits?author=sarthakpranesh" title="Code"> 💻 </a><a href="#infra-sarthakpranesh" title="Infrastructure (Hosting, Build-Tools, etc)"> 🚇 </a>
+		</td>
+	</tr>
+</table>
 
 <br/>
 
-<div align="center">
-
-### Made with ❤ by IEEE-VIT
-
-</div>
+<p align="center">
+   Made with ❤ by IEEE-VIT
+</p>
