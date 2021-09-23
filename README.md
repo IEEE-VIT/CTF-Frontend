@@ -15,7 +15,7 @@ You can check out the website [here](https://ctf.ieeevit.org/).
 
 ## Getting Started
 Please make sure you have npm and nodejs installed before following the below steps
-1. `git clone https://github.com/IEEE-VIT/CTF-Frontend.git
+1. `git clone https://github.com/IEEE-VIT/CTF-Frontend.git`
 2. `cd ctf`
 3. `npm install`
 4. `npm start`
